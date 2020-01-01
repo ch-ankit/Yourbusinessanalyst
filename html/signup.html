@@ -7,24 +7,31 @@
 </head>
 <body>
 	<div><h1 class="heading">Your Business Analyst</h1></div>
-	<div class="login-box">
+	<div class="blank"></div>
+	<div class="message">
+		<h1 class="title">Reminder!</h1>
+		<p class ="continue-text">Do you want to continue?</p>
+		<a href=""><input type="submit" name="continue" value="Yes" class="continue"></a>
+		<input type="submit" name="dontcontinue" value="No" class="dont-continue">
+	</div>
+	
+	<div class="signup-box">
 		<div class ="leftbox">
-		<h1 class="title">Sign Up</h1>
-		<input type="text" name="firstname" placeholder="Firstname"/>
-		<input type="text" name="lastname" placeholder="Lastname"/>
-		<input type="text" name="username" placeholder="Username"/>
-		<input type="email" name="email" placeholder="Email"/>
-		<input type="text" name="phonenumber" placeholder="Phone no."/>
-		<input type="text" name="mobilenumber" placeholder="Mobile no."/>
-		<input type="text" name="pannumber" placeholder="Pan No."/>
-		<input type="password" name="password" placeholder="Create password"/>
-		<input type="submit" name="signup-button" value="Sign Up"/>
-		<p class="login">Already have account?</p>
-		<a href="loginfinal.html">Login</a>
+			<h1 class="title">Sign Up</h1>
+			<form>
+				<input type="text" name="firstname" placeholder="Firstname" required>
+				<input type="text" name="lastname" placeholder="Lastname" required>
+				<input type="text" name="username" placeholder="Username" required>
+				<input type="email" name="email" placeholder="Email">
+				<input type="number" name="mobilenumber" placeholder="Mobile no.">
+				<input type="text" name="pannumber" placeholder="Pan No.">
+				<input type="password" name="password" placeholder="Create password" required>
+				<input type="submit" name="signupbutton" value="Sign Up" class="signup">
+			</form>
+			<p class="login">Already have account?</p>
+			<a href="login.html">Login</a>
 		</div>
-		<div class ="rightbox">
-			
-		</div>
+		<div class ="rightbox"></div>
 	</div>
 </body>
 </html>
