@@ -1,0 +1,114 @@
+body{
+	margin: 0;
+    background:#dcdcdc;
+    font-size: 14px;
+    color: black;
+    font-family: sans-serif;
+    font-weight: 300;
+}
+
+
+
+.navigation{
+	text-align: center;
+	padding: 0;
+}
+
+
+
+.navigation li,a{
+	display: inline-block;
+	width:110px;
+	font-size: 18px;
+	background-color: #808080;
+
+}
+
+a{
+	text-decoration: none;
+	color: black;
+}
+
+.heading{
+	
+	font-size: 28px;
+	font-weight: 300;
+	color: white;
+	background-color:#003152;
+	padding: 10px 0;
+	margin: 0;
+	text-align: center;
+}
+
+.company-name{
+	background-color: #e4c66f;
+	text-align: center;
+	font-size: 28px;
+	font-weight: 300;
+	
+	padding: 10px 0;
+	margin: 0;
+}
+
+p{
+	margin: 0;
+	text-align: center;
+}
+.accounts{
+    position: relative;
+    margin: 5% auto;
+    height: 400px;
+    width: 700px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.6);
+}
+.accounts-receivable{
+
+    position: absolute;
+    top: 0;
+    left:0;
+    background-color: white;
+    box-sizing: border-box;
+    padding: 40px;
+    width: 350px;
+    height:400px;
+    padding: 0;
+}
+.accounts-payable{
+
+
+	position:absolute;
+    top:0;
+    right:0;
+    background-color:#c2dfff;
+    box-sizing: border-box;
+    padding: 40px;
+    width:350px;
+    height:400px;
+    padding: 0;
+
+}
+
+.accounts h1{
+	text-align: center;
+	margin:0 0 10px 0;
+
+	font-size: 18px;
+	font-weight: 300;
+}
+
+.accounts-payable-scroll{
+	height: 369px;
+	width:350px;
+	overflow: auto;
+	white-space: nowrap;
+	
+}
+
+.accounts-receivable-scroll{
+	height: 369px;
+	width:350px;
+	overflow: auto;
+	white-space: nowrap;
+	
+	
+}
