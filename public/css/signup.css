@@ -132,3 +132,10 @@ input[type="submit"]:focus
 .continue-text{
     text-align: center;
  }
+ #GraphData{
+   position: fixed;
+   right: 0;
+   bottom: 0;
+   min-width: 100%;
+   min-height: 100%;
+ }

@@ -1,0 +1,22 @@
+{
+  "name": "yourbusinessanalyst",
+  "version": "1.0.0",
+  "description": "webpage to keep track of your business",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bishaljoshi08/Yourbusinessanalyst.git"
+  },
+  "keywords": [
+    "businessanalyst"
+  ],
+  "author": "Neo Avyudaya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bishaljoshi08/Yourbusinessanalyst/issues"
+  },
+  "homepage": "https://github.com/bishaljoshi08/Yourbusinessanalyst#readme"
+}
