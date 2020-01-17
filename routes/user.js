@@ -13,12 +13,13 @@ router
         password = req.body.password;
         if(username == 'admin' && password == 'admin'){
             //res.redirect('/');
-            res.send("login data valid")
+            res.sendFile('home.html',{root: path.join(__dirname,'../views')});
         }else{
     
             res.send("Password Incorrect Try again!!");
         }
     });
+    //signup
 
 
 
