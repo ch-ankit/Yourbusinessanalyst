@@ -100,3 +100,13 @@ p {
   overflow: auto;
   white-space: nowrap;
 }
+
+.foot {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: aquamarine;
+  color: rgb(211, 4, 4);
+  text-align: center;
+}

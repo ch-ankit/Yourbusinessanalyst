@@ -8,18 +8,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https:https://github.com/ch-ankit/Third-Sem.git"
+    "url": "git+https://github.com/bishaljoshi08/Yourbusinessanalyst.git"
   },
   "keywords": [
     "businessanalyst"
   ],
   "author": "Neo Avyudaya",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bishaljoshi08/Yourbusinessanalyst/issues"
+  },
   "homepage": "https://github.com/bishaljoshi08/Yourbusinessanalyst#readme",
   "dependencies": {
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-handlebars": "^3.1.0",
+    "moment": "^2.24.0",
     "mongoose": "^5.8.9"
   }
 }

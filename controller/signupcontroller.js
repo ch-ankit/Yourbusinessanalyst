@@ -6,10 +6,8 @@ exports.gsnpage = (req, res) => {
 exports.adduser = async (req, res) => {
   try {
     await Signup.create(req.body);
-    console.log(newTour);
     res.redirect('/login.html');
   } catch (err) {
-    console.log(err);
-    res.end('ERROR CODE');
+    res.end(`ERROR : ${err}`);
   }
 };

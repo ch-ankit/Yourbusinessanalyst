@@ -1,16 +1,21 @@
+const Signup = require('./../models/signupModel');
+
 exports.login = (req, res) => {
   res.sendFile('login.html');
 };
 
-exports.Login = (req, res) => {
-  username = req.body.username;
-  password = req.body.password;
-  if (username == 'admin' && password == 'admin') {
-    res.render('index', {
-      title: 'HomePage',
-      src: './../images/smiley.jpg'
-    });
-  } else {
+exports.Login = async (req, res) => {
+  try {
+    const rem = { username: req.body.username, password: req.body.password };
+    const compUser = await Signup.find(rem);
+    if (compUser == undefined) throw new Error('username password not found');
+    if (
+      req.body.username == compUser[0].username &&
+      req.body.password == compUser[0].password
+    ) {
+      res.redirect('/home');
+    }
+  } catch (err) {
     res
       .status(400)
       .send(

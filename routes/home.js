@@ -1,9 +1,6 @@
 const router = require('express').Router();
-const signupController = require('./../controller/signupcontroller');
+const homeController = require('./../controller/homeController');
 
-router
-  .route('/')
-  .get(signupController.gsnpage)
-  .post(signupController.adduser);
+router.route('/').get(homeController.ghmpage);
 
 module.exports = router;

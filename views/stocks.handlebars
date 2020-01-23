@@ -1,0 +1,35 @@
+<h1 class="text-center mb-4">
+    {{title}}
+</h1>
+<h3 class="text-center mb-4">
+    {{admin}}
+</h3>
+<h4>
+    Stocks till {{accessTime}}
+</h4>
+
+<ul class="list-group">
+    {{#each stocks}}
+    <li class="list-group-item"> {{stocks.Modelno}}: </li>
+    {{/each}}
+</ul>
+
+<form action="" method="POST" class=" ab-4">
+    <div class=" form-group">
+        <label for="Modelno">Model No.</label>
+        <input type="text" name="Modelno" placeholder="Enter item's modelno" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="Quantity">Quantity</label>
+        <input type="text" name="Quantity" placeholder="Enter item's quantity" class="form-control">
+    </div>
+    <div class=" form-group">
+        <label for="costprice">Cost price</label>
+        <input type="text" name="Costprice" placeholder="Enter item's costprice" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="sellingprice">Selling price</label>
+        <input type="text" name="Sellingprice" placeholder="Enter item's sellingprice" class="form-control">
+    </div>
+    <input type="submit" value="Add Stock" class="btn btn-primary btn-block">
+</form>
