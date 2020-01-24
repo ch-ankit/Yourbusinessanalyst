@@ -9,8 +9,8 @@
 </h4>
 
 <ul class="list-group">
-    {{#each stocks}}
-    <li class="list-group-item"> {{stocks.Modelno}}: </li>
+    {{#each stocks as |stocks|}}
+    <li class="list-group-item"> {{stocks}} </li>
     {{/each}}
 </ul>
 

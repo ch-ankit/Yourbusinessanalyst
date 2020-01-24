@@ -26,7 +26,8 @@ exports.gpage = (req, res) => {
     } else {
       res.send(err);
     }
-  }).lean();
+    console.log(docs);
+  });
 };
 exports.addStocks = async (req, res) => {
   try {
