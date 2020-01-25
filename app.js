@@ -13,7 +13,16 @@ const helpRouter = require('./routes/help');
 
 const app = express();
 
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
+const hbs = exphbs.create({
+  defaultLayout: 'main',
+  helpers: {
+    add1: value => {
+      return value + 2;
+    }
+  }
+});
+
+app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
 app.use(express.json());

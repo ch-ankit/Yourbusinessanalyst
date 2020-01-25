@@ -110,3 +110,11 @@ p {
   color: rgb(211, 4, 4);
   text-align: center;
 }
+.image {
+  display: block;
+  position: relative;
+  margin-right: 0px;
+  margin-left: auto;
+  max-width: 100px;
+  max-height: 100px;
+}

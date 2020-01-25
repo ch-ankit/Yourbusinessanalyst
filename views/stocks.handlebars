@@ -1,18 +1,36 @@
 <h1 class="text-center mb-4">
     {{title}}
 </h1>
-<h3 class="text-center mb-4">
-    {{admin}}
-</h3>
 <h4>
     Stocks till {{accessTime}}
 </h4>
 
-<ul class="list-group">
-    {{#each stocks as |stocks|}}
-    <li class="list-group-item"> {{stocks}} </li>
-    {{/each}}
-</ul>
+<table class ="table">
+    <thead border="1px">
+        <tr>
+            <th>Index</th>
+            <th>ModelNo.</th>
+            <th>Quantity</th>
+            <th>Costprice</th>
+            <th>Sellingprice</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each stocks as |value key|}}
+        <tr>
+                <th>{{add1 key}} </th>
+                {{#each  value as |svalue|}}
+                    {{#if svalue.Modelno}}<th> {{svalue.Modelno}} </th> {{/if}}
+                    {{#if svalue.Quantity}} <th>{{ svalue.Quantity}}</th>{{/if}}
+                    {{#if svalue.Costprice}}<th>{{svalue.Costprice}} </th> {{/if}} 
+                    {{#if svalue.Sellingprice}} <th>{{svalue.Sellingprice}}</th>{{/if}}
+                {{/each}}
+                
+        </tr>
+        {{/each}}
+    </tbody>
+
+</table>
 
 <form action="" method="POST" class=" ab-4">
     <div class=" form-group">
@@ -31,5 +49,5 @@
         <label for="sellingprice">Selling price</label>
         <input type="text" name="Sellingprice" placeholder="Enter item's sellingprice" class="form-control">
     </div>
-    <input type="submit" value="Add Stock" class="btn btn-primary btn-block">
+    <input type="submit" value="Add Stock" class="btn btn-primary btn-block mb-4">
 </form>

@@ -9,11 +9,11 @@
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="../../css/home.css">
 
-    <title>Your Bussiness Analyst</title>
+    <title>{{title}}</title>
 </head>
 
 <body>
-    <ul class="navigation">
+    <ul class="navigation mt-4 ">
         <li><a href="home">Home</a></li>
         <li><a href="accounts">Accounts</a></li>
         <li><a href="stocks">Stock</a></li>
@@ -21,6 +21,10 @@
         <li><a href="help">Help</a></li>
         <li><a href="aboutus">About Us</a></li>
     </ul>
+<img  class="image" src={{src}} } alt="Upload you photo">
+    <h5 class="text-right mb-4">
+    {{admin}}
+    </h5>
     <div class="conatiner mt-4">
         {{{body}}}
     </div>

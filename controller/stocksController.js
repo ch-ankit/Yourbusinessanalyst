@@ -15,19 +15,23 @@ const Signup = require('./../models/signupModel');
 // );
 
 exports.gpage = (req, res) => {
-  Stocks.find((err, docs) => {
-    if (!err) {
-      res.render('stocks', {
-        title: 'Stocks',
-        admin: 'user',
-        accessTime: moment().format(),
-        stocks: docs
-      });
-    } else {
-      res.send(err);
+  Stocks.find(
+    {},
+    'Modelno Quantity Sellingprice Costprice -_id',
+    (err, docs) => {
+      if (!err) {
+        res.render('stocks', {
+          title: 'Stocks',
+          admin: global.compUser[0].username,
+          accessTime: moment().format(),
+          stocks: docs,
+          src: './../images/smiley.jpg'
+        });
+      } else {
+        res.send(err);
+      }
     }
-    console.log(docs);
-  });
+  );
 };
 exports.addStocks = async (req, res) => {
   try {

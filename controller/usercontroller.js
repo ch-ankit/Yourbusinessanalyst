@@ -1,5 +1,5 @@
 const Signup = require('./../models/signupModel');
-
+const Users = require('./../models/userModel');
 exports.login = (req, res) => {
   res.sendFile('login.html');
 };
@@ -7,7 +7,8 @@ exports.login = (req, res) => {
 exports.Login = async (req, res) => {
   try {
     const rem = { username: req.body.username, password: req.body.password };
-    const compUser = await Signup.find(rem);
+    global.compUser = await Signup.find(rem);
+    console.log(compUser);
     if (compUser == undefined) throw new Error('username password not found');
     if (
       req.body.username == compUser[0].username &&

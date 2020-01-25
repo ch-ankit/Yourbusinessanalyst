@@ -1,5 +1,7 @@
 exports.gpage = (req, res) => {
-  res.render('index', {
-    title: 'About Us'
+  res.render('aboutus', {
+    title: 'About Us',
+    admin: global.compUser[0].username,
+    src: './../images/smiley.jpg'
   });
 };
