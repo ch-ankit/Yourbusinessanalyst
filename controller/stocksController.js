@@ -1,28 +1,18 @@
 const moment = require('moment');
 const Stocks = require('./../models/stockModel');
-const Signup = require('./../models/signupModel');
-// let stocks = Stocks.find(
-//   {},
-//   'Modelno Quantity Costprice Sellingprice ',
-//   (err, stocker) => {
-//     if (err) {
-//       console.log('something went wrong');
-//     } else {
-//       //console.log(stocker);
-//       return stocker;
-//     }
-//   }
-// );
 
-exports.gpage = (req, res) => {
+const User = require('./../models/User');
+
+exports.gpage = async (req, res) => {
+  const user = await User.findOne({ id: req.user.id });
   Stocks.find(
-    {},
+    { userId: req.user.id },
     'Modelno Quantity Sellingprice Costprice -_id',
     (err, docs) => {
       if (!err) {
         res.render('stocks', {
           title: 'Stocks',
-          admin: global.compUser[0].username,
+          admin: user.username,
           accessTime: moment().format(),
           stocks: docs,
           src: './../images/smiley.jpg'
@@ -35,8 +25,33 @@ exports.gpage = (req, res) => {
 };
 exports.addStocks = async (req, res) => {
   try {
-    await Stocks.create(req.body);
+    await Stocks.create({
+      Modelno: req.body.Modelno,
+      Sellingprice: req.body.Sellingprice,
+      Costprice: req.body.Costprice,
+      Quantity: req.body.Quantity,
+      userId: req.user.id
+    });
     res.redirect('/stocks');
+  } catch (err) {
+    res.send(`Error:${err}`);
+  }
+};
+
+exports.updateQuantity = async (req, res) => {
+  try {
+    const q = await Stocks.findOne(
+      {
+        Modelno: req.body.Modelno,
+        userId: req.user.id
+      })
+    const docs = await Stocks.findOneAndUpdate({
+      Modelno: req.body.Modelno,
+      userId: req.user.id
+    }, {
+      Quantity: (q.Quantity - req.body.Quantity) < 0 ? 0 : q.Quantity - req.body.Quantity
+    });
+    res.redirect('/home');
   } catch (err) {
     res.send(`Error:${err}`);
   }

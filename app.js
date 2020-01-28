@@ -3,22 +3,21 @@ const path = require('path');
 const exphbs = require('express-handlebars');
 
 const userRouter = require('./routes/user');
-const signupRouter = require('./routes/signup');
 const homeRouter = require('./routes/home');
 const accountRouter = require('./routes/account');
 const stocksRouter = require('./routes/stocks');
 const partyRouter = require('./routes/party');
 const aboutusRouter = require('./routes/aboutus');
 const helpRouter = require('./routes/help');
-
 const app = express();
 
 const hbs = exphbs.create({
   defaultLayout: 'main',
   helpers: {
-    add1: value => {
-      return value + 2;
-    }
+    add1: value => value + 1,
+    multiply: (a, b) => a * b,
+    sub: (a, b) => a - b,
+    profit: (a, b, c) => (a - b) * c
   }
 });
 
@@ -28,10 +27,11 @@ app.set('view engine', 'handlebars');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use(require('cookie-parser')());
+
 app.use(express.static(path.join(__dirname, '/public')));
 
-app.use('/login.html', userRouter);
-app.use('/signup.html', signupRouter);
+app.use('/user', userRouter);
 app.use('/home', homeRouter);
 app.use('/accounts', accountRouter);
 app.use('/stocks', stocksRouter);

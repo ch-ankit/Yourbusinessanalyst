@@ -1,9 +1,9 @@
 const moment = require('moment');
-
-exports.gacpage = (req, res) => {
+exports.gacpage = async (req, res) => {
+  const user = await User.findOne({ id: req.user.id });
   res.render('Accounts', {
     title: 'Accounts',
-    admin: compUser[0].username,
+    admin: user.username,
     accesstime: moment().format(),
     src: './../images/smiley.jpg'
   });

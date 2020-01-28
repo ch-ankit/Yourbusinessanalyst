@@ -1,21 +1,31 @@
-const Signup = require('./../models/signupModel');
-const Users = require('./../models/userModel');
-exports.login = (req, res) => {
-  res.sendFile('login.html');
+const User = require('./../models/User');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
+const saltRounds = 10;
+//LOGIN
+
+exports.getLogin = async (req, res) => {
+  res.render('login');
 };
 
-exports.Login = async (req, res) => {
+exports.postLogin = async (req, res, next) => {
   try {
-    const rem = { username: req.body.username, password: req.body.password };
-    global.compUser = await Signup.find(rem);
-    console.log(compUser);
-    if (compUser == undefined) throw new Error('username password not found');
-    if (
-      req.body.username == compUser[0].username &&
-      req.body.password == compUser[0].password
-    ) {
-      res.redirect('/home');
+    const user = await User.findOne({ username: req.body.username });
+
+    if (user.length == 0) res.send('USERNAME OR PASSWORD NOT CORRECT');
+    let passwordMatched = await bcrypt.compare(
+      req.body.password,
+      user.password
+    );
+
+    if (!passwordMatched) {
+      res.send('USERNAME OR PASSWORD NOT CORRECT');
     }
+
+    let token = jwt.sign({ id: user.id }, process.env.TOKEN_SECRET);
+    res.cookie('auth-token', token);
+    res.redirect('/home');
   } catch (err) {
     res
       .status(400)
@@ -23,4 +33,36 @@ exports.Login = async (req, res) => {
         '<h1><center>AUTHENTICATION FAILED!!!</center></h1> <a href="login.html">Go To Login Page </a>'
       );
   }
+};
+
+//SIGNUP
+
+exports.getSignup = (req, res) => {
+  res.render('signup');
+};
+
+exports.adduser = async (req, res) => {
+  const hash = await bcrypt.hash(req.body.password, saltRounds);
+
+  try {
+    await User.create({
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      username: req.body.username,
+      email: req.body.email,
+      mobilenumber: req.body.mobilenumber,
+      id: req.body.pannumber,
+      password: hash,
+      capital: req.body.capital
+    });
+
+    res.redirect('/user/login');
+  } catch (err) {
+    res.end(`ERRORs : ${err}`);
+  }
+};
+
+exports.logout = (req, res) => {
+  res.clearCookie('auth-token');
+  res.redirect('/user/login');
 };

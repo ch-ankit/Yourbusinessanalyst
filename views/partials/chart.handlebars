@@ -1,0 +1,44 @@
+<div hidden id='data'>
+    {{data}}
+</div>
+<div hidden id='data1'>
+    {{data1}}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<canvas id="profitChart" class="mb-4"></canvas>
+<script>
+    var data = document.getElementById('data').innerText.trim().split(',');
+    console.log(data);
+    var data1 = document.getElementById('data1').innerText.trim().split(',');
+    var label = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    let l = data1.length;
+    for (let i = 12; i < parseInt(12 + l % 12); i++) {
+        label.push(label[i - 12]);
+    }
+    var ctx = document.getElementById('profitChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: label,
+            datasets: [{
+                label: 'Profit',
+                borderColor: 'rgb(0, 0, 255)',
+                data: data1,
+                borderWidth: 2
+            },
+            {
+                label: 'Stocks',
+                borderColor: 'rgb(222, 0, 255)',
+                data: data,
+                borderWidth: 2
+            }]
+        },
+
+        // Configuration options go here
+        options: {}
+    });
+</script>

@@ -1,141 +1,139 @@
- body  {
-    margin:0;
-    padding: 0;
-    background:cornflowerblue;
-    font-size: 16px;
-    color: black;
-    font-family: sans-serif;
-    font-weight: 300;
- }
- .blank{
-    display: none;
-    position: fixed;
-    background: rgba(0, 0, 0, 0.5);
-    top: 0;
-    height: 100vh;
-    width: 100vw;
-    z-index: 1;
- }
- .message{
-    display: none;
-    position: fixed;
-    background: cornflowerblue;
-    padding: 10px;
-    width:300px;
-    top:200px;
-    left: 500px;
-    z-index: 1;
- }
- .heading{
-    margin: 20px 0 ;
-    font-weight: 300;
-    text-align: center;
-    font-size: 28px;
- }
- .signup-box{
-    position: relative;
-    margin: 5% auto;
-    height: 600px;
-    width: 600px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.6);
- }
-
-.login-box{
-    position: relative;
-    margin: 5% auto;
-    padding: 40px;
-    height: 250px;
-    width: 250px;
-    background-color:#dcdcdc; 
-    box-shadow: 0 2px 4px rgba(0,0,0,0.6);
+body {
+  margin: 0;
+  padding: 0;
+  background: cornflowerblue;
+  font-size: 16px;
+  color: black;
+  font-family: sans-serif;
+  font-weight: 300;
+}
+.blank {
+  display: none;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1;
+}
+.message {
+  display: none;
+  position: fixed;
+  background: cornflowerblue;
+  padding: 10px;
+  width: 300px;
+  top: 200px;
+  left: 500px;
+  z-index: 1;
+}
+.heading {
+  margin: 20px 0;
+  font-weight: 300;
+  text-align: center;
+  font-size: 28px;
+  color: blue;
+  position: relative;
+}
+.signup-box {
+  position: relative;
+  margin: 5% auto;
+  height: 600px;
+  width: 600px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
 }
 
- .leftbox{
-    position: absolute;
-    top: 0;
-    left:0;
-    background-color: #dcdcdc;
-    box-sizing: border-box;
-    padding: 40px;
-    width: 300px;
-    height:600px;
- }
-
- .title{
-    margin: 0 0 20px 0;
-    font-weight: 300;
-    font-size: 28px;
- }
-
- input[type="text"],
- input[type="password"],
- input[type="email"],
- input[type="number"]
-
- {
-    display: block;
-    box-sizing: border-box;
-    margin-bottom: 20px;
-    padding: 4px;
-    width: 220px;
-    height: 32px;
-    border: none;
-    outline: none;
-    border-bottom: 1px solid #aaa;
-    font-family: sans-serif;
-    font-weight: 400;
-    font-size:15px;
-    transition:0.2s ease;
- }
-
- input[type="submit"]{
-    margin-bottom: 20px;
-    width: 147px;
-    height:32px;
-    background:#f44336;
-    border: none;
-    border-radius: 50px;
-    color:cornflowerblue;
-    font-family: sans-serif;
-    font-weight: 500;
-    text-transform:uppercase;
-    transition: 0.3s ease;
-    cursor: pointer;
+.login-box {
+  position: relative;
+  margin: 5% auto;
+  padding: 40px;
+  height: 300px;
+  width: 250px;
+  background-color: rgb(6, 135, 158);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
 }
-input[type="submit"]:hover,
-input[type="submit"]:focus
- {
-    background: #fff;
-    transition: 0.2s ease;
- }
- .rightbox{
 
-    position:absolute;
-    top:0;
-    right:0;
-    box-sizing: border-box;
-    padding: 40px;
-    width:300px;
-    height:600px;
-    background-image: url(../images/analysis.jpg);
-    background-size: cover;
-    background-position: center;
- }
- .login{
-    margin: 0;
-    font-weight: 200;
- }
+.leftbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #dcdcdc;
+  box-sizing: border-box;
+  padding: 40px;
+  width: 300px;
+  height: 600px;
+}
 
- .leftbox a{
-    right: 0;
- }
-.continue-text{
-    text-align: center;
- }
- #GraphData{
-   position: fixed;
-   right: 0;
-   bottom: 0;
-   min-width: 100%;
-   min-height: 100%;
- }
+.title {
+  margin: 0 0 20px 0;
+  font-weight: 300;
+  font-size: 28px;
+}
+
+input[type='text'],
+input[type='password'],
+input[type='email'],
+input[type='number'] {
+  display: block;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  padding: 4px;
+  width: 220px;
+  height: 32px;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #aaa;
+  font-family: sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  transition: 0.2s ease;
+}
+
+input[type='submit'] {
+  margin-bottom: 20px;
+  width: 147px;
+  height: 32px;
+  background: #f44336;
+  border: none;
+  border-radius: 50px;
+  color: cornflowerblue;
+  font-family: sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+input[type='submit']:hover,
+input[type='submit']:focus {
+  background: #fff;
+  transition: 0.2s ease;
+}
+.rightbox {
+  position: absolute;
+  top: 0;
+  right: 0;
+  box-sizing: border-box;
+  padding: 40px;
+  width: 300px;
+  height: 600px;
+  background-image: url(../images/analysis.jpg);
+  background-size: cover;
+  background-position: center;
+}
+.login {
+  margin: 0;
+  font-weight: 200;
+}
+
+.leftbox a {
+  right: 0;
+}
+.continue-text {
+  text-align: center;
+}
+#GraphData {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
