@@ -19,7 +19,7 @@ body {
 .message {
   display: none;
   position: fixed;
-  background: cornflowerblue;
+  background: rgb(12, 178, 219);
   padding: 10px;
   width: 300px;
   top: 200px;
@@ -37,8 +37,8 @@ body {
 .signup-box {
   position: relative;
   margin: 5% auto;
-  height: 600px;
-  width: 600px;
+  height: 700px;
+  width: 00px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
 }
 
@@ -46,8 +46,8 @@ body {
   position: relative;
   margin: 5% auto;
   padding: 40px;
-  height: 300px;
-  width: 250px;
+  height: 400px;
+  width: 350px;
   background-color: rgb(6, 135, 158);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
 }
@@ -59,8 +59,8 @@ body {
   background-color: #dcdcdc;
   box-sizing: border-box;
   padding: 40px;
-  width: 300px;
-  height: 600px;
+  width: 400px;
+  height: 700px;
 }
 
 .title {
@@ -113,8 +113,8 @@ input[type='submit']:focus {
   right: 0;
   box-sizing: border-box;
   padding: 40px;
-  width: 300px;
-  height: 600px;
+  width: 400px;
+  height: 700px;
   background-image: url(../images/analysis.jpg);
   background-size: cover;
   background-position: center;

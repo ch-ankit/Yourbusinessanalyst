@@ -1,3 +1,5 @@
+const User = require('./../models/User');
+
 const moment = require('moment');
 exports.gacpage = async (req, res) => {
   const user = await User.findOne({ id: req.user.id });

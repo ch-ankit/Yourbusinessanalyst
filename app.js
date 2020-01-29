@@ -39,4 +39,18 @@ app.use('/party', partyRouter);
 app.use('/aboutus', aboutusRouter);
 app.use('/help', helpRouter);
 
+app.use((req, res, next) => {
+  const err = new Error("Not Found")
+  err.status = 404;
+  next(err);
+})
+
+app.use((err, req, res, next) => {
+  res.render('error', {
+    title: "💥💥💥ERROR💥💥💥",
+    message: err.message,
+    status: err.status || 500
+  })
+})
+
 module.exports = app;

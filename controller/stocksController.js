@@ -23,7 +23,7 @@ exports.gpage = async (req, res) => {
     }
   );
 };
-exports.addStocks = async (req, res) => {
+exports.addStocks = async (req, res, next) => {
   try {
     await Stocks.create({
       Modelno: req.body.Modelno,
@@ -34,9 +34,10 @@ exports.addStocks = async (req, res) => {
     });
     res.redirect('/stocks');
   } catch (err) {
-    res.send(`Error:${err}`);
+    next(err);
   }
 };
+
 
 exports.updateQuantity = async (req, res) => {
   try {

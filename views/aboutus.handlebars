@@ -1,62 +1,65 @@
+{{>headers}}
+
 <h1 class="text-center mb-4">
-    {{title}}
+  {{title}}
 </h1>
-<style> .column {
-  float: left;
-  width: 33.3%;
-  margin-bottom: 16px;
-  padding: 0 8px;
-}
-
-/* Display the columns below each other instead of side by side on small screens */
-@media screen and (max-width: 650px) {
+<style>
   .column {
-    width: 100%;
-    display: block;
+    float: left;
+    width: 33.3%;
+    margin-bottom: 16px;
+    padding: 0 8px;
   }
-}
 
-/* Add some shadows to create a card effect */
-.card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-}
+  /* Display the columns below each other instead of side by side on small screens */
+  @media screen and (max-width: 650px) {
+    .column {
+      width: 100%;
+      display: block;
+    }
+  }
 
-/* Some left and right padding inside the container */
-.container {
-  padding: 0 16px;
-}
+  /* Add some shadows to create a card effect */
+  .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  }
 
-/* Clear floats */
-.container::after,
-.row::after {
-  content: '';
-  clear: both;
-  display: table;
-}
+  /* Some left and right padding inside the container */
+  .container {
+    padding: 0 16px;
+  }
 
-.title {
-  color: grey;
-}
+  /* Clear floats */
+  .container::after,
+  .row::after {
+    content: '';
+    clear: both;
+    display: table;
+  }
 
-.button {
-  border: none;
-  outline: 0;
-  display: inline-block;
-  padding: 8px;
-  color: white;
-  background-color: #000;
-  text-align: center;
-  cursor: pointer;
-  width: 100%;
-}
+  .title {
+    color: grey;
+  }
 
-.button:hover {
-  background-color: #555;
-}
+  .button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  .button:hover {
+    background-color: #555;
+  }
 </style>
-<h2>Meet the Development Team</h2> 
+<h2>Meet the Development Team</h2>
 <hr>
- <div class="row">
+<div class="row">
   <div class="column">
     <div class="card">
       <img src="./../images/smiley.jpg" alt="Ankit" style="width:80%">
@@ -95,18 +98,18 @@
       </div>
     </div>
   </div>
-</div> 
+</div>
 
-  <div class="column">
-    <div class="card">
-      <img src="./../images/smiley.jpg" alt="Name" style="width:80%">
-      <div class="container">
-        <h2>Name</h2>
-        <p class="title">portion worked</p>
-        <p>Some text that describes </p>
-        <p>example@example.com</p>
-        <p><button class="button">Contact</button></p>
-      </div>
+<div class="column">
+  <div class="card">
+    <img src="./../images/smiley.jpg" alt="Name" style="width:80%">
+    <div class="container">
+      <h2>Name</h2>
+      <p class="title">portion worked</p>
+      <p>Some text that describes </p>
+      <p>example@example.com</p>
+      <p><button class="button">Contact</button></p>
     </div>
   </div>
-</div> 
+</div>
+</div>

@@ -1,3 +1,5 @@
+{{>headers}}
+
 <h1 class="text-center mb-4">
     {{title}}
 </h1>
@@ -5,7 +7,7 @@
     Stocks till {{accessTime}}
 </h4>
 
-<table class ="table">
+<table class="table">
     <thead border="1px">
         <tr>
             <th>Index</th>
@@ -21,17 +23,17 @@
     <tbody>
         {{#each stocks as |value key|}}
         <tr>
-                <th>{{add1 key}} </th>
-                {{#each  value as |svalue|}}
-                    {{#if svalue.Modelno}}<th> {{svalue.Modelno}} </th> {{/if}}
-                    {{#if svalue.Quantity}} <th>{{ svalue.Quantity}}</th>{{/if}}
-                    {{#if svalue.Costprice}}<th>{{svalue.Costprice}} </th> {{/if}} 
-                    {{#if svalue.Costprice}} <th>{{multiply svalue.Costprice svalue.Quantity}}</th>{{/if}}
-                    {{#if svalue.Sellingprice}} <th>{{svalue.Sellingprice}}</th>{{/if}}
-                    {{#if svalue.Sellingprice}} <th>{{multiply svalue.Sellingprice svalue.Quantity}}</th>{{/if}}
-                    {{#if svalue.Sellingprice}} <th>{{profit svalue.Sellingprice svalue.Costprice svalue.Quantity}}</th>{{/if}}
-                {{/each}}
-                
+            <th>{{add1 key}} </th>
+            {{#each  value as |svalue|}}
+            {{#if svalue.Modelno}}<th> {{svalue.Modelno}} </th> {{/if}}
+            {{#if svalue.Quantity}} <th>{{ svalue.Quantity}}</th>{{/if}}
+            {{#if svalue.Costprice}}<th>{{svalue.Costprice}} </th> {{/if}}
+            {{#if svalue.Costprice}} <th>{{multiply svalue.Costprice svalue.Quantity}}</th>{{/if}}
+            {{#if svalue.Sellingprice}} <th>{{svalue.Sellingprice}}</th>{{/if}}
+            {{#if svalue.Sellingprice}} <th>{{multiply svalue.Sellingprice svalue.Quantity}}</th>{{/if}}
+            {{#if svalue.Sellingprice}} <th>{{profit svalue.Sellingprice svalue.Costprice svalue.Quantity}}</th>{{/if}}
+            {{/each}}
+
         </tr>
         {{/each}}
     </tbody>
