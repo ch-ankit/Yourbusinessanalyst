@@ -3,7 +3,7 @@ const Stocks = require('./../models/stockModel');
 
 const User = require('./../models/User');
 
-exports.gpage = async (req, res) => {
+exports.gpage = async (req, res, next) => {
   const user = await User.findOne({ id: req.user.id });
   Stocks.find(
     { userId: req.user.id },
@@ -18,7 +18,7 @@ exports.gpage = async (req, res) => {
           src: './../images/smiley.jpg'
         });
       } else {
-        res.send(err);
+        next(err);
       }
     }
   );

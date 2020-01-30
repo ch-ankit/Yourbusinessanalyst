@@ -48,7 +48,7 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
   res.render('error', {
     title: "💥💥💥ERROR💥💥💥",
-    message: err.message,
+    message: `:: ${err.message}`,
     status: err.status || 500
   })
 })

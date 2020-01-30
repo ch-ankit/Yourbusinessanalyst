@@ -9,7 +9,6 @@
 <canvas id="profitChart" class="mb-4"></canvas>
 <script>
     var data = document.getElementById('data').innerText.trim().split(',');
-    console.log(data);
     var data1 = document.getElementById('data1').innerText.trim().split(',');
     var label = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     let l = data1.length;
@@ -25,16 +24,16 @@
         data: {
             labels: label,
             datasets: [{
-                label: 'Profit',
+                label: 'Esti mated Profit',
                 borderColor: 'rgb(0, 0, 255)',
                 data: data1,
-                borderWidth: 2
+                borderWidth: 3
             },
             {
                 label: 'Stocks',
                 borderColor: 'rgb(222, 0, 255)',
                 data: data,
-                borderWidth: 2
+                borderWidth: 3
             }]
         },
 
