@@ -5,8 +5,12 @@ const jwt = require('jsonwebtoken');
 const saltRounds = 10;
 //LOGIN
 
-exports.getLogin = async (req, res) => {
-  res.render('login');
+exports.getLogin = async (req, res, next) => {
+  try {
+    res.render('login');
+  } catch (err) {
+    next(err);
+  }
 };
 
 exports.postLogin = async (req, res, next) => {
@@ -54,7 +58,7 @@ exports.adduser = async (req, res) => {
 
     res.redirect('/user/login');
   } catch (err) {
-    res.end(`ERRORs : ${err}`);
+    next(err);
   }
 };
 

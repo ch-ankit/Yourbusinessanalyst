@@ -53,6 +53,7 @@ exports.addStocks = async (req, res, next) => {
         }
       })
     }
+
     console.log(supplier)
     let exist = supplier.supplies.includes(stock._id) || null;
     if (!exist) {
