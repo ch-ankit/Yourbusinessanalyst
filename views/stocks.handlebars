@@ -21,6 +21,8 @@
     </thead>
     <tbody>
         {{#each stocks as |value key|}}
+        
+        
         <tr>
             <th>{{add1 key}} </th>
             {{#each  value as |svalue|}}
@@ -38,7 +40,6 @@
     </tbody>
 
 </table>
-
 <form action="" method="POST" class=" ab-4">
     <div class=" form-group">
         <label for="Modelno">Model No.</label>
@@ -63,3 +64,4 @@
 
     <input type="submit" value="Add Stock" class="btn btn-primary btn-block mb-4">
 </form>
+{{>horizontalbar}}

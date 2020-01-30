@@ -16,6 +16,8 @@ exports.gpage = async (req, res, next) => {
 					admin: user.username,
 					accessTime: moment().format(),
 					stocks: docs,
+					modelNo: Object.keys(docs).map(el => docs[el].Modelno),
+					quantity: Object.keys(docs).map(el => docs[el].Quantity),
 					src: './../images/smiley.jpg'
 				});
 			} else {
@@ -65,24 +67,34 @@ exports.addStocks = async (req, res, next) => {
 
 exports.updateQuantity = async (req, res) => {
 	try {
-		const q = await Stocks.findOne({
-			Modelno: req.body.Modelno,
-			userId: req.user.id
-		});
-		const docs = await Stocks.findOneAndUpdate(
+		const q = await Stocks.findOne(
 			{
 				Modelno: req.body.Modelno,
 				userId: req.user.id
-			},
-			{
-				Quantity:
-					q.Quantity - req.body.Quantity < 0
-						? 0
-						: q.Quantity - req.body.Quantity
-			}
-		);
+			})
+		const docs = await Stocks.findOneAndUpdate({
+			Modelno: req.body.Modelno,
+			userId: req.user.id
+		}, {
+			Quantity: (q.Quantity - req.body.Quantity) < 0 ? 0 : q.Quantity - req.body.Quantity
+		});
 		res.redirect('/home');
 	} catch (err) {
 		res.send(`Error:${err}`);
 	}
 };
+
+exports.getStocks = async (req, res) => {
+	Stocks.find(
+		{ userId: req.user.id },
+		'Modelno Quantity -_id',
+		(err, docs) => {
+			if (!err) {
+				console.log(docs)
+				res.json(docs);
+			} else {
+				next(err);
+			}
+		}
+	);
+}
