@@ -1,14 +1,11 @@
 {{>headers}}
 
-<h1 class="text-center mb-4">
-    {{title}}
-</h1>
 
 Accounts Details till {{accesstime}}
 </h4>
-<form class="form-inline">
+<form position="fixed" class="form-inline">
     <div>
-        <table width="450px" border="5px">
+        <table width="400px" class="table table-striped table-bordered">
             <thead>
                 <tr>
                     <th>Accounts Recivable</th>
@@ -26,7 +23,7 @@ Accounts Details till {{accesstime}}
         </table>
     </div>
     <div>
-        <table width="450px" border="5px">
+        <table width="400px" class="table table-striped table-bordered ml-1">
             <thead>
                 <tr>
                     <th>Accounts Payable</th>
@@ -43,4 +40,5 @@ Accounts Details till {{accesstime}}
             </tbody>
         </table>
     </div>
-    {{>pieChart}}
+</form>
+{{>pieChart}}
