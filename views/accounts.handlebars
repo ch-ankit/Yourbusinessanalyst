@@ -4,10 +4,7 @@
     {{title}}
 </h1>
 
-<div><button class="btn  btn-light "> <a href="recieveable">Recieveable</a> </button>
-    <button class="btn btn-light "> <a href="payable">Payable</a></button></div>
-<h4>
-    Accounts Details till {{accesstime}}
+Accounts Details till {{accesstime}}
 </h4>
 <form class="form-inline">
     <div>
@@ -21,6 +18,8 @@
             </thead>
             <tbody>
                 <tr>
+                    <th> </th>
+                    <th> </th>
                     <th> </th>
                 </tr>
             </tbody>
@@ -38,7 +37,10 @@
             <tbody>
                 <tr>
                     <th> </th>
+                    <th> </th>
+                    <th> </th>
                 </tr>
             </tbody>
         </table>
     </div>
+    {{>pieChart}}

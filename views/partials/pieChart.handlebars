@@ -1,0 +1,26 @@
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<canvas id="pChart" class="mb-4"></canvas>
+<script>
+    var ctx = document.getElementById('pChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'pie',
+
+        // The data for our dataset
+        data: {
+            labels: ['Amount to be received', 'Amount to be Payed'],
+            datasets: [
+                {
+                    label: 'Payment',
+                    borderColor: 'rgb(0, 0, 255)',
+                    backgroundColor: ['rgb(25,233,45)', 'rgb(255, 0, 0)'],
+                    data: [166, 110],
+                    borderWidth: 5
+                }
+            ]
+        },
+
+        // Configuration options go here
+        options: {}
+    });
+</script>
