@@ -53,11 +53,8 @@ exports.addStocks = async (req, res, next) => {
         }
       })
     }
-<<<<<<< HEAD
-=======
 
     console.log(supplier)
->>>>>>> a0d77da9096cacd29c594cbd5645122968c35025
     let exist = supplier.supplies.includes(stock._id) || null;
     if (!exist) {
       supplier = await Supplier.updateOne(
