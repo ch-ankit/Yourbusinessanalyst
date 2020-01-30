@@ -1,4 +1,4 @@
-const User = require('./../models/User');
+const User = require('./../models/userModel');
 
 const moment = require('moment');
 exports.gacpage = async (req, res) => {

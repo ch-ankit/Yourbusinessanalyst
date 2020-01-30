@@ -1,6 +1,6 @@
 const moment = require('moment');
 const Stocks = require('./../models/stockModel');
-const User = require('./../models/User');
+const User = require('./../models/userModel');
 
 
 

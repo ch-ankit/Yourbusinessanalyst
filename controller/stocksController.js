@@ -1,7 +1,7 @@
 const moment = require('moment');
 const Stocks = require('./../models/stockModel');
 
-const User = require('./../models/User');
+const User = require('./../models/userModel');
 
 exports.gpage = async (req, res, next) => {
   const user = await User.findOne({ id: req.user.id });
