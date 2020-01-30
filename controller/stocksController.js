@@ -54,8 +54,8 @@ exports.addStocks = async (req, res, next) => {
 				});
 		}
 
-
-		res.json(supplier);
+		let supplies = await Supplier.findOne({ userId: req.user.id }).populate('supplies');
+		res.json(supplies.supplies);
 		// res.redirect('/stocks');
 		// }
 	} catch (err) {

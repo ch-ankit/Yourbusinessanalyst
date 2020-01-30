@@ -32,13 +32,6 @@ const stocksSchema = new mongoose.Schema({
   }
 });
 
-// stocksSchema.post("findOneAndUpdate", function (next) {
-
-//   if (this.isModified("Quantity")) {
-
-//   }
-
-// })
 
 const Stocks = mongoose.model('Stocks', stocksSchema);
 module.exports = Stocks;
