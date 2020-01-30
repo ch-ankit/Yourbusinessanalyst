@@ -8,7 +8,6 @@ exports.ghmpage = async (req, res, next) => {
     let stock = {};
     let estimatedProfit = {};
     const docs = await Stocks.find({ userId: req.user.id }, '-_id ');
-    console.log(docs)
     docs.forEach(row => {
 
       let date = row.Date.getMonth() + row.Date.getYear();
