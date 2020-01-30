@@ -1,7 +1,77 @@
-<div id="stock" hidden="true">{{ stocks }}</div>
+<div id="modelNo" hidden="true">{{ modelNo }}</div>
+<div id="quantity" hidden="true">{{ quantity }}</div>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<canvas id="chart" class="mb-4"></canvas>
 <script>
-  const stocks = document.getElementById('stock').innerText;
-  console.log(stocks);
+  const modelNo = document
+    .getElementById('modelNo')
+    .innerText.trim()
+    .split(',');
+  const quantity = document
+    .getElementById('quantity')
+    .innerText.trim()
+    .split(',');
+
+  var chart = document.getElementById('chart').getContext('2d');
+  var lineChart = new Chart(chart, {
+    // The type of chart we want to create
+    type: 'horizontalBar',
+
+    // The data for our dataset
+    data: {
+      labels: modelNo,
+      datasets: [
+        {
+          label: 'Quantity',
+          borderColor: 'rgb(0, 0, 0)',
+          data: quantity,
+          backgroundColor: [
+            'rgb(2, 71, 181)',
+            'rgb(193, 253, 111)',
+            'rgb(172, 127, 203)',
+            'rgb(203, 53, 175)',
+            'rgb(226, 45, 44)',
+            'rgb(102, 181, 19)',
+            'rgb(92, 165, 221)',
+            'rgb(250, 40, 162)',
+            'rgb(250, 252, 120)',
+            'rgb(67, 59, 246)'
+          ],
+          borderWidth: 3
+        }
+      ]
+    },
+
+    // Configuration options go here
+    options: {
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: true
+            }
+          }
+        ]
+      },
+      legend: {
+        position: 'right',
+        labels: {
+          fontSize: '14',
+          fontColor: 'crimson'
+        }
+      },
+      tooltips: {
+        mode: 'nearest'
+      }
+    }
+  });
+</script>
+<script>
+  //   fetch('/stocks/getStocks')
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       console.log(data);
+  //     });
   // const modelNo = document
 </script>

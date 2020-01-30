@@ -16,6 +16,8 @@ exports.gpage = async (req, res, next) => {
           admin: user.username,
           accessTime: moment().format(),
           stocks: docs,
+          modelNo: Object.keys(docs).map(el => docs[el].Modelno),
+          quantity: Object.keys(docs).map(el => docs[el].Quantity),
           src: './../images/smiley.jpg'
         });
       } else {
@@ -64,42 +66,31 @@ exports.addStocks = async (req, res, next) => {
 };
 
 exports.updateQuantity = async (req, res) => {
-  const q = await Stocks.findOne(
-    {
+  try {
+    const q = await Stocks.findOne(
+      {
+        Modelno: req.body.Modelno,
+        userId: req.user.id
+      })
+    const docs = await Stocks.findOneAndUpdate({
       Modelno: req.body.Modelno,
       userId: req.user.id
-    })
-  const docs = await Stocks.findOneAndUpdate({
-    Modelno: req.body.Modelno,
-    userId: req.user.id
-  }, {
-    Quantity: (q.Quantity - req.body.Quantity) < 0 ? 0 : q.Quantity - req.body.Quantity
-  });
-  res.redirect('/home');
-} catch (err) {
-  res.send(`Error:${err}`);
-}
+    }, {
+      Quantity: (q.Quantity - req.body.Quantity) < 0 ? 0 : q.Quantity - req.body.Quantity
+    });
+    res.redirect('/home');
+  } catch (err) {
+    res.send(`Error:${err}`);
+  }
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
 exports.getStocks = async (req, res) => {
-  const user = await User.findOne({ id: req.user.id });
   Stocks.find(
     { userId: req.user.id },
-    'Modelno Quantity Sellingprice Costprice -_id',
+    'Modelno Quantity -_id',
     (err, docs) => {
       if (!err) {
+        console.log(docs)
         res.json(docs);
       } else {
         next(err);
