@@ -57,3 +57,30 @@ exports.updateQuantity = async (req, res) => {
     res.send(`Error:${err}`);
   }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+exports.getStocks = async (req, res) => {
+  const user = await User.findOne({ id: req.user.id });
+  Stocks.find(
+    { userId: req.user.id },
+    'Modelno Quantity Sellingprice Costprice -_id',
+    (err, docs) => {
+      if (!err) {
+        res.json(docs);
+      } else {
+        next(err);
+      }
+    }
+  );
+}
