@@ -10,7 +10,6 @@ router
 
 router.route('/updateQuantity').post(auth, stocksController.updateQuantity);
 
-router.route('/getStocks').get(auth, stocksController.getStocks)
 
 
 module.exports = router;

@@ -2,13 +2,15 @@ const moment = require('moment');
 const Stocks = require('./../models/stockModel');
 const User = require('./../models/userModel');
 
-exports.ghmpage = async (req, res) => {
-  const user = await User.findOne({ id: req.user.id });
-  let stock = {};
-  let estimatedProfit = {};
-  const docs = await Stocks.find({ userId: req.user.id }, '-_id ');
+exports.ghmpage = async (req, res, next) => {
   try {
+    const user = await User.findOne({ id: req.user.id });
+    let stock = {};
+    let estimatedProfit = {};
+    const docs = await Stocks.find({ userId: req.user.id }, '-_id ');
+    console.log(docs)
     docs.forEach(row => {
+
       let date = row.Date.getMonth() + row.Date.getYear();
       // console.log(date)
       if (!stock.hasOwnProperty(date)) {
@@ -34,7 +36,8 @@ exports.ghmpage = async (req, res) => {
       data: Object.keys(stock).map(el => stock[el]),
       data1: Object.keys(estimatedProfit).map(el => estimatedProfit[el])
     });
+
   } catch (err) {
-    res.send(err);
+    next(err);
   }
 };

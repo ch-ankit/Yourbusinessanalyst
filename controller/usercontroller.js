@@ -27,11 +27,7 @@ exports.postLogin = async (req, res, next) => {
     res.cookie('auth-token', token);
     res.redirect('/home');
   } catch (err) {
-    res
-      .status(400)
-      .send(
-        '<h1><center>AUTHENTICATION FAILED!!!</center></h1> <a href="login">Go To Login Page </a>'
-      );
+    next(err)
   }
 };
 
