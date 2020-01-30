@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Users = require('./userModel');
+
 const stocksSchema = new mongoose.Schema({
   Modelno: {
     type: String,
@@ -7,26 +7,38 @@ const stocksSchema = new mongoose.Schema({
     unique: true
   },
   userId: {
-    type: String,
-    ref: 'User'
+    type: String
   },
   Quantity: {
-    type: String,
+    type: Number,
     required: true,
     default: 0
   },
   Costprice: {
-    type: String,
+    type: Number,
     required: true
   },
   Sellingprice: {
-    type: String,
-    required: true
+    type: Number,
+    default: 0
   },
   Date: {
     type: Date,
     default: Date.now()
+  },
+  supplierPan: {
+    type: String,
+    default: ''
   }
 });
+
+// stocksSchema.post("findOneAndUpdate", function (next) {
+
+//   if (this.isModified("Quantity")) {
+
+//   }
+
+// })
+
 const Stocks = mongoose.model('Stocks', stocksSchema);
 module.exports = Stocks;
