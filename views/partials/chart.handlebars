@@ -8,10 +8,11 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <canvas id="profitChart" class="mb-4"></canvas>
 <script>
+    
     var data = document.getElementById('data').innerText.trim().split(',');
     var data1 = document.getElementById('data1').innerText.trim().split(',');
     var label = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    let l = data1.length;
+    let l = data1.length ;
     for (let i = 12; i < parseInt(12 + l % 12); i++) {
         label.push(label[i - 12]);
     }

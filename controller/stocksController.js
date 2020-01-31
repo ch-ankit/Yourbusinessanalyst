@@ -29,7 +29,11 @@ exports.gpage = async (req, res, next) => {
 exports.addStocks = async (req, res, next) => {
   try {
     let stock = await Stocks.findOneAndUpdate(
-      { Modelno: req.body.Modelno, userId: req.user.id },
+      {
+        Modelno: req.body.Modelno,
+        userId: req.user.id,
+        supplierPan: req.body.supplierPannumber
+      },
       {
         $inc: {
           Quantity: parseInt(req.body.Quantity)
@@ -41,9 +45,13 @@ exports.addStocks = async (req, res, next) => {
         userId: req.user.id,
         Date: Date.now()
       },
-      { upsert: true, new: true });
+      { upsert: true, new: true }
+    );
 
-    let supplier = await Supplier.findOne({ userId: req.user.id, supplierPan: req.body.supplierPannumber });
+    let supplier = await Supplier.findOne({
+      userId: req.user.id,
+      supplierPan: req.body.supplierPannumber
+    });
     if (!supplier) {
       supplier = await Supplier.create({
         userId: req.user.id,
@@ -51,22 +59,22 @@ exports.addStocks = async (req, res, next) => {
         $push: {
           supplies: stock
         }
-      })
+      });
     }
     let exist = supplier.supplies.includes(stock._id) || null;
     if (!exist) {
-      supplier = await Supplier.updateOne(
-        supplier,
-        {
-          userId: req.user.id,
-          supplierPan: req.body.supplierPannumber,
-          $push: {
-            supplies: stock
-          }
-        });
+      supplier = await Supplier.updateOne(supplier, {
+        userId: req.user.id,
+        supplierPan: req.body.supplierPannumber,
+        $push: {
+          supplies: stock
+        }
+      });
     }
 
-    let supplies = await Supplier.findOne({ userId: req.user.id }).populate('supplies');
+    let supplies = await Supplier.findOne({ userId: req.user.id }).populate(
+      'supplies'
+    );
     // res.json(supplies.supplies);
     res.redirect('/stocks');
     // }
@@ -77,20 +85,24 @@ exports.addStocks = async (req, res, next) => {
 
 exports.updateQuantity = async (req, res) => {
   try {
-    const q = await Stocks.findOne(
+    const q = await Stocks.findOne({
+      Modelno: req.body.Modelno,
+      userId: req.user.id
+    });
+    const docs = await Stocks.findOneAndUpdate(
       {
         Modelno: req.body.Modelno,
         userId: req.user.id
-      })
-    const docs = await Stocks.findOneAndUpdate({
-      Modelno: req.body.Modelno,
-      userId: req.user.id
-    }, {
-      Quantity: (q.Quantity - req.body.Quantity) < 0 ? 0 : q.Quantity - req.body.Quantity
-    });
+      },
+      {
+        Quantity:
+          q.Quantity - req.body.Quantity < 0
+            ? 0
+            : q.Quantity - req.body.Quantity
+      }
+    );
     res.redirect('/home');
   } catch (err) {
     res.send(`Error:${err}`);
   }
 };
-

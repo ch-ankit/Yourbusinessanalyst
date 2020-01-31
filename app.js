@@ -9,6 +9,9 @@ const stocksRouter = require('./routes/stocks');
 const partyRouter = require('./routes/party');
 const aboutusRouter = require('./routes/aboutus');
 const helpRouter = require('./routes/help');
+// const clientsRouter = require('./routes/clients');
+const suppliersRouter = require('./routes/suppliers');
+
 const app = express();
 
 const hbs = exphbs.create({
@@ -38,19 +41,21 @@ app.use('/stocks', stocksRouter);
 app.use('/party', partyRouter);
 app.use('/aboutus', aboutusRouter);
 app.use('/help', helpRouter);
+// app.use('/clients', clientsRouter);
+app.use('/suppliers', suppliersRouter);
 
 app.use((req, res, next) => {
-  const err = new Error("Not Found")
+  const err = new Error('Not Found');
   err.status = 404;
   next(err);
-})
+});
 
 app.use((err, req, res, next) => {
   res.render('error', {
-    title: "💥💥💥ERROR💥💥💥",
+    title: '💥💥💥ERROR💥💥💥',
     message: `:: ${err.message}`,
     status: err.status || 500
-  })
-})
+  });
+});
 
 module.exports = app;

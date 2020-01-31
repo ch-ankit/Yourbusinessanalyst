@@ -17,21 +17,24 @@ exports.postLogin = async (req, res, next) => {
   try {
     const user = await User.findOne({ username: req.body.username });
 
-    if (user.length == 0) res.send('USERNAME OR PASSWORD NOT CORRECT');
-    let passwordMatched = await bcrypt.compare(
-      req.body.password,
-      user.password
-    );
-
-    if (!passwordMatched) {
+    if (user == null || user.length == 0) {
       res.send('USERNAME OR PASSWORD NOT CORRECT');
-    }
+    } else {
+      let passwordMatched = await bcrypt.compare(
+        req.body.password,
+        user.password
+      );
 
-    let token = jwt.sign({ id: user.id }, process.env.TOKEN_SECRET);
-    res.cookie('auth-token', token);
-    res.redirect('/home');
+      if (!passwordMatched) {
+        res.send('USERNAME OR PASSWORD NOT CORRECT');
+      } else {
+        let token = jwt.sign({ id: user.id }, process.env.TOKEN_SECRET);
+        res.cookie('auth-token', token);
+        res.redirect('/home');
+      }
+    }
   } catch (err) {
-    next(err)
+    next(err);
   }
 };
 

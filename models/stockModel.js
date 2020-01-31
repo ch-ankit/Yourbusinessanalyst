@@ -3,8 +3,7 @@ const mongoose = require('mongoose');
 const stocksSchema = new mongoose.Schema({
   Modelno: {
     type: String,
-    required: true,
-    unique: true
+    required: true
   },
   userId: {
     type: String
@@ -31,7 +30,6 @@ const stocksSchema = new mongoose.Schema({
     default: ''
   }
 });
-
 
 const Stocks = mongoose.model('Stocks', stocksSchema);
 module.exports = Stocks;

@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const userController = require('./../controller/usercontroller');
 
-
 //For Login
 router
   .route('/login')

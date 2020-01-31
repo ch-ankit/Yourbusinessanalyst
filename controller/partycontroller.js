@@ -7,7 +7,6 @@ exports.gpage = async (req, res) => {
     title: 'Party',
     admin: user.username,
     src: './../images/smiley.jpg',
-    suppliers: supplies.supplies
   });
 };
 

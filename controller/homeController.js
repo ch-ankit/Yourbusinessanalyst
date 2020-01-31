@@ -9,7 +9,6 @@ exports.ghmpage = async (req, res, next) => {
     let estimatedProfit = {};
     const docs = await Stocks.find({ userId: req.user.id }, '-_id ');
     docs.forEach(row => {
-
       let date = row.Date.getMonth() + row.Date.getYear();
       // console.log(date)
       if (!stock.hasOwnProperty(date)) {
@@ -35,7 +34,6 @@ exports.ghmpage = async (req, res, next) => {
       data: Object.keys(stock).map(el => stock[el]),
       data1: Object.keys(estimatedProfit).map(el => estimatedProfit[el])
     });
-
   } catch (err) {
     next(err);
   }

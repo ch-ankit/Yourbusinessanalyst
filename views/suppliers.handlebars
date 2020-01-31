@@ -1,5 +1,37 @@
 {{>headers}}
 
+<table class="table table-bordered table-hover table-responsive">
+    <caption>Table:List of Suppliers</caption>
+    <thead class="thead-dark">
+        <tr>
+            <th>Index</th>
+            <th>Pan Number</th>
+            <th>Model No.</th>
+            <th>Quantity</th>
+            <th>Cost Price</th>
+            <th>Total Cost Price</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        {{#each suppliers as |value key|}}
+            <tr>
+                <th>{{add1 key}} </th>
+                {{#each  value as |svalue|}}
+                    {{#if svalue.supplierPan}} <th>{{svalue.supplierPan}}</th>{{/if}}
+                    {{#if svalue.Modelno}}<th> {{tvalue.Modelno}} </th> {{/if}}
+                    {{#if svalue.Quantity}} <th>{{svalue.Quantity}}</th>{{/if}}
+                    {{#if svalue.Costprice}}<th>{{svalue.Costprice}} </th> {{/if}}
+                    {{#if svalue.Costprice}} <th>{{multiply svalue.Costprice svalue.Quantity}}</th>{{/if}}
+                {{/each}}
+
+            </tr>
+        {{/each}}
+    </tbody>
+
+</table>
+
+
 <form action="/party/addsupplier" method="POST" class=" ab-4">
     <div class=" form-group">
         <label for="Name">suppliers Name</label>
