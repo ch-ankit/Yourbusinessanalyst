@@ -13,6 +13,10 @@ const stocksSchema = new mongoose.Schema({
     required: true,
     default: 0
   },
+  soldQuantity: {
+    type: Number,
+    default: 0
+  },
   Costprice: {
     type: Number,
     required: true

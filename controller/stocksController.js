@@ -76,7 +76,7 @@ exports.addStocks = async (req, res, next) => {
     let supplies = await Supplier.findOne({ userId: req.user.id }).populate(
       'supplies'
     );
-    console.log(supplies.supplies)
+    // console.log(supplies.supplies)
     // res.json(supplies.supplies);
     res.redirect('/stocks');
     // }
@@ -89,9 +89,9 @@ exports.updateQuantity = async (req, res) => {
   try {
     const q = await Stocks.findOne({
       Modelno: req.body.Modelno,
-      userId: req.user.id
+      userId: req.user.id,
     });
-    const docs = await Stocks.findOneAndUpdate(
+    let docs = await Stocks.findOneAndUpdate(
       {
         Modelno: req.body.Modelno,
         userId: req.user.id
@@ -100,21 +100,45 @@ exports.updateQuantity = async (req, res) => {
         Quantity:
           q.Quantity - req.body.Quantity < 0
             ? 0
-            : q.Quantity - req.body.Quantity
-      }
+            : q.Quantity - req.body.Quantity,
+        soldQuantity: req.body.Quantity
+      }, { new: true }
     );
-    await Buyer.findOneAndUpdate({ userId: req.user.id, supplierPan: req.body.buyerPannumber }, {
-      $inc: {
-        Quantity: parseInt(req.body.Quantity)
-      },
-      Costprice: parseInt(req.body.Costprice),
-      Sellingprice: parseInt(req.body.Sellingprice),
-      supplierPan: req.body.buyerPannumber,
-      Modelno: req.body.Modelno,
+    ////////////////////////////////////
+    let buyer = await Buyer.findOne({
       userId: req.user.id,
-      Date: Date.now()
-    },
-      { upsert: true, new: true });
+      supplierPan: req.body.buyerPannumber
+    });
+    if (!buyer) {
+      await Buyer.create({
+        userId: req.user.id,
+        supplierPan: req.body.buyerPannumber,
+        $push: {
+          supplies: docs
+        }
+      });
+    }
+    else {
+      let exist = buyer.supplies.includes(docs._id) || false;
+      if (!exist) {
+        buyer = await Buyer.findOne({
+          userId: req.user.id,
+          supplierPan: req.body.buyerPannumber
+        })
+        buyer = await Buyer.updateOne(buyer, {
+          userId: req.user.id,
+          supplierPan: req.body.buyerPannumber,
+          $push: {
+            supplies: docs
+          }
+        });
+      }
+    }
+    let supplies = await Buyer.findOne({ userId: req.user.id }).populate(
+      'supplies'
+    );
+    // console.log(supplies)
+    ////////////////////////////////////
     res.redirect('/home');
   } catch (err) {
     res.send(`Error:${err}`);
