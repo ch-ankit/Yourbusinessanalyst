@@ -2,13 +2,13 @@ const moment = require('moment');
 const Stocks = require('./../models/stockModel');
 
 const User = require('./../models/userModel');
-const { Supplier } = require('./../models/buyerSupplierModel');
+const { Supplier, Buyer } = require('./../models/buyerSupplierModel');
 
 exports.gpage = async (req, res, next) => {
   const user = await User.findOne({ id: req.user.id });
   Stocks.find(
     { userId: req.user.id },
-    'Modelno Quantity Sellingprice Costprice -_id',
+    'Modelno Quantity Sellingprice Costprice supplierPan -_id',
     (err, docs) => {
       if (!err) {
         res.render('stocks', {
@@ -61,20 +61,22 @@ exports.addStocks = async (req, res, next) => {
         }
       });
     }
-    let exist = supplier.supplies.includes(stock._id) || null;
-    if (!exist) {
-      supplier = await Supplier.updateOne(supplier, {
-        userId: req.user.id,
-        supplierPan: req.body.supplierPannumber,
-        $push: {
-          supplies: stock
-        }
-      });
+    else {
+      let exist = supplier.supplies.includes(stock._id) || false;
+      if (!exist) {
+        supplier = await Supplier.updateOne(supplier, {
+          userId: req.user.id,
+          supplierPan: req.body.supplierPannumber,
+          $push: {
+            supplies: stock
+          }
+        });
+      }
     }
-
     let supplies = await Supplier.findOne({ userId: req.user.id }).populate(
       'supplies'
     );
+    console.log(supplies.supplies)
     // res.json(supplies.supplies);
     res.redirect('/stocks');
     // }
@@ -101,6 +103,18 @@ exports.updateQuantity = async (req, res) => {
             : q.Quantity - req.body.Quantity
       }
     );
+    await Buyer.findOneAndUpdate({ userId: req.user.id, supplierPan: req.body.buyerPannumber }, {
+      $inc: {
+        Quantity: parseInt(req.body.Quantity)
+      },
+      Costprice: parseInt(req.body.Costprice),
+      Sellingprice: parseInt(req.body.Sellingprice),
+      supplierPan: req.body.buyerPannumber,
+      Modelno: req.body.Modelno,
+      userId: req.user.id,
+      Date: Date.now()
+    },
+      { upsert: true, new: true });
     res.redirect('/home');
   } catch (err) {
     res.send(`Error:${err}`);

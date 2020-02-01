@@ -17,12 +17,13 @@
             <th>Selling Price</th>
             <th>Total Selling Price</th>
             <th>Estimated Profit/Loss</th>
+            <th>Supplier's Pan No</th>
         </tr>
     </thead>
     <tbody>
         {{#each stocks as |value key|}}
-        
-        
+
+
         <tr>
             <th>{{add1 key}} </th>
             {{#each  value as |svalue|}}
@@ -33,6 +34,7 @@
             {{#if svalue.Sellingprice}} <th>{{svalue.Sellingprice}}</th>{{/if}}
             {{#if svalue.Sellingprice}} <th>{{multiply svalue.Sellingprice svalue.Quantity}}</th>{{/if}}
             {{#if svalue.Sellingprice}} <th>{{profit svalue.Sellingprice svalue.Costprice svalue.Quantity}}</th>{{/if}}
+            {{#if svalue.supplierPan}} <th>{{svalue.supplierPan}}</th>{{/if}}
             {{/each}}
 
         </tr>
