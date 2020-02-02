@@ -1,25 +1,99 @@
 {{>headers}}
+<table class="table table-bordered table-hover table-responsive">
+  <caption>
+    Table:List of Suppliers
+  </caption>
+  <thead class="thead-dark">
+    <tr>
+      <th>Index</th>
+      <th>Pan Number</th>
+      <th>Model No.</th>
+      <th>Quantity</th>
+      <th>Cost Price</th>
+      <th>Total Cost Price</th>
+    </tr>
+  </thead>
+
+  <tbody id="tableData"></tbody>
+</table>
 
 <form action="/party/addclient" method="POST" class=" ab-4">
-    <div class=" form-group">
-        <label for="Name">Clients Name</label>
-        <input type="text" name="clientName" placeholder="Enter Clients Model Name" class="form-control">
-    </div>
-    <div class="form-group">
-        <label for="Amount">Amount to be received</label>
-        <input type="text" name="amountRecivable" placeholder="Enter amount to be received" class="form-control">
-    </div>
-    <div class=" form-group">
-        <label for="contact">Contact Number</label>
-        <input type="text" name="contact" placeholder="Enter Clients contact number" class="form-control">
-    </div>
-    <div class="form-group">
-        <label for="address"> Client'sAddress</label>
-        <input type="text" name="address" placeholder="Enter Client's Address" class="form-control">
-    </div>
-    <div class="form-group">
-        <label for="pannumber">Client's Pan No.</label>
-        <input type="text" name="panNumber" placeholder="Enter Client's Pan Number" class="form-control">
-    </div>
-    <input type="submit" value="Add Clients" class="btn btn-primary btn-block mb-4">
+  <div class=" form-group">
+    <label for="Name">Clients Name</label>
+    <input
+      type="text"
+      name="clientName"
+      placeholder="Enter Clients Model Name"
+      class="form-control"
+    />
+  </div>
+  <div class="form-group">
+    <label for="Amount">Amount to be received</label>
+    <input
+      type="text"
+      name="amountRecivable"
+      placeholder="Enter amount to be received"
+      class="form-control"
+    />
+  </div>
+  <div class=" form-group">
+    <label for="contact">Contact Number</label>
+    <input
+      type="text"
+      name="contact"
+      placeholder="Enter Clients contact number"
+      class="form-control"
+    />
+  </div>
+  <div class="form-group">
+    <label for="address"> Client'sAddress</label>
+    <input
+      type="text"
+      name="address"
+      placeholder="Enter Client's Address"
+      class="form-control"
+    />
+  </div>
+  <div class="form-group">
+    <label for="pannumber">Client's Pan No.</label>
+    <input
+      type="text"
+      name="panNumber"
+      placeholder="Enter Client's Pan Number"
+      class="form-control"
+    />
+  </div>
+  <input
+    type="submit"
+    value="Add Clients"
+    class="btn btn-primary btn-block mb-4"
+  />
 </form>
+
+<script>
+  fetch('/clients/getSupplies')
+    .then(response => response.json())
+    .then(data => {
+      let table = document.getElementById('tableData');
+      let i = 1;
+
+      data.forEach(row => {
+        console.log(row);
+        let supplies = row.supplies;
+        supplies.forEach(el => {
+          table.innerHTML += `
+                          <tr>
+                              <td>${i}</td>
+                              <td>${row.supplierPan}</td>
+                              <td>${el.Modelno}</td>
+                              <td>${el.soldQuantity}</td>
+                              <td>${el.Costprice}</td>
+                               <td>${parseInt(el.Costprice) *
+                                 parseInt(el.soldQuantity)}</td>
+                          </tr>
+                      `;
+          i++;
+        });
+      });
+    });
+</script>

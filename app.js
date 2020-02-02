@@ -9,7 +9,7 @@ const stocksRouter = require('./routes/stocks');
 const partyRouter = require('./routes/party');
 const aboutusRouter = require('./routes/aboutus');
 const helpRouter = require('./routes/help');
-// const clientsRouter = require('./routes/clients');
+const clientsRouter = require('./routes/clients');
 const suppliersRouter = require('./routes/suppliers');
 
 const app = express();
@@ -41,7 +41,7 @@ app.use('/stocks', stocksRouter);
 app.use('/party', partyRouter);
 app.use('/aboutus', aboutusRouter);
 app.use('/help', helpRouter);
-// app.use('/clients', clientsRouter);
+app.use('/clients', clientsRouter);
 app.use('/suppliers', suppliersRouter);
 
 app.use((req, res, next) => {

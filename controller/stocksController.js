@@ -60,8 +60,7 @@ exports.addStocks = async (req, res, next) => {
           supplies: stock
         }
       });
-    }
-    else {
+    } else {
       let exist = supplier.supplies.includes(stock._id) || false;
       if (!exist) {
         supplier = await Supplier.updateOne(supplier, {
@@ -85,11 +84,11 @@ exports.addStocks = async (req, res, next) => {
   }
 };
 
-exports.updateQuantity = async (req, res) => {
+exports.updateQuantity = async (req, res, next) => {
   try {
     const q = await Stocks.findOne({
       Modelno: req.body.Modelno,
-      userId: req.user.id,
+      userId: req.user.id
     });
     let stock = await Stocks.findOneAndUpdate(
       {
@@ -102,26 +101,25 @@ exports.updateQuantity = async (req, res) => {
             q.Quantity - req.body.Quantity < 0
               ? 0
               : q.Quantity - req.body.Quantity,
-          soldQuantity: req.body.Quantity
+          soldQuantity: req.body.Quantity,
+          Sellingprice: req.body.Sellingprice
         }
-      }, { new: true }
+      },
+      { new: true }
     );
     ////////////////////////////////////
     let buyer = await Buyer.findOne({
       userId: req.user.id,
       supplierPan: req.body.buyerPannumber
     });
-    console.log("DOCS", stock, "BUYER", buyer);
+    console.log('DOCS', stock, 'BUYER', buyer);
     if (!buyer) {
       buyer = await Buyer.create({
         userId: req.user.id,
         supplierPan: req.body.buyerPannumber,
         supplies: stock
       });
-
-      console.log("BUYERRRRRRRRRR", buyer);
-    }
-    else {
+    } else {
       let exist = buyer.supplies.includes(stock._id) || false;
       if (!exist) {
         buyer = await Buyer.updateOne(buyer, {
@@ -139,8 +137,8 @@ exports.updateQuantity = async (req, res) => {
     // console.log(supplies)
     ////////////////////////////////////
     // res.redirect('/home');
-    res.json(supplies)
+    res.json(supplies);
   } catch (err) {
-    res.send(`Error:${err}`);
+    next(err);
   }
 };

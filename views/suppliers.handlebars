@@ -2,7 +2,8 @@
 
 <table class="table table-bordered table-hover table-responsive">
     <caption>Table:List of Suppliers</caption>
-    <thead class="thead-dark">
+    <thead
+     class="thead-dark">
         <tr>
             <th>Index</th>
             <th>Pan Number</th>
@@ -12,22 +13,11 @@
             <th>Total Cost Price</th>
         </tr>
     </thead>
-    <tbody>
+        
+    <tbody id="tableData">
 
-        {{#each suppliers as |value key|}}
-            <tr>
-                <th>{{add1 key}} </th>
-                {{#each  value as |svalue|}}
-                    {{#if svalue.supplierPan}} <th>{{svalue.supplierPan}}</th>{{/if}}
-                    {{#if svalue.Modelno}}<th> {{tvalue.Modelno}} </th> {{/if}}
-                    {{#if svalue.Quantity}} <th>{{svalue.Quantity}}</th>{{/if}}
-                    {{#if svalue.Costprice}}<th>{{svalue.Costprice}} </th> {{/if}}
-                    {{#if svalue.Costprice}} <th>{{multiply svalue.Costprice svalue.Quantity}}</th>{{/if}}
-                {{/each}}
-
-            </tr>
-        {{/each}}
     </tbody>
+   
 
 </table>
 
@@ -55,3 +45,34 @@
     </div>
     <input type="submit" value="Add suppliers" class="btn btn-primary btn-block mb-4"/>
 </form>
+
+<script>
+fetch('/suppliers/getSupplies')
+    .then(response=>response.json())
+    .then(data =>{
+        let table = document.getElementById('tableData');
+        let i = 1;
+        console.log(data)
+     
+        data.forEach(row =>{
+            table.innerHTML += `
+                        <tr>
+                            <td>${i}</td>
+                            <td>${row[0].supplierPan}</td>
+                            <td>${row[0].Modelno}</td>
+                            <td>${row[0].Quantity}</td>
+                            <td>${row[0].Costprice}</td>
+                             <td>${parseInt(row[0].Costprice) * parseInt(row[0].Quantity)}</td>
+                        </tr>    
+                    `;
+            i++;
+        });
+
+        
+    
+
+    });
+
+
+
+</script>

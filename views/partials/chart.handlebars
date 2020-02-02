@@ -1,70 +1,94 @@
-<div hidden id='data'>
-    {{data}}
+<div hidden id="data">
+  {{ data }}
 </div>
 
-<div hidden id='data1'>
-    {{data1}}
+<div hidden id="data1">
+  {{ data1 }}
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js" integrity="sha256-AdQN98MVZs44Eq2yTwtoKufhnU+uZ7v2kXnD5vqzZVo=" crossorigin="anonymous"></script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"
+  integrity="sha256-AdQN98MVZs44Eq2yTwtoKufhnU+uZ7v2kXnD5vqzZVo="
+  crossorigin="anonymous"
+></script>
 <canvas id="profitChart" class="mb-4"></canvas>
 <script>
-    
-    var data = document.getElementById('data').innerText.trim().split(',');
-    var data1 = document.getElementById('data1').innerText.trim().split(',');
-    var label = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    let l = data1.length ;
-    for (let i = 12; i < parseInt(12 + l % 12); i++) {
-        label.push(label[i - 12]);
-    }
-    var chart = document.getElementById('profitChart').getContext('2d');
-    var lineChart = new Chart(chart, {
-        // The type of chart we want to create
-        type: 'line',
+  var data = document
+    .getElementById('data')
+    .innerText.trim()
+    .split(',');
+  var data1 = document
+    .getElementById('data1')
+    .innerText.trim()
+    .split(',');
+  var label = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
+  ];
+  let l = data1.length;
+  for (let i = 12; i < parseInt(12 + (l % 12)); i++) {
+    label.push(label[i - 12]);
+  }
+  var chart = document.getElementById('profitChart').getContext('2d');
+  var lineChart = new Chart(chart, {
+    // The type of chart we want to create
+    type: 'line',
 
-        // The data for our dataset
-        data: {
-            labels: label,
-            datasets: [{
-                label: 'Estimated Profit',
-                borderColor: 'rgb(0, 255, 0)',
-                data: data1,
-                borderWidth: 3
-            },
-            {
-                label: 'Stocks',
-                borderColor: 'rgb(20, 100, 100)',
-                data: data,
-                borderWidth: 3
-            }]
+    // The data for our dataset
+    data: {
+      labels: label,
+      datasets: [
+        {
+          label: 'Estimated Profit',
+          borderColor: 'rgb(0, 255, 0)',
+          data: data1,
+          borderWidth: 3
         },
-
-        // Configuration options go here
-        options: {
-            scales:{
-                yAxes:[{
-                    ticks:{
-                        beginAtZero:true
-                    }
-                }],
-                
-            },
-            legend:
-            {
-                position:'right',
-                labels:{
-                    fontSize:'14',
-                    fontColor:'crimson'
-                }
-            },
-            tooltips:{
-                mode:'nearest'
-            },
-            hover: {
-                mode: 'nearest',
-                intersect: true
-            }
+        {
+          label: 'Stocks',
+          borderColor: 'rgb(20, 100, 100)',
+          data: data,
+          borderWidth: 3
         }
-    });
+      ]
+    },
+
+    // Configuration options go here
+    options: {
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: true
+            }
+          }
+        ]
+      },
+      legend: {
+        position: 'right',
+        labels: {
+          fontSize: '14',
+          fontColor: 'crimson'
+        }
+      },
+      tooltips: {
+        mode: 'nearest'
+      },
+      hover: {
+        mode: 'nearest',
+        intersect: true
+      }
+    }
+  });
 </script>

@@ -4,6 +4,10 @@ const supplierBuyersSchema = new mongoose.Schema({
   userId: {
     type: String
   },
+  name: {
+    type: String,
+    required: true
+  },
   amount: {
     type: String,
     default: 0

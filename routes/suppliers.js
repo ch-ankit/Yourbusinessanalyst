@@ -6,4 +6,6 @@ router
   .get(auth, supplierController.getSuppliers)
   .post(auth, supplierController.addSuppliers);
 
+router.route('/getSupplies').get(auth, supplierController.getSupplies);
+
 module.exports = router;
