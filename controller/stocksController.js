@@ -136,8 +136,8 @@ exports.updateQuantity = async (req, res, next) => {
     );
     // console.log(supplies)
     ////////////////////////////////////
-    // res.redirect('/home');
-    res.json(supplies);
+    res.redirect('/home');
+    // res.json(supplies);
   } catch (err) {
     next(err);
   }
