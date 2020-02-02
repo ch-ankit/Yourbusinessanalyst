@@ -91,17 +91,19 @@ exports.updateQuantity = async (req, res) => {
       Modelno: req.body.Modelno,
       userId: req.user.id,
     });
-    let docs = await Stocks.findOneAndUpdate(
+    let stock = await Stocks.findOneAndUpdate(
       {
         Modelno: req.body.Modelno,
         userId: req.user.id
       },
       {
-        Quantity:
-          q.Quantity - req.body.Quantity < 0
-            ? 0
-            : q.Quantity - req.body.Quantity,
-        soldQuantity: req.body.Quantity
+        $set: {
+          Quantity:
+            q.Quantity - req.body.Quantity < 0
+              ? 0
+              : q.Quantity - req.body.Quantity,
+          soldQuantity: req.body.Quantity
+        }
       }, { new: true }
     );
     ////////////////////////////////////
@@ -109,27 +111,24 @@ exports.updateQuantity = async (req, res) => {
       userId: req.user.id,
       supplierPan: req.body.buyerPannumber
     });
+    console.log("DOCS", stock, "BUYER", buyer);
     if (!buyer) {
-      await Buyer.create({
+      buyer = await Buyer.create({
         userId: req.user.id,
         supplierPan: req.body.buyerPannumber,
-        $push: {
-          supplies: docs
-        }
+        supplies: stock
       });
+
+      console.log("BUYERRRRRRRRRR", buyer);
     }
     else {
-      let exist = buyer.supplies.includes(docs._id) || false;
+      let exist = buyer.supplies.includes(stock._id) || false;
       if (!exist) {
-        buyer = await Buyer.findOne({
-          userId: req.user.id,
-          supplierPan: req.body.buyerPannumber
-        })
         buyer = await Buyer.updateOne(buyer, {
           userId: req.user.id,
           supplierPan: req.body.buyerPannumber,
           $push: {
-            supplies: docs
+            supplies: stock
           }
         });
       }
@@ -139,7 +138,8 @@ exports.updateQuantity = async (req, res) => {
     );
     // console.log(supplies)
     ////////////////////////////////////
-    res.redirect('/home');
+    // res.redirect('/home');
+    res.json(supplies)
   } catch (err) {
     res.send(`Error:${err}`);
   }
