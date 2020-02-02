@@ -7,10 +7,12 @@ exports.ghmpage = async (req, res, next) => {
     const user = await User.findOne({ id: req.user.id });
     let stock = {};
     let estimatedProfit = {};
+    let dates = [];
+    var i = 0;
     const docs = await Stocks.find({ userId: req.user.id }, '-_id ');
     docs.forEach(row => {
+      dates[i] = row.Date;
       let date = row.Date.getMonth() + row.Date.getYear();
-      // console.log(date)
       if (!stock.hasOwnProperty(date)) {
         stock[date] = row.Costprice * row.Quantity;
         estimatedProfit[date] =
@@ -25,6 +27,7 @@ exports.ghmpage = async (req, res, next) => {
         estimatedProfit[date] +=
           (row.Sellingprice - row.Costprice) * row.Quantity;
       }
+      i++;
     });
     res.render('index', {
       title: 'Homepage',
@@ -32,7 +35,8 @@ exports.ghmpage = async (req, res, next) => {
       accessTime: moment().format(),
       src: './../images/smiley.jpg',
       data: Object.keys(stock).map(el => stock[el]),
-      data1: Object.keys(estimatedProfit).map(el => estimatedProfit[el])
+      data1: Object.keys(estimatedProfit).map(el => estimatedProfit[el]),
+      dates: dates
     });
   } catch (err) {
     next(err);
