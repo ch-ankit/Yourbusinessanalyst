@@ -5,4 +5,5 @@ router
   .route('/')
   .get(auth, supplierController.getSuppliers)
   .post(auth, supplierController.addSuppliers);
+
 module.exports = router;
