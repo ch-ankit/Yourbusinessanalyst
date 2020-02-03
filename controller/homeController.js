@@ -43,7 +43,6 @@ exports.ghmpage = async (req, res, next) => {
     });
     dates = dates.map(date => moment(date).format('YYYY MM DD'));
     let uniqueDates = dates.filter(onlyUnique);
-    console.log(stock);
 
     res.render('index', {
       title: 'Homepage',

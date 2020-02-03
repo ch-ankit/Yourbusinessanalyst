@@ -9,7 +9,7 @@ const supplierBuyersSchema = new mongoose.Schema({
     required: true
   },
   amount: {
-    type: String,
+    type: Number,
     default: 0
   },
   pan: {
@@ -27,4 +27,7 @@ const supplierBuyersSchema = new mongoose.Schema({
 });
 
 exports.buyerDetails = mongoose.model('buyerDetails', supplierBuyersSchema);
-exports.supplierDetail = mongoose.model('supplierDetail', supplierBuyersSchema);
+exports.supplierDetails = mongoose.model(
+  'supplierDetail',
+  supplierBuyersSchema
+);

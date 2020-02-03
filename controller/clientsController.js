@@ -1,7 +1,7 @@
 const User = require('./../models/userModel');
 const Buyer = require('./../models/buyerSupplierModel').Buyer;
-const buyerDetail = require('./../models/suppliersBuyersDetailModel')
-  .buyerDetail;
+const buyerDetails = require('./../models/suppliersBuyersDetailModel')
+  .buyerDetails;
 exports.getClients = async (req, res, next) => {
   try {
     const user = await User.findOne({ id: req.user.id });
@@ -17,14 +17,14 @@ exports.getClients = async (req, res, next) => {
 };
 exports.addClients = async (req, res, next) => {
   try {
-    const docs = await buyerDetail.findOneAndUpdate(
+    const docs = await buyerDetails.findOneAndUpdate(
       {
         userId: req.user.id,
         pan: req.body.panNumber
       },
       {
         userId: req.user.id,
-        name: req.body.supplierName,
+        name: req.body.clientName,
         amount: req.body.amount,
         pan: req.body.panNumber,
         contactNumber: req.body.contact,

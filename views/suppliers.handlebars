@@ -51,21 +51,39 @@ fetch('/suppliers/getSupplies')
     .then(response=>response.json())
     .then(data =>{
         let table = document.getElementById('tableData');
-        let i = 1;
+        let i = 0;
         console.log(data)
      
         data.forEach(row =>{
-            table.innerHTML += `
+            if(row.length>1){
+                for(j=0;j<row.length;j++){
+                    table.innerHTML += `
                         <tr>
-                            <td>${i}</td>
+                            <td>${i+1}</td>
+                            <td>${row[i].supplierPan}</td>
+                            <td>${row[i].Modelno}</td>
+                            <td>${row[i].Quantity}</td>
+                            <td>${row[i].Costprice}</td>
+                             <td>${parseInt(row[i].Costprice) * parseInt(row[i].Quantity)}</td>
+                        </tr>    
+                    `;
+                    i++;
+                }
+                
+            }else{
+                table.innerHTML += `
+                        <tr>
+                            <td>${i+1}</td>
                             <td>${row[0].supplierPan}</td>
                             <td>${row[0].Modelno}</td>
                             <td>${row[0].Quantity}</td>
                             <td>${row[0].Costprice}</td>
                              <td>${parseInt(row[0].Costprice) * parseInt(row[0].Quantity)}</td>
                         </tr>    
-                    `;
+                    `;console.log(1)
             i++;
+            }
+            
         });
 
         

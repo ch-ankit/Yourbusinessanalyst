@@ -17,7 +17,7 @@
   <tbody id="tableData"></tbody>
 </table>
 
-<form action="/party/addclient" method="POST" class=" ab-4">
+<form action="/clients" method="POST" class=" ab-4">
   <div class=" form-group">
     <label for="Name">Clients Name</label>
     <input
@@ -31,7 +31,7 @@
     <label for="Amount">Amount to be received</label>
     <input
       type="text"
-      name="amountRecivable"
+      name="amount"
       placeholder="Enter amount to be received"
       class="form-control"
     />
@@ -78,7 +78,7 @@
       let i = 1;
 
       data.forEach(row => {
-        console.log(row);
+        
         let supplies = row.supplies;
         supplies.forEach(el => {
           table.innerHTML += `

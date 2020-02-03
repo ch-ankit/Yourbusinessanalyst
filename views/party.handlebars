@@ -1,9 +1,12 @@
 {{>headers}}
 
-<div>
+
+<center>
+    <div>
     <button class="btn  btn-light  mt-4"> <a href="clients">Clients</a> </button>
     <button class="btn btn-light mt-4 "> <a href="suppliers">Suppliers</a></button>
 </div>
+</center>
 <span>
     <h3 class="text text-center">Clients</h3>
  
@@ -15,11 +18,23 @@
                 <th>Pan Number</th>
                 <th>Contact Number</th>
                 <th>Address</th>
+                <th>Amount</th>
             </tr>
         </thead>
-        <tbody>
-          
-
+          <tbody>
+               {{#each buyerDetails as |svalue key|}}
+               <tr>
+                    <td>{{add1 key}}</td>  
+                    {{#each svalue as |value|}}
+                        {{#if value.name}}<td>{{value.name}}</td> {{/if}}
+                        {{#if value.pan }}<td>{{value.pan}}</td> {{/if}}
+                        {{#if contactNumber}}<td>{{value.contactNumber}}</td> {{/if}}
+                        {{#if value.address}}<td>{{value.address}}</td>{{/if}}
+                        {{#if value.amount}}<td>{{value.amount}}</td>{{/if}}
+                    {{/each}} 
+                </tr>
+            {{/each}}
+        
         </tbody>
     </table>
 
@@ -55,7 +70,7 @@
     </table>
 
 </span>
-
+{{>verticalbar}}
 
 
 

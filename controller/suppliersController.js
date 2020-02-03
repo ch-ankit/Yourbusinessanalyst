@@ -1,7 +1,7 @@
 const User = require('./../models/userModel');
 const Supplier = require('./../models/buyerSupplierModel').Supplier;
-const supplierDetail = require('./../models/suppliersBuyersDetailModel')
-  .supplierDetail;
+const supplierDetails = require('./../models/suppliersBuyersDetailModel')
+  .supplierDetails;
 
 exports.getSuppliers = async (req, res, next) => {
   try {
@@ -11,7 +11,6 @@ exports.getSuppliers = async (req, res, next) => {
       '-_id Quantity supplierPan Costprice Modelno '
     ).populate('supplies');
     // let supplies = suppliers.map(el => el.supplies);
-    console.log(supplies);
     res.render('suppliers', {
       title: 'Suppliers',
       admin: user.username,
@@ -25,7 +24,7 @@ exports.getSuppliers = async (req, res, next) => {
 
 exports.addSuppliers = async (req, res, next) => {
   try {
-    const docs = await supplierDetail.findOneAndUpdate(
+    const docs = await supplierDetails.findOneAndUpdate(
       {
         userId: req.user.id,
         pan: req.body.panNumber
@@ -52,8 +51,8 @@ exports.getSupplies = async (req, res, next) => {
       { userId: req.user.id },
       '-_id Quantity supplierPan Costprice Modelno '
     ).populate('supplies');
+
     let supplies = suppliers.map(el => el.supplies);
-    console.log(supplies);
     res.json(supplies);
   } catch (err) {
     next(err);

@@ -24,16 +24,16 @@
         {{#each stocks as |value key|}}
 
         <tr>
-            <th>{{add1 key}} </th>
+            <td>{{add1 key}} </td>
             {{#each  value as |svalue|}}
-            {{#if svalue.Modelno}}<th> {{svalue.Modelno}} </th> {{/if}}
-            {{#if svalue.Quantity}} <th>{{ svalue.Quantity}}</th>{{/if}}
-            {{#if svalue.Costprice}}<th>{{svalue.Costprice}} </th> {{/if}}
-            {{#if svalue.Costprice}} <th>{{multiply svalue.Costprice svalue.Quantity}}</th>{{/if}}
-            {{#if svalue.Sellingprice}} <th>{{svalue.Sellingprice}}</th>{{/if}}
-            {{#if svalue.Sellingprice}} <th>{{multiply svalue.Sellingprice svalue.Quantity}}</th>{{/if}}
-            {{#if svalue.Sellingprice}} <th>{{profit svalue.Sellingprice svalue.Costprice svalue.Quantity}}</th>{{/if}}
-            {{#if svalue.supplierPan}} <th>{{svalue.supplierPan}}</th>{{/if}}
+            {{#if svalue.Modelno}}<td> {{svalue.Modelno}} </td> {{/if}}
+            {{#if svalue.Modelno}} <td>{{ svalue.Quantity}}</td>{{/if}}
+            {{#if svalue.Modelno}}<td>{{svalue.Costprice}} </td> {{/if}}
+            {{#if svalue.Modelno}} <td>{{multiply svalue.Costprice svalue.Quantity}}</td>{{/if}}
+            {{#if svalue.Modelno}} <td>{{svalue.Sellingprice}}</td>{{/if}}
+            {{#if svalue.Modelno}} <td>{{multiply svalue.Sellingprice svalue.Quantity}}</td>{{/if}}
+            {{#if svalue.Modelno}} <td>{{profit svalue.Sellingprice svalue.Costprice svalue.Quantity}}</td>{{/if}}
+            {{#if svalue.Modelno}} <td>{{svalue.supplierPan}}</td>{{/if}}
             {{/each}}
 
         </tr>

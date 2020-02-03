@@ -1,0 +1,139 @@
+<div id="sName" hidden="true">{{ sName }}</div>
+<div id="sAmount" hidden="true">{{ sAmount }}</div>
+<div id="cName" hidden="true">{{ cName }}</div>
+<div id="cAmount" hidden="true">{{ cAmount }}</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<div class="container">
+  <canvas id="schart" class="mb-5"></canvas>
+  <canvas id="cchart" class="mb-5"></canvas>
+</div>
+<script>
+  const sName = document
+    .getElementById('sName')
+    .innerText.trim()
+    .split(',');
+  const sAmount = document
+    .getElementById('sAmount')
+    .innerText.trim()
+    .split(',');
+
+  var chart = document.getElementById('schart').getContext('2d');
+  var lineChart = new Chart(chart, {
+    // The type of chart we want to create
+    type: 'bar',
+
+    // The data for our dataset
+    data: {
+      labels: sName,
+      datasets: [
+        {
+          label: 'Amount ',
+          borderColor: 'rgb(0, 0, 0)',
+          data: sAmount,
+          backgroundColor: [
+            'rgb(2, 71, 181)',
+            'rgb(193, 253, 111)',
+            'rgb(172, 127, 203)',
+            'rgb(203, 53, 175)',
+            'rgb(226, 45, 44)',
+            'rgb(102, 181, 19)',
+            'rgb(92, 165, 221)',
+            'rgb(250, 40, 162)',
+            'rgb(250, 252, 120)',
+            'rgb(67, 59, 246)'
+          ],
+          borderWidth: 3
+        }
+      ]
+    },
+
+    // Configuration options go here
+    options: {
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: true
+            }
+          }
+        ]
+      },
+      legend: {
+        display:false
+      },
+      tooltips: {
+        mode: 'nearest'
+      },
+      title: {
+            display: true,
+            text: 'AMOUNT TO BE PAYED'
+        }
+    }
+  });
+</script>
+
+<script>
+  const cName = document
+    .getElementById('cName')
+    .innerText.trim()
+    .split(',');
+  const cAmount = document
+    .getElementById('cAmount')
+    .innerText.trim()
+    .split(',');
+
+  var chart = document.getElementById('cchart').getContext('2d');
+  var lineChart = new Chart(chart, {
+    // The type of chart we want to create
+    type: 'bar',
+
+    // The data for our dataset
+    data: {
+      labels: cName,
+      datasets: [
+        {
+          label: 'Amount',
+          borderColor: 'rgb(0, 0, 0)',
+          data: cAmount,
+          backgroundColor: [
+            'rgb(2, 71, 181)',
+            'rgb(193, 253, 111)',
+            'rgb(172, 127, 203)',
+            'rgb(203, 53, 175)',
+            'rgb(226, 45, 44)',
+            'rgb(102, 181, 19)',
+            'rgb(92, 165, 221)',
+            'rgb(250, 40, 162)',
+            'rgb(250, 252, 120)',
+            'rgb(67, 59, 246)'
+          ],
+          borderWidth: 3
+        }
+      ]
+    },
+
+    // Configuration options go here
+    options: {
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: true
+            }
+          }
+        ]
+      },
+      legend: {
+        display:false
+      },
+      tooltips: {
+        mode: 'nearest'
+      },
+      title: {
+            display: true,
+            text: 'AMOUNT TO BE RECIVED'
+        }
+    }
+  });
+</script>
