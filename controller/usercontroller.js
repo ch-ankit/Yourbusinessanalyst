@@ -1,6 +1,45 @@
-const User = require('./../models/userModel');
 const bcrypt = require('bcrypt');
+const multer = require('multer');
+const sharp = require('sharp');
 const jwt = require('jsonwebtoken');
+const User = require('./../models/userModel');
+
+
+const multerStorage = multer.memoryStorage()
+
+const multerFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith('image')) {
+    cb(null, true)
+  } else {
+    cb(err, false)
+  }
+
+}
+
+const upload = multer({
+  storage: multerStorage,
+  fileFilter: multerFilter
+})
+
+exports.updateUserPhoto = upload.single('photo')
+
+exports.resizeUserPhoto = async (req, res, next) => {
+  try {
+    const user = await User.findOne({ id: req.user.id })
+    if (!req.file) return next(err)
+    req.file.filename = `${user.username}.jpeg`
+
+    sharp(req.file.buffer)
+      .resize(500, 500)
+      .toFormat('jpeg').
+      jpeg({ quality: 90 })
+      .toFile(`public/images/users/${req.file.filename}`)
+    next()
+  } catch (err) {
+    next(err)
+  }
+}
+
 
 const saltRounds = 10;
 //LOGIN
@@ -69,3 +108,21 @@ exports.logout = (req, res) => {
   res.clearCookie('auth-token');
   res.redirect('/user/login');
 };
+
+
+exports.updateMe = async (req, res, next) => {
+  try {
+    if (req.file) {
+      const filterBody = req.file.filename;
+      await User.findOneAndUpdate({ id: req.user.id }, {
+        photo: filterBody
+      });
+      res.json({
+        status: 'success',
+        message: 'User has been updated'
+      })
+    }
+  } catch (err) {
+    next(err)
+  }
+}

@@ -8,7 +8,7 @@ exports.gacpage = async (req, res, next) => {
       title: 'Accounts',
       admin: user.username,
       accesstime: moment().format(),
-      src: './../images/smiley.jpg'
+      src: `./../images/users/${user.photo}`
     });
   } catch (err) {
     next(err);

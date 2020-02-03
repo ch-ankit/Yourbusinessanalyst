@@ -22,7 +22,7 @@ exports.gpage = async (req, res, next) => {
           stocks: docs,
           modelNo: Object.keys(docs).map(el => docs[el].Modelno),
           quantity: Object.keys(docs).map(el => docs[el].Quantity),
-          src: './../images/smiley.jpg'
+          src: `./../images/users/${user.photo}`
         });
       } else {
         next(err);
@@ -35,7 +35,6 @@ exports.addStocks = async (req, res, next) => {
     let valider = await supplierDetails.findOne({
       pan: req.body.supplierPannumber
     });
-    console.log(valider);
     if (!valider) {
       throw new Error('Supplier Is Not Registered, Add Suppliers first');
     } else {

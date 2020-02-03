@@ -32,6 +32,10 @@ const userSchema = new mongoose.Schema({
   capital: {
     type: String,
     required: true
+  },
+  photo: {
+    type: String,
+    default: 'default.png'
   }
 });
 

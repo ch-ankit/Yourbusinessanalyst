@@ -30,7 +30,7 @@ exports.gpage = async (req, res, next) => {
     res.render('party', {
       title: 'Party',
       admin: user.username,
-      src: './../images/smiley.jpg',
+      src: `./../images/users/${user.photo}`,
       supplierDetail: supDetails,
       buyerDetails: buyDetails,
       sAmount: sAmounts,

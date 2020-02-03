@@ -9,7 +9,7 @@ exports.getClients = async (req, res, next) => {
     res.render('clients', {
       title: 'Clients',
       admin: user.username,
-      src: './../images/smiley.jpg'
+      src: `./../images/users/${user.photo}`
     });
   } catch (err) {
     next(err);

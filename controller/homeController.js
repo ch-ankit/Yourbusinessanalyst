@@ -36,7 +36,7 @@ exports.ghmpage = async (req, res, next) => {
         estimatedProfit[currentDate] =
           estimatedProfit[prevDate] +
           parseInt(row.Quantity) *
-            (parseInt(row.Sellingprice) - parseInt(row.Costprice));
+          (parseInt(row.Sellingprice) - parseInt(row.Costprice));
         prevDate = currentDate;
       }
       i++;
@@ -48,7 +48,7 @@ exports.ghmpage = async (req, res, next) => {
       title: 'Homepage',
       admin: user.username,
       accessTime: moment().format(),
-      src: './../images/smiley.jpg',
+      src: `./../images/users/${user.photo}`,
       data: Object.keys(stock).map(el => stock[el]),
       data1: Object.keys(estimatedProfit).map(el => estimatedProfit[el]),
       labels: uniqueDates

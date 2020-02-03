@@ -14,7 +14,7 @@ exports.getSuppliers = async (req, res, next) => {
     res.render('suppliers', {
       title: 'Suppliers',
       admin: user.username,
-      src: './../images/smiley.jpg',
+      src: `./../images/users/${user.photo}`,
       suppliers: supplies
     });
   } catch (err) {
