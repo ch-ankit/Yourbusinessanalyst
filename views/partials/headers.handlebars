@@ -1,19 +1,56 @@
 <ul class="navigation mt-4 ">
-    <li><a href="/home">Home</a></li>
-    <li><a href="accounts">Accounts</a></li>
-    <li><a href="stocks" class="d" >Stock</a></li>
-    <li><a href="party">Party</a></li>
-    <li><a href="help">Help</a></li>
-    <li><a href="aboutus">About Us</a></li>
-    <li><a href="/user/logout">Logout</a></li>
-
+  <li><a href="/home">Home</a></li>
+  <li><a href="accounts">Accounts</a></li>
+  <li><a href="stocks" class="d">Stock</a></li>
+  <li><a href="party">Party</a></li>
+  <li><a href="help">Help</a></li>
+  <li><a href="aboutus">About Us</a></li>
+  <li><a href="/user/logout">Logout</a></li>
 </ul>
-<img class="image  img-thumbnail img-fluid" src={{src}} alt="Upload you photo">
-<h5 class="text-right mb-4">
-    {{admin}}
+
+<img
+  class="image  img-thumbnail img-fluid"
+  id="custom-buttons"
+  style="cursor: pointer;"
+  src="{{ src }}"
+  alt="Upload you photo"
+/>
+<input type="file" id="real-file" hidden="hidden" />
+
+<h5 class="text-right mb-4 mr-3">
+  {{ admin }}
 </h5>
 <h1 class="text-center mb-4">
-    {{title}}
+  {{ title }}
 </h1>
 
-<footer class=" foot"> &copy;2020 Developed By Neo Avyudaya </footer>
+<footer class=" foot">&copy;2020 Developed By Neo Avyudaya</footer>
+<script>
+  const realFileBtn = document.getElementById('real-file');
+  const customBtn = document.getElementById('custom-buttons');
+
+  customBtn.addEventListener('click', function() {
+    realFileBtn.click();
+  });
+
+  realFileBtn.addEventListener('change', function() {
+    let formData = new FormData();
+    console.log($('input[type=file]')[0]);
+    formData.append('photo', $('input[type=file]')[0].files[0]);
+    $.ajax({
+      url: '/user/updateUser',
+      data: formData,
+      type: 'POST',
+      contentType: false,
+      processData: false,
+      success: function(successData) {
+        if (successData.status == 'success') {
+          location.reload();
+        }
+      },
+      error: function(err) {
+        console.log(err);
+      }
+    });
+  });
+</script>

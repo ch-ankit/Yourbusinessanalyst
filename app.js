@@ -54,6 +54,7 @@ app.use((err, req, res, next) => {
   res.render('error', {
     title: '💥💥💥ERROR💥💥💥',
     message: `:: ${err.message}`,
+    error: err,
     status: err.status || 500
   });
 });
