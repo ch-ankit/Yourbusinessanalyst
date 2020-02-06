@@ -140,3 +140,9 @@ p {
   font-family: sans-serif;
   color: #aaa;
 }
+
+.bes {
+  display: inline-block;
+  background-color: aqua;
+  width: 400px;
+}

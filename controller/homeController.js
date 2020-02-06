@@ -1,6 +1,7 @@
 const moment = require('moment');
 const Stocks = require('./../models/stockModel');
 const User = require('./../models/userModel');
+const Buyer = require('./../models/buyerSupplierModel').Buyer;
 
 function onlyUnique(value, index, self) {
   return self.indexOf(value) === index;
@@ -10,6 +11,7 @@ exports.ghmpage = async (req, res, next) => {
     const user = await User.findOne({ id: req.user.id });
     let stock = {};
     let estimatedProfit = {};
+    let actualProfit = {};
     let dates = [];
     var i = 0;
     let currentDate,
@@ -23,11 +25,17 @@ exports.ghmpage = async (req, res, next) => {
         estimatedProfit[currentDate] =
           parseInt(row.Quantity) *
           (parseInt(row.Sellingprice) - parseInt(row.Costprice));
+        actualProfit[currentDate] =
+          parseInt(row.soldQuantity) *
+          (parseInt(row.Sellingprice) - parseInt(row.Costprice));
         prevDate = currentDate;
       } else if (currentDate == prevDate) {
         stock[currentDate] += parseInt(row.Quantity) * parseInt(row.Costprice);
         estimatedProfit[currentDate] +=
           parseInt(row.Quantity) *
+          (parseInt(row.Sellingprice) - parseInt(row.Costprice));
+        actualProfit[currentDate] +=
+          parseInt(row.soldQuantity) *
           (parseInt(row.Sellingprice) - parseInt(row.Costprice));
         prevDate = currentDate;
       } else if (prevDate != currentDate) {
@@ -36,7 +44,11 @@ exports.ghmpage = async (req, res, next) => {
         estimatedProfit[currentDate] =
           estimatedProfit[prevDate] +
           parseInt(row.Quantity) *
-          (parseInt(row.Sellingprice) - parseInt(row.Costprice));
+            (parseInt(row.Sellingprice) - parseInt(row.Costprice));
+        actualProfit[currentDate] =
+          actualProfit[prevDate] +
+          parseInt(row.soldQuantity) *
+            (parseInt(row.Sellingprice) - parseInt(row.Costprice));
         prevDate = currentDate;
       }
       i++;
@@ -49,8 +61,11 @@ exports.ghmpage = async (req, res, next) => {
       admin: user.username,
       accessTime: moment().format(),
       src: `./../images/users/${user.photo}`,
-      data: Object.keys(stock).map(el => stock[el]),
-      data1: Object.keys(estimatedProfit).map(el => estimatedProfit[el]),
+      stock: Object.keys(stock).map(el => stock[el]),
+      estimatedProfit: Object.keys(estimatedProfit).map(
+        el => estimatedProfit[el]
+      ),
+      actualProfit: Object.keys(actualProfit).map(el => actualProfit[el]),
       labels: uniqueDates
     });
   } catch (err) {

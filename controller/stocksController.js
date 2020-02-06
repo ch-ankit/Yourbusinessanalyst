@@ -55,7 +55,7 @@ exports.addStocks = async (req, res, next) => {
           userId: req.user.id,
           Date: Date.now()
         },
-        { upsert: true, new: true }
+        { upsert: true, new: true, setDefaultsOnInsert: true }
       );
 
       let supplier = await Supplier.findOne({

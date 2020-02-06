@@ -1,9 +1,13 @@
 <div hidden id="data">
-  {{ data }}
+  {{ stock }}
 </div>
 
 <div hidden id="data1">
-  {{ data1 }}
+  {{ estimatedProfit }}
+</div>
+
+<div hidden id="data2">
+  {{ actualProfit }}
 </div>
 <div hidden id="labels">
   {{ labels }}
@@ -23,6 +27,10 @@
     .split(',');
   var data1 = document
     .getElementById('data1')
+    .innerText.trim()
+    .split(',');
+  var data2 = document
+    .getElementById('data2')
     .innerText.trim()
     .split(',');
   var labels = document
@@ -48,6 +56,12 @@
           label: 'Stocks',
           borderColor: 'rgb(20, 100, 100)',
           data: data,
+          borderWidth: 3
+        },
+        {
+          label: 'Actual Profit',
+          borderColor: 'rgb(255,0,255)',
+          data: data2,
           borderWidth: 3
         }
       ]

@@ -23,7 +23,7 @@ const stocksSchema = new mongoose.Schema({
   },
   Sellingprice: {
     type: Number,
-    default: 0
+    default: 1
   },
   Date: {
     type: Date,
