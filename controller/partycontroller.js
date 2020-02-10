@@ -45,27 +45,32 @@ exports.gpage = async (req, res, next) => {
 
 exports.paymentMade = async (req, res, next) => {
   try {
-
-    const supplier = await supplierDetails.findOneAndUpdate({ userId: req.user.id, pan: req.body.supplierPanNumber }, {
-      $inc: {
-        amount: -parseInt(req.body.sAmount)
+    const supplier = await supplierDetails.findOneAndUpdate(
+      { userId: req.user.id, pan: req.body.supplierPanNumber },
+      {
+        $inc: {
+          amount: -parseInt(req.body.sAmount)
+        }
       }
-    })
-    res.redirect('/home')
+    );
+    res.redirect('/home');
   } catch (err) {
-    next(err)
+    next(err);
   }
-}
+};
 exports.paymentReceived = async (req, res, next) => {
   try {
-
-    const buyer = await buyerDetails.findOneAndUpdate({ userId: req.user.id, pan: req.body.buyerPanNumber }, {
-      $inc: {
-        amount: -parseInt(req.body.cAmount)
-      }
-    }, { setDefaultsOnInsert: true })
-    res.redirect('/home')
+    const buyer = await buyerDetails.findOneAndUpdate(
+      { userId: req.user.id, pan: req.body.buyerPanNumber },
+      {
+        $inc: {
+          amount: -parseInt(req.body.cAmount)
+        }
+      },
+      { setDefaultsOnInsert: true }
+    );
+    res.redirect('/home');
   } catch (err) {
-    next(err)
+    next(err);
   }
-}
+};

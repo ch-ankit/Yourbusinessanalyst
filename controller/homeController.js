@@ -44,11 +44,11 @@ exports.ghmpage = async (req, res, next) => {
         estimatedProfit[currentDate] =
           estimatedProfit[prevDate] +
           parseInt(row.Quantity) *
-            (parseInt(row.Sellingprice) - parseInt(row.Costprice));
+          (parseInt(row.Sellingprice) - parseInt(row.Costprice));
         actualProfit[currentDate] =
           actualProfit[prevDate] +
           parseInt(row.soldQuantity) *
-            (parseInt(row.Sellingprice) - parseInt(row.Costprice));
+          (parseInt(row.Sellingprice) - parseInt(row.Costprice));
         prevDate = currentDate;
       }
       i++;
