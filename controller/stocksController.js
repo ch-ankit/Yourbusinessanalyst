@@ -2,6 +2,7 @@ const moment = require('moment');
 const Stocks = require('./../models/stockModel');
 
 const User = require('./../models/userModel');
+const chartModel = require('./../models/chartModel');
 const { Supplier, Buyer } = require('./../models/buyerSupplierModel');
 const {
   supplierDetails,
@@ -57,6 +58,17 @@ exports.addStocks = async (req, res, next) => {
         },
         { upsert: true, new: true, setDefaultsOnInsert: true }
       );
+      await chartModel.create({
+        Quantity: parseInt(req.body.Quantity),
+        Costprice: parseInt(req.body.Costprice),
+        Sellingprice: parseInt(req.body.Sellingprice),
+        supplierPan: req.body.supplierPannumber,
+        Modelno: req.body.Modelno,
+        userId: req.user.id,
+        Date: Date.now(),
+        estimatedProfit:
+          parseInt(req.body.Quantity) * parseInt(req.body.Sellingprice)
+      });
 
       let supplier = await Supplier.findOne({
         userId: req.user.id,
