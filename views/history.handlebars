@@ -1,0 +1,41 @@
+{{>headers}}
+
+<table class="table table-bordered table-hover table-responsive">
+    <caption>Table:Tranactions History</caption>
+    <thead class="thead-dark">
+        <tr>
+            <th>Index</th>
+            <th>Action</th>
+            <th>Date</th>
+            <th>ModelNo.</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total Price</th>
+            <th>Pan No</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each content as |value key|}}
+
+        <tr>
+            <td>{{add1 key}} </td>
+            {{#each  value as |svalue|}}
+
+            {{#if svalue.Modelno}}{{#unless svalue.method}} <td> Debited </td>{{/unless}} {{/if}}
+            {{#if svalue.method}} <td> Credited </td>{{/if}}
+            {{#if svalue.Modelno}}<td> {{svalue.Date}} </td> {{/if}}
+            {{#if svalue.Modelno}} <td>{{ svalue.Modelno}}</td>{{/if}}
+            {{#if svalue.Modelno}}{{#unless svalue.method}}{{condition svalue.method}}<td>{{ svalue.Quantity}} </td>{{/unless}}{{/if}}
+            {{#if svalue.method}}<td>{{ svalue.soldQuantity}} </td>{{/if}}
+            {{#if svalue.Modelno}}{{#unless svalue.method}}<td>{{svalue.Costprice}} </td>{{/unless}} {{/if}}
+            {{#if svalue.method}}<td>{{svalue.Sellingprice}} </td>{{/if}}
+            {{#if svalue.Modelno}}{{#unless svalue.method}} <td>{{multiply svalue.Costprice svalue.Quantity}}</td>{{/unless}} {{/if}}
+            {{#if svalue.method}}<td>{{multiply svalue.Sellingprice svalue.soldQuantity}}</td>{{/if}}
+            {{#if svalue.Modelno}} <td>{{svalue.pan}}</td>{{/if}}
+            {{/each}}
+
+        </tr>
+        {{/each}}
+    </tbody>
+
+</table>

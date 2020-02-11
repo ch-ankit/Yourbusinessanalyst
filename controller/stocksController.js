@@ -61,13 +61,11 @@ exports.addStocks = async (req, res, next) => {
       await chartModel.create({
         Quantity: parseInt(req.body.Quantity),
         Costprice: parseInt(req.body.Costprice),
-        Sellingprice: parseInt(req.body.Sellingprice),
-        supplierPan: req.body.supplierPannumber,
+        method: 0,
+        pan: req.body.supplierPannumber,
         Modelno: req.body.Modelno,
         userId: req.user.id,
-        Date: Date.now(),
-        estimatedProfit:
-          parseInt(req.body.Quantity) * parseInt(req.body.Sellingprice)
+        Date: Date.now()
       });
 
       let supplier = await Supplier.findOne({
@@ -119,6 +117,15 @@ exports.updateQuantity = async (req, res, next) => {
       if (q.Quantity < parseInt(req.body.Quantity)) {
         throw new Error('Selected Model Out of Stocks');
       } else {
+        await chartModel.create({
+          soldQuantity: parseInt(req.body.Quantity),
+          Sellingprice: parseInt(req.body.Sellingprice),
+          method: 1,
+          pan: req.body.buyerPannumber,
+          Modelno: req.body.Modelno,
+          userId: req.user.id,
+          Date: Date.now()
+        });
         let stock = await Stocks.findOneAndUpdate(
           {
             Modelno: req.body.Modelno,

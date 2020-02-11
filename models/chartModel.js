@@ -18,8 +18,7 @@ const chartSchema = new mongoose.Schema({
     default: 0
   },
   Costprice: {
-    type: Number,
-    required: true
+    type: Number
   },
   Sellingprice: {
     type: Number,
@@ -29,7 +28,7 @@ const chartSchema = new mongoose.Schema({
     type: Date,
     default: Date.now()
   },
-  supplierPan: {
+  pan: {
     type: String,
     default: ''
   },
@@ -44,6 +43,13 @@ const chartSchema = new mongoose.Schema({
   handAmount: {
     type: Number,
     default: 0
+  },
+  depreciation: {
+    type: Number,
+    default: 0
+  },
+  method: {
+    type: Number
   }
 });
 
