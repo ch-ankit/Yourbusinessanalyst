@@ -42,8 +42,15 @@
     <input type="text" name="supplierPanNumber" placeholder="Enter Supplier's Pan Number" class="form-control" />
   </div>
 
-  <input type="submit" value="Paid" class="btn btn-primary btn-block mb-4" />
+  <input type="submit" value="Paid" id="myBtn" class="btn btn-primary btn-block mb-4" />
 </form>
+
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close">OK</span>
+    <p>Hi my friend on other side</p>
+  </div>
+</div>
 
 <form action="/party/paymentReceived" method="POST" class="bes ab-4">
   <div class="text text-center font-weight-bold text-warning">
@@ -63,5 +70,27 @@
     <input type="text" name="buyerPanNumber" placeholder="Enter Buyer's Pan Number" class="form-control" />
   </div>
 
-  <input type="submit" value="Received" class="btn btn-primary btn-block mb-4" />
+  <input type="submit" value="Received"  class="btn btn-primary btn-block mb-4" />
 </form>
+
+<script>
+var modal = document.getElementById("myModal");
+
+var btn = document.getElementById("myBtn");
+
+var span = document.getElementsByClassName("close")[0];
+
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>

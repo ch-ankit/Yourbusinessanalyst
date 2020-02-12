@@ -1,4 +1,5 @@
 const User = require('./../models/userModel');
+const paymentHistoryModel = require('./../models/paymentHistoryModel');
 const Supplier = require('./../models/buyerSupplierModel').Supplier;
 const {
   supplierDetails,
@@ -53,6 +54,14 @@ exports.paymentMade = async (req, res, next) => {
         }
       }
     );
+    await paymentHistoryModel.create({
+      method: 0,
+      amount: req.body.sAmount,
+      pan: req.body.supplierPanNumber,
+      userId: req.user.id,
+      name: req.body.supplierName,
+      Date: Date.now()
+    });
     res.redirect('/home');
   } catch (err) {
     next(err);
@@ -69,6 +78,14 @@ exports.paymentReceived = async (req, res, next) => {
       },
       { setDefaultsOnInsert: true }
     );
+    await paymentHistoryModel.create({
+      method: 1,
+      amount: req.body.cAmount,
+      pan: req.body.buyerPanNumber,
+      userId: req.user.id,
+      name: req.body.buyerName,
+      Date: Date.now()
+    });
     res.redirect('/home');
   } catch (err) {
     next(err);

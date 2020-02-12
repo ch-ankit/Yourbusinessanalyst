@@ -12,6 +12,8 @@ const helpRouter = require('./routes/help');
 const clientsRouter = require('./routes/clients');
 const suppliersRouter = require('./routes/suppliers');
 const historyRouter = require('./routes/history');
+const stocksHistoryRouter = require('./routes/stocksHistory');
+const paymentHistoryRouter = require('./routes/paymentHistory');
 const app = express();
 
 const hbs = exphbs.create({
@@ -20,13 +22,7 @@ const hbs = exphbs.create({
     add1: value => value + 1,
     multiply: (a, b) => a * b,
     sub: (a, b) => a - b,
-    profit: (a, b, c) => (a - b) * c,
-    condition: method => {
-      if (method == 'Debited') return 1;
-    },
-    condition1: method => {
-      if (method == 'Credited') return 1;
-    }
+    profit: (a, b, c) => (a - b) * c
   }
 });
 
@@ -50,7 +46,8 @@ app.use('/help', helpRouter);
 app.use('/clients', clientsRouter);
 app.use('/suppliers', suppliersRouter);
 app.use('/transhistory', historyRouter);
-
+app.use('/paymenthistory', paymentHistoryRouter);
+app.use('/stockshistory', stocksHistoryRouter);
 app.use((req, res, next) => {
   const err = new Error('Not Found');
   err.status = 404;

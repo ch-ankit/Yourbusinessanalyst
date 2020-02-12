@@ -1,7 +1,9 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <canvas id="pChart" class="mb-4"></canvas>
+<div id="amount" hidden>{{amount}} </div>
 <script>
     var ctx = document.getElementById('pChart').getContext('2d');
+    var amount = document.getElementById('amount').innerText.trim().split(',');
     var chart = new Chart(ctx, {
         // The type of chart we want to create
         type: 'pie',
@@ -14,7 +16,7 @@
                     label: 'Payment',
                     borderColor: 'rgb(0, 0, 255)',
                     backgroundColor: ['rgb(25,233,45)', 'rgb(255, 0, 0)'],
-                    data: [166, 110],
+                    data:amount ,
                     borderWidth: 5
                 }
             ]

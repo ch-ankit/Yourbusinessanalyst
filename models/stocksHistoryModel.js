@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const chartSchema = new mongoose.Schema({
+const stocksHistorySchema = new mongoose.Schema({
   Modelno: {
     type: String,
     required: true
@@ -32,26 +32,13 @@ const chartSchema = new mongoose.Schema({
     type: String,
     default: ''
   },
-  estimatedProfit: {
-    type: Number,
-    default: 0
-  },
-  actualProfit: {
-    type: Number,
-    default: 0
-  },
-  handAmount: {
-    type: Number,
-    default: 0
-  },
-  depreciation: {
-    type: Number,
-    default: 0
-  },
   method: {
     type: Number
   }
 });
 
-const chartModel = mongoose.model('chartModel', chartSchema);
-module.exports = chartModel;
+const stocksHistoryModel = mongoose.model(
+  'stocksHistoryModel',
+  stocksHistorySchema
+);
+module.exports = stocksHistoryModel;

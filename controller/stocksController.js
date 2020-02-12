@@ -2,7 +2,7 @@ const moment = require('moment');
 const Stocks = require('./../models/stockModel');
 
 const User = require('./../models/userModel');
-const chartModel = require('./../models/chartModel');
+const stocksHistoryModel = require('../models/stocksHistoryModel');
 const { Supplier, Buyer } = require('./../models/buyerSupplierModel');
 const {
   supplierDetails,
@@ -58,7 +58,7 @@ exports.addStocks = async (req, res, next) => {
         },
         { upsert: true, new: true, setDefaultsOnInsert: true }
       );
-      await chartModel.create({
+      await stocksHistoryModel.create({
         Quantity: parseInt(req.body.Quantity),
         Costprice: parseInt(req.body.Costprice),
         method: 0,
@@ -117,7 +117,7 @@ exports.updateQuantity = async (req, res, next) => {
       if (q.Quantity < parseInt(req.body.Quantity)) {
         throw new Error('Selected Model Out of Stocks');
       } else {
-        await chartModel.create({
+        await stocksHistoryModel.create({
           soldQuantity: parseInt(req.body.Quantity),
           Sellingprice: parseInt(req.body.Sellingprice),
           method: 1,
