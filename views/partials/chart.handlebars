@@ -1,3 +1,4 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js" integrity="sha256-AdQN98MVZs44Eq2yTwtoKufhnU+uZ7v2kXnD5vqzZVo=" crossorigin="anonymous"></script>
 <div hidden id="data">
   {{ stock }}
 </div>
@@ -12,12 +13,6 @@
 <div hidden id="labels">
   {{ labels }}
 </div>
-<script
-  src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"
-  integrity="sha256-AdQN98MVZs44Eq2yTwtoKufhnU+uZ7v2kXnD5vqzZVo="
-  crossorigin="anonymous"
-></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 
 <canvas id="profitChart" class="mb-4"></canvas>
 <script>
@@ -33,6 +28,7 @@
     .getElementById('data2')
     .innerText.trim()
     .split(',');
+
   var labels = document
     .getElementById('labels')
     .innerText.trim()
@@ -48,19 +44,19 @@
       datasets: [
         {
           label: 'Estimated Profit',
-          borderColor: 'rgb(0, 255, 0)',
+          borderColor: 'rgb(25,150,155)',
           data: data1,
           borderWidth: 3
         },
         {
           label: 'Stocks',
-          borderColor: 'rgb(20, 100, 100)',
+          borderColor: 'rgb(100,200,00)',
           data: data,
           borderWidth: 3
         },
         {
           label: 'Actual Profit',
-          borderColor: 'rgb(255,0,255)',
+          borderColor: 'rgb(20,0, 100)',
           data: data2,
           borderWidth: 3
         }
@@ -89,13 +85,7 @@
           }
         ]
       },
-      legend: {
-        position: 'right',
-        labels: {
-          fontSize: '14',
-          fontColor: 'crimson'
-        }
-      },
+      
       tooltips: {
         mode: 'nearest'
       },

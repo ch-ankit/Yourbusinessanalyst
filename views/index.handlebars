@@ -4,7 +4,8 @@
 {{>chart}}
 
 <form action="/stocks/updateQuantity" method="POST" class=" bes ab-4">
-  <div class=" form-group">
+<h4 class="text-center bg-success">Stock Sold</h4>
+  <div class=" form-group ">
     <label for="Modelno">Model No.</label>
     <input type="text" name="Modelno" placeholder="Enter item's modelno" class="form-control" />
   </div>
@@ -21,13 +22,11 @@
     <input type="text" name="buyerPannumber" placeholder="Enter Buyer's Pan Number" class="form-control" />
   </div>
 
-  <input type="submit" value="Sold Stock" class="btn btn-primary btn-block mb-4" />
+  <input type="submit" value="Sold Stock" class="btn btn-danger btn-block mb-4" />
 </form>
 
 <form action="/party/paymentMade" method="POST" class="bes ab-4">
-  <div class="text text-center font-weight-bold text-warning">
-    <h3>Payment Made</h3>
-  </div>
+  <h4 class="text-center bg-success">Payment Made</h4>
   <div class=" form-group">
     <label for="Supplier">Supplier Name</label>
     <input type="text" name="supplierName" placeholder="Enter Supplier Name" class="form-control" />
@@ -42,18 +41,16 @@
     <input type="text" name="supplierPanNumber" placeholder="Enter Supplier's Pan Number" class="form-control" />
   </div>
 
-  <input type="submit" value="Paid"  class="btn btn-primary btn-block mb-4" />
+  <input type="submit" value="Paid"  class="btn btn-danger btn-block mb-4" />
 </form>
 
 
 
 <form action="/party/paymentReceived" method="POST" class="bes ab-4">
-  <div class="text text-center font-weight-bold text-warning">
-    <h3>Payment Recieved</h3>
-  </div>
+  <h4 class="text-center bg-success">Payment Recived</h4>
   <div class=" form-group">
     <label for="Buyer">Buyer Name</label>
-    <input type="text" name="buyerName" placeholder="Enter Buyer Name" class="form-control" />
+    <input type="text " name="buyerName" placeholder="Enter Buyer Name" class="form-control" />
   </div>
   <div class="form-group">
     <label for="Amount">Amount</label>
@@ -65,6 +62,6 @@
     <input type="text" name="buyerPanNumber" placeholder="Enter Buyer's Pan Number" class="form-control" />
   </div>
 
-  <input type="submit" value="Received"  class="btn btn-primary btn-block mb-4" />
+  <input type="submit" value="Received"  class="btn btn-danger btn-block mb-4" />
 </form>
 

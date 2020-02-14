@@ -22,9 +22,11 @@
   <li class="nav-item"><a class="nav-link" href="/user/logout">Logout</a></li>
 </ul>
 </nav>
-
+<h2 class="text-center mt-2">
+  {{ title }}
+</h2>
 <img
-  class="image  img-thumbnail img-fluid "
+  class="image img-thumbnail img-fluid "
   id="custom-buttons"
   style="cursor: pointer;"
   src="{{ src }}"
@@ -32,12 +34,10 @@
 />
 <input type="file" id="real-file" hidden="hidden" />
 
-<h5 class="text-right mb-4 mr-3">
-  {{ admin }}
+<h5 class="text-right mr-4">
+ <i>{{ admin }}</i> 
 </h5>
-<h1 class="text-center mb-4">
-  {{ title }}
-</h1>
+
 
 <footer class=" foot">&copy;2020 Developed By Neo Avyudaya</footer>
 <script>
@@ -50,7 +50,6 @@
 
   realFileBtn.addEventListener('change', function() {
     let formData = new FormData();
-    console.log($('input[type=file]')[0]);
     formData.append('photo', $('input[type=file]')[0].files[0]);
     $.ajax({
       url: '/user/updateUser',
