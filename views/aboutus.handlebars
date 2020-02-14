@@ -239,171 +239,14 @@
   }
 </style>
 
-<div class="row">
-  <div class="left" style="background-color:#bbb;">
-    <h2>Menu</h2>
-    <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search.." title="Type in a category">
-    <ul id="myMenu">
-      <ul class="navbar-nav mr-auto">
-        <li><a href="/home">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="accounts">Accounts</a></li>
-        <li class="nav-item"><a class="nav-link" href="stocks">Stock</a></li>
-        <li class="nav-item"><a class="nav-link" href="party">Party</a></li>
-        <li class="nav-item"><a class="nav-link" href="help">Help</a></li>
-        <li class="nav-item"><a class="nav-link" href="aboutus">About Us</a></li>
-        <li class="nav-item"><a class="nav-link" href="AboutC">AboutCompany</a></li>
-        <li class="nav-item"><a class="nav-link" href="/user/logout">Logout</a></li>
-        <li class="nav-item"><a class="nav-link" href="">Nischal</a></li>
-        <li class="nav-item"><a class="nav-link"
-            href="https://www.facebook.com/profile.php?id=100008302140700">Ankit</a></li>
-        <li class="nav-item"><a class="nav-link" href="">joshi</a></li>
-        <li class="nav-item"><a class="nav-link" href=""> </a></li>
-        <li class="nav-item"><a class="nav-link" href="">Logout</a></li>
-      </ul>
 
-    </ul>
-  </div>
 
-  <div class="right" style="background-color:#ddd;">
-    <h2>Meet the Development Team</h2>
-    <hr>
-    <div class="row">
-      <div class="column">
-        <div class="card">
-          <img src="./../images/joshi.jpg" alt="" class="rounded-left mx-auto d-block" style="width:80%">
-          <div class="container">
-            <h2>Bishal joshi</h2>
-            <p class="title">Backend Developer</p>
-            <p>Worked on database.</p>
-            <p>akgunner@gmail.com</p>
-            <p><button class="button">Contact</button></p>
-          </div>
-        </div>
-      </div>
-
-      <div class="column">
-        <div class="card">
-          <img src="./../images/Nischal.jpg" alt="Nischal" style="width:80%">
-          <div class="container">
-            <h2>Nischal Bhandari</h2>
-            <p class="title">Done almost everything!</p>
-            <p>Some text that describes .</p>
-            <p>example@example.com</p>
-            <p> <button class="button">Contact</button></p>
-          </div>
-        </div>
-      </div>
-
-      <div class="column">
-        <div class="card">
-          <img src="./../images/joshi.jpg" alt="Name" class="rounded-left" style="width:80%">
-          <div class="container">
-            <h2>Name</h2>
-            <p class="title">portion worked</p>
-            <p>Some text that describes </p>
-            <p>example@example.com</p>
-            <p><button class="button">Contact</button></p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="column">
-      <div class="card">
-        <img src="./../images/ankit.jpg" alt="Name" style="width:80%">
-        <div class="container">
-          <h2>Ankit Khatiwoda</h2>
-          <p class="title">almost everything worked</p>
-          <p> One of the finest student of KU </p>
-          <p>akgunner@gmail.com</p>
-          <p><button class="button">Contact</button></p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-
-<script>
-  function myFunction() {
-    var input, filter, ul, li, a, i;
-    input = document.getElementById("mySearch");
-    filter = input.value.toUpperCase();
-    ul = document.getElementById("myMenu");
-    li = ul.getElementsByTagName("li");
-    for (i = 0; i < li.length; i++) {
-      a = li[i].getElementsByTagName("a")[0];
-      if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-        li[i].style.display = "";
-      } else {
-        li[i].style.display = "none";
-      }
-    }
-  }
-</script>
-<!--
-<h2>Meet the Development Team</h2>
-<hr>
-<div class="row">
-  <div class="column">
-    <div class="card">
-      <img src="./../images/joshi.jpg" alt="" class="rounded-left" style="width:80%">
-      <div class="container">
-        <h2>Bishal joshi</h2>
-        <p class="title">Backend Developer</p>
-        <p>Worked on database.</p>
-        <p>akgunner@gmail.com</p>
-        <p><button class="button">Contact</button></p>
-      </div>
-    </div>
-  </div>
-
-  <div class="column">
-    <div class="card">
-      <img src="./../images/Nischal.jpg" alt="Nischal" style="width:80%">
-      <div class="container">
-        <h2>Nischal Bhandari</h2>
-        <p class="title">Done almost everything!</p>
-        <p>Some text that describes .</p>
-        <p>example@example.com</p>
-        <p><button class="button">Contact</button></p>
-      </div>
-    </div>
-  </div>
-
-  <div class="column">
-    <div class="card">
-      <img src="./../images/joshi.jpg" alt="Name" class="rounded-left" style="width:80%">
-      <div class="container">
-        <h2>Name</h2>
-        <p class="title">portion worked</p>
-        <p>Some text that describes </p>
-        <p>example@example.com</p>
-        <p><button class="button">Contact</button></p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="column">
-  <div class="card">
-    <img src="./../images/ankit.jpg" alt="Name" style="width:80%">
-    <div class="container">
-      <h2>Ankit Khatiwoda</h2>
-      <p class="title">almost everything worked</p>
-      <p> One of the finest student of KU </p>
-      <p>akgunner@gmail.com</p>
-      <p><button class="button">Contact</button></p>
-    </div>
-  </div>
-</div>
-</div> -->
 
 <section id="team" class="pb-5 white-section">
   <div class="container">
     <h5 class="section-title h1">OUR TEAM</h5>
     <div class="row">
-      <!-- Team member -->
+
       <div class="col-xs-12 col-sm-6 col-md-4">
         <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
           <div class="mainflip">
@@ -412,10 +255,8 @@
                 <div class="card-body text-center">
                   <p><img class=" img-fluid" src="Images/Nischal.jpg" alt="card image"></p>
                   <h4 class="card-title">Nischal Bhandari</h4>
-                  <h6 class="card-subtitle mb-2 text-muted">Head Developer</h6>
-                  <p class="card-text">This is basic card with image on top, title, description
-                    and
-                    button.</p>
+                  <h6 class="card-subtitle mb-2 text-muted">Backend Developer</h6>
+                  <p class="card-text">.....................</p>
                   <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
                 </div>
               </div>
@@ -466,8 +307,7 @@
                   <p><img class=" img-fluid" src="Images/joshi.jpg" alt="card image"></p>
                   <h4 class="card-title">Bishal joshi</h4>
                   <h6 class="card-subtitle mb-2 text-muted">Maintained all the reports</h6>
-                  <p class="card-text">He has worked on the basic report writing and asisited the Developer team by
-                    Providing very useful information</p>
+                  <p class="card-text">.....................</p>
                   <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
                 </div>
               </div>
@@ -476,8 +316,8 @@
               <div class="card">
                 <div class="card-body text-center mt-4">
                   <h4 class="card-title">Bishal joshi</h4>
-                  <p class="card-text">Bishal joshi is the topper guy of CE second sem. He hasnot
-                    given us party of scholorship still</p>
+                  <p class="card-text">He has worked on the basic report writing and asisited the Developer team by
+                    Providing very useful information</p>
                   <ul class="list-inline">
                     <li class="list-inline-item">
                       <a class="social-icon text-xs-center" target="_blank" href="#">
@@ -516,10 +356,8 @@
                 <div class="card-body text-center">
                   <p><img class=" img-fluid" src="Images/nabin.jpg" alt="card image"></p>
                   <h4 class="card-title">Nabin</h4>
-                  <h6 class="card-subtitle mb-2 text-muted">Founder, CEO</h6>
-                  <p class="card-text">This is basic card with image on top, title, description
-                    and
-                    button.</p>
+                  <h6 class="card-subtitle mb-2 text-muted">Frontend Developer</h6>
+                  <p class="card-text">.....................</p>
                   <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
                 </div>
               </div>
@@ -527,12 +365,10 @@
             <div class="backside">
               <div class="card">
                 <div class="card-body text-center mt-4">
-                  <h4 class="card-title">joshi</h4>
-                  <p class="card-text">This is basic card with image on top, title, description
-                    and
-                    button.This is basic card with image on top, title, description and
-                    button.This
-                    is basic card with image on top, title, description and button.</p>
+                  <h4 class="card-title">Nabin Ghimire</h4>
+                  <p class="card-text">
+                    He has worked on the frontend and asisited the Developer team by
+                    Providing very stylish frontend and other help whenever needed.        </p>
                   <ul class="list-inline">
                     <li class="list-inline-item">
                       <a class="social-icon text-xs-center" target="_blank" href="#">
@@ -571,13 +407,11 @@
                 <div class="card-body text-center">
                   <p><img class=" img-fluid" src="Images/ankiti.jpg" alt="card image"></p>
                   <h4 class="card-title">Ankit khatiwada</h4>
-                  <h6 class="card-subtitle mb-2 text-muted">Database
+                  <h6 class="card-subtitle mb-2 text-muted">Database Developer
 
-                    <Head>Head</Head>
+                    
                   </h6>
-                  <p class="card-text">This is basic card with image on top, title, description
-                    and
-                    button.</p>
+                  <p class="card-text">...................</p>
                   <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
                 </div>
               </div>
@@ -586,11 +420,9 @@
               <div class="card">
                 <div class="card-body text-center mt-4">
                   <h4 class="card-title">Ankit khatiwada</h4>
-                  <p class="card-text">This is basic card with image on top, title, description
-                    and
-                    button.This is basic card with image on top, title, description and
-                    button.This
-                    is basic card with image on top, title, description and button.</p>
+                  <p class="card-text ">
+                       He has worked on backend and he has mainly focused on database and organization of data.
+                  </p>
                   <ul class="list-inline">
                     <li class="list-inline-item">
                       <a class="social-icon text-xs-center" target="_blank" href="#">
@@ -621,4 +453,21 @@
     </div>
   </div>
 </section>
-<!-- Team -->
+
+<script>
+  function myFunction() {
+    var input, filter, ul, li, a, i;
+    input = document.getElementById("mySearch");
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("myMenu");
+    li = ul.getElementsByTagName("li");
+    for (i = 0; i < li.length; i++) {
+      a = li[i].getElementsByTagName("a")[0];
+      if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        li[i].style.display = "";
+      } else {
+        li[i].style.display = "none";
+      }
+    }
+  }
+</script>
