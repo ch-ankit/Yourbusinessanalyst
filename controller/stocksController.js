@@ -8,12 +8,14 @@ const {
   supplierDetails,
   buyerDetails
 } = require('./../models/suppliersBuyersDetailModel');
-
+const chart = require('./../models/chartModel');
+let date =
+  new Date().getFullYear() + new Date().getMonth() + new Date().getDate();
 exports.gpage = async (req, res, next) => {
   const user = await User.findOne({ id: req.user.id });
-  Stocks.find(
+  const stockess = await Stocks.find(
     { userId: req.user.id },
-    'Modelno Quantity Sellingprice Costprice supplierPan -_id',
+    'Modelno Quantity Sellingprice Costprice supplierPan Date -_id',
     (err, docs) => {
       if (!err) {
         res.render('stocks', {
@@ -58,6 +60,21 @@ exports.addStocks = async (req, res, next) => {
         },
         { upsert: true, new: true, setDefaultsOnInsert: true }
       );
+      await chart.findOneAndUpdate(
+        { Date: date, userId: req.user.id },
+        {
+          userId: req.user.id,
+          $inc: {
+            stockValue:
+              parseInt(req.body.Quantity) * parseInt(req.body.Costprice)
+          },
+          $inc: {
+            estimatedProfit:
+              parseInt(req.body.Quantity) * parseInt(req.body.Sellingprice)
+          }
+        },
+        { upsert: true, setDefaultsOnInsert: true }
+      );
       await stocksHistoryModel.create({
         Quantity: parseInt(req.body.Quantity),
         Costprice: parseInt(req.body.Costprice),
@@ -95,6 +112,7 @@ exports.addStocks = async (req, res, next) => {
           amount: parseInt(req.body.Quantity) * parseInt(req.body.Costprice)
         }
       });
+
       res.redirect('/stocks');
     }
   } catch (err) {
@@ -117,15 +135,6 @@ exports.updateQuantity = async (req, res, next) => {
       if (q.Quantity < parseInt(req.body.Quantity)) {
         throw new Error('Selected Model Out of Stocks');
       } else {
-        await stocksHistoryModel.create({
-          soldQuantity: parseInt(req.body.Quantity),
-          Sellingprice: parseInt(req.body.Sellingprice),
-          method: 1,
-          pan: req.body.buyerPannumber,
-          Modelno: req.body.Modelno,
-          userId: req.user.id,
-          Date: Date.now()
-        });
         let stock = await Stocks.findOneAndUpdate(
           {
             Modelno: req.body.Modelno,
@@ -140,6 +149,30 @@ exports.updateQuantity = async (req, res, next) => {
           },
           { new: true }
         );
+        await chart.findOneAndUpdate(
+          { Date: date },
+          {
+            userId: req.user.id,
+            $inc: {
+              stockValue: -parseInt(req.body.soldQuantity)
+            },
+            $inc: {
+              actualProfit:
+                parseInt(req.body.soldQuantity) *
+                parseInt(req.body.Sellingprice)
+            }
+          },
+          { upsert: true, setDefaultsOnInsert: true }
+        );
+        await stocksHistoryModel.create({
+          soldQuantity: parseInt(req.body.Quantity),
+          Sellingprice: parseInt(req.body.Sellingprice),
+          method: 1,
+          pan: req.body.buyerPannumber,
+          Modelno: req.body.Modelno,
+          userId: req.user.id,
+          Date: Date.now()
+        });
         ////////////////////////////////////
         ////////////////////////////////////
         ////////////////////////////////////
@@ -172,6 +205,7 @@ exports.updateQuantity = async (req, res, next) => {
               parseInt(req.body.Quantity) * parseInt(req.body.Sellingprice)
           }
         });
+
         res.redirect('/home');
       }
     }

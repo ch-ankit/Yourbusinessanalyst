@@ -48,6 +48,9 @@ app.use('/suppliers', suppliersRouter);
 app.use('/transhistory', historyRouter);
 app.use('/paymenthistory', paymentHistoryRouter);
 app.use('/stockshistory', stocksHistoryRouter);
+console.log(
+  `${new Date().getFullYear() + new Date().getMonth() + new Date().getDate()} `
+);
 app.use((req, res, next) => {
   const err = new Error('Not Found');
   err.status = 404;

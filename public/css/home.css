@@ -1,27 +1,9 @@
 body {
   margin: 0;
-  background: hsl(0, 0%, 97%);
   font-size: 14px;
   color: black;
   font-family: sans-serif;
   font-weight: 300;
-}
-
-.navigation {
-  text-align: center;
-  padding: 0;
-}
-
-.navigation li,
-a {
-  display: inline-block;
-  width: 110px;
-  font-size: 18px;
-  background-color: #808080;
-}
-a {
-  text-decoration: none;
-  color: black;
 }
 
 .heading {

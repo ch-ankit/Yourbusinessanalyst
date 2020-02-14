@@ -26,8 +26,7 @@ const stocksSchema = new mongoose.Schema({
     default: 1
   },
   Date: {
-    type: Date,
-    default: Date.now()
+    type: Number
   },
   supplierPan: {
     type: String,
