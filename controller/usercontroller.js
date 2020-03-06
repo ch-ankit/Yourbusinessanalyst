@@ -114,7 +114,6 @@ exports.logout = (req, res) => {
 exports.updateMe = async (req, res, next) => {
   try {
     if (req.file) {
-      console.log(req.file);
       const filterBody = req.file.filename;
       await User.findOneAndUpdate(
         { id: req.user.id },

@@ -1,5 +1,7 @@
 const moment = require('moment');
 const Stocks = require('./../models/stockModel');
+const multer = require('multer');
+const sharp = require('sharp');
 
 const User = require('./../models/userModel');
 const stocksHistoryModel = require('../models/stocksHistoryModel');
@@ -9,6 +11,48 @@ const {
   buyerDetails
 } = require('./../models/suppliersBuyersDetailModel');
 const chart = require('./../models/chartModel');
+/////////////////////////////////////////////////
+//MULTER WORKS
+const multerStorage = multer.memoryStorage();
+
+const multerFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith('image')) {
+    cb(null, true);
+  } else {
+    console.log('ERROR FROME HEERERERE');
+    cb(err, false);
+  }
+};
+
+const upload = multer({
+  storage: multerStorage,
+  fileFilter: multerFilter
+});
+
+exports.updateStockPhoto = upload.single('photo');
+
+exports.resizeStockPhoto = async (req, res, next) => {
+  try {
+    if (!req.file) {
+      throw new Error('File Not Found');
+    }
+    req.file.filename = `${req.user.id}-${req.body.Modelno}.jpeg`;
+
+    sharp(req.file.buffer)
+      .resize(500, 500)
+      .withMetadata()
+      .rotate()
+      .toFormat('jpeg')
+      .jpeg({ quality: 90 })
+      .toFile(`public/images/stocks/${req.file.filename}`);
+    next();
+  } catch (err) {
+    next(err);
+  }
+};
+/////////////////////////////////////////////////
+///////
+
 let date =
   new Date().getFullYear() + new Date().getMonth() + new Date().getDate();
 exports.gpage = async (req, res, next) => {
@@ -56,10 +100,12 @@ exports.addStocks = async (req, res, next) => {
           supplierPan: req.body.supplierPannumber,
           Modelno: req.body.Modelno,
           userId: req.user.id,
-          Date: Date.now()
+          Date: Date.now(),
+          photo: req.file.filename
         },
         { upsert: true, new: true, setDefaultsOnInsert: true }
       );
+
       await chart.findOneAndUpdate(
         { Date: date, userId: req.user.id },
         {

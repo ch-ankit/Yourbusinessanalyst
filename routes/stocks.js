@@ -6,7 +6,8 @@ const auth = require('./../helpers/auth');
 router
   .route('/')
   .get(auth, stocksController.gpage)
-  .post(auth, stocksController.addStocks);
+  .post(auth, stocksController.updateStockPhoto,
+    stocksController.resizeStockPhoto, stocksController.addStocks);
 
 router.route('/updateQuantity').post(auth, stocksController.updateQuantity);
 
