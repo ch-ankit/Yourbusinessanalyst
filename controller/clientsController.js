@@ -5,7 +5,6 @@ const buyerDetails = require('./../models/suppliersBuyersDetailModel')
 exports.getClients = async (req, res, next) => {
   try {
     const user = await User.findOne({ id: req.user.id });
-
     res.render('clients', {
       title: 'Clients',
       admin: user.username,

@@ -26,7 +26,7 @@
         <tr>
             <td>{{add1 key}} </td>
             {{#each  value as |svalue|}}
-            {{#if svalue.Modelno}}<td> {{svalue.Modelno}} </td> {{/if}}
+            {{#if svalue.Modelno}}<td> <a href="stock?name={{svalue.Modelno}}">{{svalue.Modelno}}</a>  </td> {{/if}}
             {{#if svalue.Modelno}} <td>{{ svalue.Quantity}}</td>{{/if}}
             {{#if svalue.Modelno}}<td>{{svalue.Costprice}} </td> {{/if}}
             {{#if svalue.Modelno}} <td>{{multiply svalue.Costprice svalue.Quantity}}</td>{{/if}}

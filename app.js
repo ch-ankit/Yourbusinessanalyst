@@ -14,6 +14,7 @@ const suppliersRouter = require('./routes/suppliers');
 const historyRouter = require('./routes/history');
 const stocksHistoryRouter = require('./routes/stocksHistory');
 const paymentHistoryRouter = require('./routes/paymentHistory');
+const stock = require('./routes/stock');
 const app = express();
 
 const hbs = exphbs.create({
@@ -48,6 +49,8 @@ app.use('/suppliers', suppliersRouter);
 app.use('/transhistory', historyRouter);
 app.use('/paymenthistory', paymentHistoryRouter);
 app.use('/stockshistory', stocksHistoryRouter);
+app.use('/stock', stock);
+
 console.log(
   `${new Date().getFullYear() + new Date().getMonth() + new Date().getDate()} `
 );

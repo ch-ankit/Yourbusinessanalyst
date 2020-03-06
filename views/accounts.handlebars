@@ -1,13 +1,14 @@
 {{>headers}}
 
-<h3>Accounts Details till {{accesstime}}</h3>
+<h3 class=" text-center">Accounts Details till {{accesstime}}</h3>
 </h4>
-
+<div class="mt-4">
+    <h3 class=" text-center">Accounts Recivable</h3>
     <table width="800px" class="table table-striped table-bordered">
         <caption>Table:Amount To Be Recieved</caption>
         <thead class="thead-dark">
             <tr>
-                <th>Accounts Recivable</th>
+                <th>Client's Name</th>
                 <th>Amount</th>
                 <th>Pan No.</th>
             </tr>
@@ -24,11 +25,14 @@
             {{/each}}
         </tbody>
     </table>
+</div>
 
+<div class="mt-4">
+    <h3 class=" text-center">Accounts Payable</h3>
     <table width="800px" class="table table-striped table-bordered ml-1">
         <caption>Table:Amount To Be Payed</caption>
         <thead class="thead-dark" >
-            <th>Accounts Payable</th>
+            <th>Supplier's Name</th>
             <th>Amount</th>
             <th>Pan No.</th>
             </tr>
@@ -47,5 +51,8 @@
             {{/each}}
         </tbody>
     </table>
+</div>
+
+    
 
 {{>pieChart}}

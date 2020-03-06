@@ -1,8 +1,9 @@
 {{>headers}}
 
-<h4>Profit Graph till {{ accessTime }}</h4>
+<h2 class="text text-center mb-4 ">Profit Graph till {{ accessTime }}</h2>
 {{>chart}}
 
+<h2 class="text text-center mb-4 ">Daily Actions</h2>
 <form action="/stocks/updateQuantity" method="POST" class=" bes ab-4">
 <h4 class="text-center bg-success">Stock Sold</h4>
   <div class=" form-group ">
