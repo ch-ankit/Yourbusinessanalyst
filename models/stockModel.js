@@ -31,6 +31,10 @@ const stocksSchema = new mongoose.Schema({
   supplierPan: {
     type: String,
     default: ''
+  },
+  photo: {
+    type: String,
+    default: ''
   }
 });
 

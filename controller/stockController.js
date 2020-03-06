@@ -18,7 +18,6 @@ exports.gpage = async (req, res, next) => {
     { userId: req.user.id, Modelno: req.query.name },
     'Modelno Quantity Sellingprice Costprice supplierPan Date -_id',
     (err, docs) => {
-      console.log(docs);
       if (!err) {
         res.render('stock', {
           title: req.query.name,
@@ -27,7 +26,8 @@ exports.gpage = async (req, res, next) => {
           stocks: docs,
           modelNo: Object.keys(docs).map(el => docs[el].Modelno),
           quantity: Object.keys(docs).map(el => docs[el].Quantity),
-          src: `./../images/users/${user.photo}`
+          src: `./../images/users/${user.photo}`,
+          src1: `./../images/users/${stocks.photo}`
         });
       } else {
         next(err);

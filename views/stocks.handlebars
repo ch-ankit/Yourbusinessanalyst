@@ -5,7 +5,7 @@
     Stocks till {{accessTime}}
 </h4>
 
-<table class="table table-bordered table-hover table-responsive">
+<table class="table table-bordered table-hover ">
     <caption>Table:List of stocks in storage</caption>
     <thead class="thead-dark">
         <tr>
@@ -41,7 +41,7 @@
     </tbody>
 
 </table>
-<form action="/stocks" method="POST" class=" ab-4">
+<form action="/stocks" method="POST" enctype="multipart/form-data" class=" ab-4">
     <div class=" form-group">
         <label for="Modelno">Model No.</label>
         <input type="text" name="Modelno" placeholder="Enter item's modelno" class="form-control">
@@ -62,7 +62,10 @@
         <label for="supplier">Supplier's Pan No.</label>
         <input type="text" name="supplierPannumber" placeholder="Enter Supplier's Pan Number" class="form-control">
     </div>
-
+    <div class="form-group">
+        <label for="photo">Upload Model Photo</label>
+        <input type="file" id="photo" class="form-control">
+    </div>
     <input type="submit" value="Add Stock" class="btn btn-primary btn-block mb-4">
 </form>
 {{>horizontalbar}}
