@@ -1,7 +1,10 @@
 {{>headers}}
 
 <!-- Trigger/Open The Modal -->
-<button id="myBtn" class="btn-info btn-outline-secondary mb-5 mr-lg-5">ADD STOCKS</button>
+<div class=" text-center">
+  <button id="myBtn" class="btn btn-primary mb-5  ">ADD STOCKS</button>
+</div>
+
 
 <!-- The Modal -->
 <div id="myModal" class="modal">
@@ -83,8 +86,8 @@
 <h4>
   Stocks till {{accessTime}}
 </h4>
-
-<table class="table table-bordered table-hover ">
+<div class="my-custom-scrollbar table-wrapper-scroll-y mb-5">
+  <table class="table table-bordered table-hover ">
   <caption>Table:List of stocks in storage</caption>
   <thead class="thead-dark">
     <tr>
@@ -120,6 +123,8 @@
   </tbody>
 
 </table>
+</div>
+
 
 
 {{>horizontalbar}}
