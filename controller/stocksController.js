@@ -19,7 +19,7 @@ const multerFilter = (req, file, cb) => {
   if (file.mimetype.startsWith('image')) {
     cb(null, true);
   } else {
-    console.log('ERROR FROME HEERERERE');
+    console.log('Please Enter a valid Image');
     cb(err, false);
   }
 };
@@ -34,18 +34,19 @@ exports.updateStockPhoto = upload.single('photo');
 exports.resizeStockPhoto = async (req, res, next) => {
   try {
     if (!req.file) {
-      throw new Error('File Not Found');
+      throw Error('File Not Found');
     }
-    req.file.filename = `${req.user.id}-${req.body.Modelno}.jpeg`;
-
-    sharp(req.file.buffer)
-      .resize(500, 500)
-      .withMetadata()
-      .rotate()
-      .toFormat('jpeg')
-      .jpeg({ quality: 90 })
-      .toFile(`public/images/stocks/${req.file.filename}`);
-    next();
+    else {
+      req.file.filename = `${req.user.id}-${req.body.Modelno}.jpeg`;
+      sharp(req.file.buffer)
+        .resize(500, 500)
+        .withMetadata()
+        .rotate()
+        .toFormat('jpeg')
+        .jpeg({ quality: 90 })
+        .toFile(`public/images/stocks/${req.file.filename}`);
+      next();
+    }
   } catch (err) {
     next(err);
   }
@@ -79,6 +80,12 @@ exports.gpage = async (req, res, next) => {
 };
 exports.addStocks = async (req, res, next) => {
   try {
+    if (!req.file) {
+      let photoName = 'default'
+    }
+    else {
+      photoName = req.file.filename
+    }
     let valider = await supplierDetails.findOne({
       pan: req.body.supplierPannumber
     });
@@ -101,7 +108,7 @@ exports.addStocks = async (req, res, next) => {
           Modelno: req.body.Modelno,
           userId: req.user.id,
           Date: Date.now(),
-          photo: req.file.filename
+          photo: photoName
         },
         { upsert: true, new: true, setDefaultsOnInsert: true }
       );

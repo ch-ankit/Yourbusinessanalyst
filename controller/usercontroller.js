@@ -97,7 +97,8 @@ exports.adduser = async (req, res) => {
       mobilenumber: req.body.mobilenumber,
       id: req.body.pannumber,
       password: hash,
-      capital: req.body.capital
+      capital: req.body.capital,
+      dateCreated: Date.now()
     });
 
     res.redirect('/user/login');
