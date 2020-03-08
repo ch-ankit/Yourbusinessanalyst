@@ -89,7 +89,7 @@ exports.addStocks = async (req, res, next) => {
       throw new Error('Supplier Is Not Registered, Add Suppliers first');
     } else {
       if (!req.file) {
-        let photoName = 'defaultStock'
+        photoName = 'defaultStock.jpg'
       }
       else {
         photoName = req.file.filename
