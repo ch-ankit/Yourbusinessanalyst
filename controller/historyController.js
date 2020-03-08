@@ -5,7 +5,7 @@ exports.gpage = async (req, res, next) => {
     const user = await User.findOne({ id: req.user.id });
     const history = await History.find({ userId: req.user.id });
     res.render('history', {
-      title: 'Transaction History',
+      title: 'Transaction',
       admin: user.username,
       src: `./../images/users/${user.photo}`
     });
