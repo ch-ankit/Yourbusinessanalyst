@@ -1,8 +1,8 @@
 const moment = require('moment');
-const Stocks = require('./../models/stockModel');
 const multer = require('multer');
 const sharp = require('sharp');
 
+const Stocks = require('./../models/stockModel');
 const User = require('./../models/userModel');
 const stocksHistoryModel = require('../models/stocksHistoryModel');
 const { Supplier, Buyer } = require('./../models/buyerSupplierModel');
@@ -57,9 +57,10 @@ exports.resizeStockPhoto = async (req, res, next) => {
 
 let date =
   new Date().getFullYear() + new Date().getMonth() + new Date().getDate();
+
 exports.gpage = async (req, res, next) => {
   const user = await User.findOne({ id: req.user.id });
-  const stockess = await Stocks.find(
+  await Stocks.find(
     { userId: req.user.id },
     'Modelno Quantity Sellingprice Costprice supplierPan Date -_id',
     (err, docs) => {
@@ -79,6 +80,8 @@ exports.gpage = async (req, res, next) => {
     }
   );
 };
+
+
 exports.addStocks = async (req, res, next) => {
   try {
     let photoName = 'defaultStock.jpg'
@@ -205,15 +208,17 @@ exports.updateQuantity = async (req, res, next) => {
           { new: true }
         );
         await chart.findOneAndUpdate(
-          { Date: date },
           {
             userId: req.user.id,
+            Date: date
+          },
+          {
             $inc: {
-              stockValue: -parseInt(req.body.soldQuantity)
+              stockValue: -(parseInt(req.body.Quantity) * parseInt(stock.Costprice))
             },
             $inc: {
               actualProfit:
-                parseInt(req.body.soldQuantity) *
+                parseInt(req.body.Quantity) *
                 parseInt(req.body.Sellingprice)
             }
           },

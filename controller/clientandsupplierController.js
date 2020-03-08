@@ -36,9 +36,6 @@ exports.gpage = async (req, res, next) => {
       src1 = `./../images/suppliers/${supDetails.photo}`
     }
 
-    console.log(buyDetails);
-    console.log(supDetails);
-    console.log(amount);
     res.render('clientandsupplier', {
       title: req.query.name,
       admin: user.username,
