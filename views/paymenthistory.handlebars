@@ -1,34 +1,35 @@
 {{>headers}}
+<div class="table-wrapper-scroll-y my-custom-scrollbar">
+    <table class="table table-bordered table-hover table-fixed ">
+        <caption>Table:Tranactions History</caption>
+        <thead class="thead-dark">
+            <tr>
+                <th>Index</th>
+                <th>Action</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Pan No</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each content as |value key|}}
 
-<table class="table table-bordered table-hover table-fixed ">
-    <caption>Table:Tranactions History</caption>
-    <thead class="thead-dark">
-        <tr>
-            <th>Index</th>
-            <th>Action</th>
-            <th>Date</th>
-            <th>Amount</th>
-            <th>Pan No</th>
-            <th>Name</th>
-        </tr>
-    </thead>
-    <tbody>
-        {{#each content as |value key|}}
+            <tr>
+                <td>{{add1 key}} </td>
+                {{#each  value as |svalue|}}
 
-        <tr>
-            <td>{{add1 key}} </td>
-            {{#each  value as |svalue|}}
+                {{#if svalue.userId}}{{#unless svalue.method}} <td> Payed </td>{{/unless}} {{/if}}
+                {{#if svalue.method}} <td> Recived </td>{{/if}}
+                {{#if svalue.userId}}<td> {{svalue.Date}} </td> {{/if}}
+                {{#if svalue.userId}}<td>{{svalue.amount}} </td> {{/if}}
+                {{#if svalue.userId}}<td>{{svalue.pan}}</td>{{/if}}
+                {{#if svalue.userId}} <td>{{svalue.name}} </td>{{/if}}
+                {{/each}}
 
-            {{#if svalue.userId}}{{#unless svalue.method}} <td> Payed </td>{{/unless}} {{/if}}
-            {{#if svalue.method}} <td> Recived </td>{{/if}}
-            {{#if svalue.userId}}<td> {{svalue.Date}} </td> {{/if}}
-            {{#if svalue.userId}}<td>{{svalue.amount}} </td> {{/if}}
-            {{#if svalue.userId}}<td>{{svalue.pan}}</td>{{/if}}
-            {{#if svalue.userId}} <td>{{svalue.name}} </td>{{/if}}
+            </tr>
             {{/each}}
+        </tbody>
 
-        </tr>
-        {{/each}}
-    </tbody>
-
-</table>
+    </table>
+</div>
