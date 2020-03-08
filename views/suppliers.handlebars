@@ -1,27 +1,29 @@
 {{>headers}}
+<div class=" my-custom-scrollbar table-wrapper-scroll-y">
+    <table class="table table-bordered table-hover">
+        <caption>Table:List of Suppliers</caption>
+        <thead class="thead-dark">
+            <tr>
+                <th>Index</th>
+                <th>Pan Number</th>
+                <th>Model No.</th>
+                <th>Quantity</th>
+                <th>Cost Price</th>
+                <th>Total Cost Price</th>
+            </tr>
+        </thead>
 
-<table class="table table-bordered table-hover">
-    <caption>Table:List of Suppliers</caption>
-    <thead class="thead-dark">
-        <tr>
-            <th>Index</th>
-            <th>Pan Number</th>
-            <th>Model No.</th>
-            <th>Quantity</th>
-            <th>Cost Price</th>
-            <th>Total Cost Price</th>
-        </tr>
-    </thead>
+        <tbody id="tableData">
 
-    <tbody id="tableData">
-
-    </tbody>
-
-
-</table>
+        </tbody>
 
 
-<form action="/suppliers" method="POST" class=" ab-4">
+    </table>
+</div>
+
+
+
+<form action="/suppliers" method="POST" enctype="multipart/form-data" class=" ab-4">
     <div class=" form-group">
         <label for="Name">suppliers Name</label>
         <input type="text" name="supplierName" placeholder="Enter suppliers Model Name" class="form-control" />
@@ -41,6 +43,10 @@
     <div class="form-group">
         <label for="pannumber">supplier's Pan No.</label>
         <input type="text" name="panNumber" placeholder="Enter supplier's Pan Number" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="photo">Upload Client's Image</label>
+        <input type="file" name="sphoto" placeholder="Upload Clinet's Photo" class="form-control" />
     </div>
     <input type="submit" value="Add suppliers" class="btn btn-primary btn-block mb-4" />
 </form>

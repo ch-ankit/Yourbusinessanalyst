@@ -1,8 +1,8 @@
 const moment = require('moment');
-const Stocks = require('./../models/stockModel');
 const multer = require('multer');
 const sharp = require('sharp');
 
+const Stocks = require('./../models/stockModel');
 const User = require('./../models/userModel');
 const stocksHistoryModel = require('../models/stocksHistoryModel');
 const { Supplier, Buyer } = require('./../models/buyerSupplierModel');
@@ -31,6 +31,7 @@ const upload = multer({
 
 exports.updateStockPhoto = upload.single('photo');
 
+
 exports.resizeStockPhoto = async (req, res, next) => {
   try {
     if (!req.file) {
@@ -48,7 +49,7 @@ exports.resizeStockPhoto = async (req, res, next) => {
       next();
     }
   } catch (err) {
-    next(err);
+    next();
   }
 };
 /////////////////////////////////////////////////
@@ -56,9 +57,10 @@ exports.resizeStockPhoto = async (req, res, next) => {
 
 let date =
   new Date().getFullYear() + new Date().getMonth() + new Date().getDate();
+
 exports.gpage = async (req, res, next) => {
   const user = await User.findOne({ id: req.user.id });
-  const stockess = await Stocks.find(
+  await Stocks.find(
     { userId: req.user.id },
     'Modelno Quantity Sellingprice Costprice supplierPan Date -_id',
     (err, docs) => {
@@ -78,20 +80,23 @@ exports.gpage = async (req, res, next) => {
     }
   );
 };
+
+
 exports.addStocks = async (req, res, next) => {
   try {
-    if (!req.file) {
-      let photoName = 'default'
-    }
-    else {
-      photoName = req.file.filename
-    }
+    let photoName = 'defaultStock.jpg'
     let valider = await supplierDetails.findOne({
       pan: req.body.supplierPannumber
     });
     if (!valider) {
       throw new Error('Supplier Is Not Registered, Add Suppliers first');
     } else {
+      if (!req.file) {
+        photoName = 'defaultStock.jpg'
+      }
+      else {
+        photoName = req.file.filename
+      }
       let stock = await Stocks.findOneAndUpdate(
         {
           Modelno: req.body.Modelno,
@@ -203,15 +208,17 @@ exports.updateQuantity = async (req, res, next) => {
           { new: true }
         );
         await chart.findOneAndUpdate(
-          { Date: date },
           {
             userId: req.user.id,
+            Date: date
+          },
+          {
             $inc: {
-              stockValue: -parseInt(req.body.soldQuantity)
+              stockValue: -(parseInt(req.body.Quantity) * parseInt(stock.Costprice))
             },
             $inc: {
               actualProfit:
-                parseInt(req.body.soldQuantity) *
+                parseInt(req.body.Quantity) *
                 parseInt(req.body.Sellingprice)
             }
           },
