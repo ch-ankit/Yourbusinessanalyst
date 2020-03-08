@@ -2,6 +2,8 @@ const User = require('./../models/userModel');
 const Buyer = require('./../models/buyerSupplierModel').Buyer;
 const buyerDetails = require('./../models/suppliersBuyersDetailModel')
   .buyerDetails;
+
+//renders a page as response to get request
 exports.getClients = async (req, res, next) => {
   try {
     const user = await User.findOne({ id: req.user.id });
@@ -14,6 +16,7 @@ exports.getClients = async (req, res, next) => {
     next(err);
   }
 };
+
 exports.addClients = async (req, res, next) => {
   try {
     const docs = await buyerDetails.findOneAndUpdate(

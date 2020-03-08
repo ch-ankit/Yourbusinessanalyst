@@ -1,11 +1,19 @@
+const moment = require('moment');
+
+//importing models
+
 const User = require('./../models/userModel');
 const {
   supplierDetails,
   buyerDetails
 } = require('./../models/suppliersBuyersDetailModel');
-const moment = require('moment');
+
+//renders a page as response to get request
+
 exports.gacpage = async (req, res, next) => {
   try {
+    //importing data from database
+
     const user = await User.findOne({ id: req.user.id });
     const supDetails = await supplierDetails.find({
       userId: req.user.id
@@ -13,6 +21,9 @@ exports.gacpage = async (req, res, next) => {
     const buyDetails = await buyerDetails.find({
       userId: req.user.id
     });
+
+    //defining certain variables for calculating total amount to be payed and recieved
+
     let sAmounts = [];
     let sName = [];
     let cAmounts = [];
@@ -34,6 +45,9 @@ exports.gacpage = async (req, res, next) => {
       sTAmount += el;
     });
     amounts = [cTAmount, sTAmount];
+
+    //rendering page with required information
+
     res.render('Accounts', {
       title: 'Accounts',
       admin: user.username,
@@ -44,6 +58,7 @@ exports.gacpage = async (req, res, next) => {
       buyerDetails: buyDetails
     });
   } catch (err) {
+    //handling errors using middleware
     next(err);
   }
 };

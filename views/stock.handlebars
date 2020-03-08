@@ -1,41 +1,39 @@
 {{>headers}}
 
-
-<h4>
-    {{Name}} Details till {{accessTime}}
-</h4>
-<table class="table table-bordered table-hover ">
-    <caption>Table:Detail of a stock</caption>
-    <thead class="thead-dark">
-        <tr>
-            <th>Quantity</th>
-            <th>Cost Price</th>
-            <th>Total Cost Price</th>
-            <th>Selling Price</th>
-            <th>Total Selling Price</th>
-            <th>Estimated Profit/Loss</th>
-        </tr>
-    </thead>
-    <tbody>
-        {{#each stocks as |value key|}}
-
-        <tr>
-            {{#each  value as |svalue|}}
-            {{#if svalue.Modelno}} <td>{{ svalue.Quantity}}</td>{{/if}}
-            {{#if svalue.Modelno}}<td>{{svalue.Costprice}} </td> {{/if}}
-            {{#if svalue.Modelno}} <td>{{multiply svalue.Costprice svalue.Quantity}}</td>{{/if}}
-            {{#if svalue.Modelno}} <td>{{svalue.Sellingprice}}</td>{{/if}}
-            {{#if svalue.Modelno}} <td>{{multiply svalue.Sellingprice svalue.Quantity}}</td>{{/if}}
-            {{#if svalue.Modelno}} <td>{{profit svalue.Sellingprice svalue.Costprice svalue.Quantity}}</td>{{/if}}
-            {{/each}}
-
-        </tr>
-        {{/each}}
-    </tbody>
-
-</table>
 <img style="display: block;
   margin-left: auto;
   margin-right: auto;
   width: 30%;
   cursor: pointer;" src="{{src1}}" alt="Upload you photo" />
+   <h3 class="text-center  font-weight-bold">Details</h3>
+<div align="center" class="d-flex my-custom-scrollbar table-wrapper-scroll-y font-weight-bold">
+    <table class="table table-borderless table-light mb-5 table-hover " >
+  <thead>
+  </thead>
+  <tbody>
+    {{#each stocks as |value key|}}
+      {{#each  value as |svalue|}}
+      {{#if svalue.Modelno}} <tr><td>Quantity</td><td>{{ svalue.Quantity}} </td> </tr>{{/if}}
+      {{#if svalue.Modelno}}<tr><td>Costprice</td><td>{{svalue.Costprice}}  </td> </tr> {{/if}}
+      {{#if svalue.Modelno}} <tr><td>Sellingprice</td><td>{{svalue.Sellingprice}} </td> </tr>{{/if}}
+      {{/each}}
+
+    {{/each}}
+  </tbody>
+
+</table>
+</div>
+
+  
+            
+            
+            
+            
+            
+            
+         
+            
+
+
+        
+

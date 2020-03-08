@@ -1,4 +1,8 @@
+//importing models
+
 const User = require('./../models/userModel');
+
+//renders a page as response to get request
 
 exports.gpage = async (req, res, next) => {
   try {
@@ -9,6 +13,7 @@ exports.gpage = async (req, res, next) => {
       src: `./../images/users/${user.photo}`
     });
   } catch (err) {
+    //handling errors using middleware
     next(err);
   }
 };
