@@ -9,113 +9,115 @@
   <!-- Modal content -->
   <div class="modal-content">
     <span class="close">&times;</span>
-    
-<form action="/stocks" method="POST" enctype="multipart/form-data" class=" ab-4">
-    <div class=" form-group">
+
+    <form action="/stocks" method="POST" enctype="multipart/form-data" class=" ab-4">
+      <div class=" form-group">
         <label for="Modelno">Model No.</label>
         <input type="text" name="Modelno" placeholder="Enter item's modelno" class="form-control">
-    </div>
-    <div class="form-group">
+      </div>
+      <div class="form-group">
         <label for="Quantity">Quantity</label>
         <input type="text" name="Quantity" placeholder="Enter item's quantity" class="form-control">
-    </div>
-    <div class=" form-group">
+      </div>
+      <div class=" form-group">
         <label for="costprice">Cost price</label>
         <input type="text" name="Costprice" placeholder="Enter item's costprice" class="form-control">
-    </div>
-    <div class="form-group">
+      </div>
+      <div class="form-group">
         <label for="sellingprice">Selling price</label>
         <input type="text" name="Sellingprice" placeholder="Enter item's sellingprice" class="form-control">
-    </div>
-    <div class="form-group">
+      </div>
+      <div class="form-group">
         <label for="supplier">Supplier's Pan No.</label>
         <input type="text" name="supplierPannumber" placeholder="Enter Supplier's Pan Number" class="form-control">
-    </div>
-    <div class="form-group">
+      </div>
+      <div class="form-group">
         <label for="photo">Upload Model Photo</label>
-        <input type="file" id="photo" name="photo" class="form-control">
-    </div>
-    <input type="submit" value="Add Stock" id="add" class="btn btn-primary btn-block mb-4">
-</form>
+        <input type="file" id="photo"
+          value="C:\Users\Dell\Desktop\Yourbusinessanalyst\public\images\stocks\defaultStock.jpg" name="photo"
+          class="form-control">
+      </div>
+      <input type="submit" value="Add Stock" id="add" class="btn btn-primary btn-block mb-4">
+    </form>
 
   </div>
 
 </div>
 
 <script>
-// Get the modal
-var modal = document.getElementById("myModal");
+  // Get the modal
+  var modal = document.getElementById("myModal");
 
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
+  // Get the button that opens the modal
+  var btn = document.getElementById("myBtn");
 
-// Get the <span> element that closes the modal
-
-
-var span = document.getElementsByClassName("close")[0];
-var button = document.getElementById("add")[0];
-
-// When the user clicks the button, open the modal 
-btn.onclick = function() {
-  modal.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
-button.onclick = function() {
-  modal.style.display = "none";
-}
+  // Get the <span> element that closes the modal
 
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
+  var span = document.getElementsByClassName("close")[0];
+  var button = document.getElementById("add")[0];
+
+  // When the user clicks the button, open the modal 
+  btn.onclick = function () {
+    modal.style.display = "block";
+  }
+
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function () {
     modal.style.display = "none";
   }
-}
+  button.onclick = function () {
+    modal.style.display = "none";
+  }
+
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
 </script>
 
 
 <h4>
-    Stocks till {{accessTime}}
+  Stocks till {{accessTime}}
 </h4>
 
 <table class="table table-bordered table-hover ">
-    <caption>Table:List of stocks in storage</caption>
-    <thead class="thead-dark">
-        <tr>
-            <th>Index</th>
-            <th>ModelNo.</th>
-            <th>Quantity</th>
-            <th>Cost Price</th>
-            <th>Total Cost Price</th>
-            <th>Selling Price</th>
-            <th>Total Selling Price</th>
-            <th>Estimated Profit/Loss</th>
-            <th>Supplier's Pan No</th>
-        </tr>
-    </thead>
-    <tbody>
-        {{#each stocks as |value key|}}
+  <caption>Table:List of stocks in storage</caption>
+  <thead class="thead-dark">
+    <tr>
+      <th>Index</th>
+      <th>ModelNo.</th>
+      <th>Quantity</th>
+      <th>Cost Price</th>
+      <th>Total Cost Price</th>
+      <th>Selling Price</th>
+      <th>Total Selling Price</th>
+      <th>Estimated Profit/Loss</th>
+      <th>Supplier's Pan No</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each stocks as |value key|}}
 
-        <tr>
-            <td>{{add1 key}} </td>
-            {{#each  value as |svalue|}}
-            {{#if svalue.Modelno}}<td> <a href="stock?name={{svalue.Modelno}}">{{svalue.Modelno}}</a> </td> {{/if}}
-            {{#if svalue.Modelno}} <td>{{ svalue.Quantity}}</td>{{/if}}
-            {{#if svalue.Modelno}}<td>{{svalue.Costprice}} </td> {{/if}}
-            {{#if svalue.Modelno}} <td>{{multiply svalue.Costprice svalue.Quantity}}</td>{{/if}}
-            {{#if svalue.Modelno}} <td>{{svalue.Sellingprice}}</td>{{/if}}
-            {{#if svalue.Modelno}} <td>{{multiply svalue.Sellingprice svalue.Quantity}}</td>{{/if}}
-            {{#if svalue.Modelno}} <td>{{profit svalue.Sellingprice svalue.Costprice svalue.Quantity}}</td>{{/if}}
-            {{#if svalue.Modelno}} <td>{{svalue.supplierPan}}</td>{{/if}}
-            {{/each}}
+    <tr>
+      <td>{{add1 key}} </td>
+      {{#each  value as |svalue|}}
+      {{#if svalue.Modelno}}<td> <a href="stock?name={{svalue.Modelno}}">{{svalue.Modelno}}</a> </td> {{/if}}
+      {{#if svalue.Modelno}} <td>{{ svalue.Quantity}}</td>{{/if}}
+      {{#if svalue.Modelno}}<td>{{svalue.Costprice}} </td> {{/if}}
+      {{#if svalue.Modelno}} <td>{{multiply svalue.Costprice svalue.Quantity}}</td>{{/if}}
+      {{#if svalue.Modelno}} <td>{{svalue.Sellingprice}}</td>{{/if}}
+      {{#if svalue.Modelno}} <td>{{multiply svalue.Sellingprice svalue.Quantity}}</td>{{/if}}
+      {{#if svalue.Modelno}} <td>{{profit svalue.Sellingprice svalue.Costprice svalue.Quantity}}</td>{{/if}}
+      {{#if svalue.Modelno}} <td>{{svalue.supplierPan}}</td>{{/if}}
+      {{/each}}
 
-        </tr>
-        {{/each}}
-    </tbody>
+    </tr>
+    {{/each}}
+  </tbody>
 
 </table>
 
