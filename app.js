@@ -51,9 +51,6 @@ app.use('/paymenthistory', paymentHistoryRouter);
 app.use('/stockshistory', stocksHistoryRouter);
 app.use('/stock', stock);
 
-console.log(
-  `${new Date().getFullYear() + new Date().getMonth() + new Date().getDate()} `
-);
 app.use((req, res, next) => {
   const err = new Error('Not Found');
   err.status = 404;
