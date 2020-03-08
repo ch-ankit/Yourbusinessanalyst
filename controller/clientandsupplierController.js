@@ -26,13 +26,16 @@ exports.gpage = async (req, res, next) => {
       address = buyDetails.address;
       contactNumber = buyDetails.contactNumber;
       panNumber = buyDetails.pan;
+      src1 = `./../images/clients/${buyDetails.photo}`
     } else {
       name = supDetails.name;
       amount = supDetails.amount;
       address = supDetails.address;
       contactNumber = supDetails.contactNumber;
       panNumber = supDetails.pan;
+      src1 = `./../images/suppliers/${supDetails.photo}`
     }
+
     console.log(buyDetails);
     console.log(supDetails);
     console.log(amount);
@@ -40,6 +43,7 @@ exports.gpage = async (req, res, next) => {
       title: req.query.name,
       admin: user.username,
       src: `./../images/users/${user.photo}`,
+      src1: src1,
       name,
       panNumber,
       address,

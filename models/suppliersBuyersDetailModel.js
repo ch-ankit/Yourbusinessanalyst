@@ -23,6 +23,10 @@ const supplierBuyersSchema = new mongoose.Schema({
   address: {
     type: String,
     required: true
+  },
+  photo: {
+    type: String,
+    default: 'default.jpeg'
   }
 });
 
