@@ -31,6 +31,7 @@ const upload = multer({
 
 exports.updateStockPhoto = upload.single('photo');
 
+
 exports.resizeStockPhoto = async (req, res, next) => {
   try {
     if (!req.file) {
@@ -48,7 +49,7 @@ exports.resizeStockPhoto = async (req, res, next) => {
       next();
     }
   } catch (err) {
-    next(err);
+    next();
   }
 };
 /////////////////////////////////////////////////
@@ -80,18 +81,19 @@ exports.gpage = async (req, res, next) => {
 };
 exports.addStocks = async (req, res, next) => {
   try {
-    if (!req.file) {
-      let photoName = 'default'
-    }
-    else {
-      photoName = req.file.filename
-    }
+    let photoName = 'defaultStock.jpg'
     let valider = await supplierDetails.findOne({
       pan: req.body.supplierPannumber
     });
     if (!valider) {
       throw new Error('Supplier Is Not Registered, Add Suppliers first');
     } else {
+      if (!req.file) {
+        let photoName = 'defaultStock'
+      }
+      else {
+        photoName = req.file.filename
+      }
       let stock = await Stocks.findOneAndUpdate(
         {
           Modelno: req.body.Modelno,
