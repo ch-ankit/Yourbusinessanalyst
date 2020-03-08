@@ -14,7 +14,8 @@ const suppliersRouter = require('./routes/suppliers');
 const historyRouter = require('./routes/history');
 const stocksHistoryRouter = require('./routes/stocksHistory');
 const paymentHistoryRouter = require('./routes/paymentHistory');
-const stock = require('./routes/stock');
+const stockRouter = require('./routes/stock');
+const clientandsupplierRouter = require('./routes/clientandsupplier');
 const app = express();
 
 const hbs = exphbs.create({
@@ -49,7 +50,8 @@ app.use('/suppliers', suppliersRouter);
 app.use('/transhistory', historyRouter);
 app.use('/paymenthistory', paymentHistoryRouter);
 app.use('/stockshistory', stocksHistoryRouter);
-app.use('/stock', stock);
+app.use('/stock', stockRouter);
+app.use('/clientandsupplier', clientandsupplierRouter);
 
 app.use((req, res, next) => {
   const err = new Error('Not Found');
