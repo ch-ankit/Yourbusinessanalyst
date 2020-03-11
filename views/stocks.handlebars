@@ -98,7 +98,6 @@
       <th>Selling Price</th>
       <th>Total Selling Price</th>
       <th>Estimated Profit/Loss</th>
-      <th>Supplier's Pan No</th>
     </tr>
   </thead>
   <tbody>
@@ -114,7 +113,6 @@
       {{#if svalue.Modelno}} <td>{{svalue.Sellingprice}}</td>{{/if}}
       {{#if svalue.Modelno}} <td>{{multiply svalue.Sellingprice svalue.Quantity}}</td>{{/if}}
       {{#if svalue.Modelno}} <td>{{profit svalue.Sellingprice svalue.Costprice svalue.Quantity}}</td>{{/if}}
-      {{#if svalue.Modelno}} <td>{{svalue.supplierPan}}</td>{{/if}}
       {{/each}}
 
     </tr>

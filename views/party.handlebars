@@ -26,7 +26,7 @@
                 <tr>
                     <td>{{add1 key}}</td>
                     {{#each svalue as |value|}}
-                    {{#if value.name}}<td> <a href="clientandsupplier?name={{value.name}}">{{value.name}} </a> </td>
+                    {{#if value.name}}<td> <a href="clientandsupplier?name={{value.name}}&type=buyer">{{value.name}} </a> </td>
                     {{/if}}
                     {{#if value.pan }}<td>{{value.pan}}</td> {{/if}}
                     {{#if contactNumber}}<td>{{value.contactNumber}}</td> {{/if}}
@@ -59,7 +59,7 @@
                 <tr>
                     <td>{{add1 key}}</td>
                     {{#each svalue as |value|}}
-                    {{#if value.name}}<td> <a href="clientandsupplier?name={{value.name}}">{{value.name}} </a> </td>
+                    {{#if value.name}}<td> <a href="clientandsupplier?name={{value.name}}&type=supplier">{{value.name}} </a> </td>
                     {{/if}}
                     {{#if value.pan }}<td>{{value.pan}}</td> {{/if}}
                     {{#if contactNumber}}<td>{{value.contactNumber}}</td> {{/if}}

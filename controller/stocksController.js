@@ -2,10 +2,11 @@ const moment = require('moment');
 const multer = require('multer');
 const sharp = require('sharp');
 
+const suppliers = require('../models/supplierModel');
+const buyers = require('../models/buyerModel');
 const Stocks = require('./../models/stockModel');
 const User = require('./../models/userModel');
 const stocksHistoryModel = require('../models/stocksHistoryModel');
-const { Supplier, Buyer } = require('./../models/buyerSupplierModel');
 const {
   supplierDetails,
   buyerDetails
@@ -56,6 +57,7 @@ exports.resizeStockPhoto = async (req, res, next) => {
 
 exports.gpage = async (req, res, next) => {
   const user = await User.findOne({ id: req.user.id });
+
   await Stocks.find(
     { userId: req.user.id },
     'Modelno Quantity Sellingprice Costprice supplierPan Date -_id',
@@ -85,6 +87,10 @@ exports.addStocks = async (req, res, next) => {
     let valider = await supplierDetails.findOne({
       pan: req.body.supplierPannumber
     });
+    let q = await Stocks.findOne({
+      userId: req.user.id,
+      Modelno: req.body.Modelno
+    });
     if (!valider) {
       throw new Error('Supplier Is Not Registered, Add Suppliers first');
     } else {
@@ -93,27 +99,49 @@ exports.addStocks = async (req, res, next) => {
       } else {
         photoName = req.file.filename;
       }
+
       let stock = await Stocks.findOneAndUpdate(
         {
           Modelno: req.body.Modelno,
-          userId: req.user.id,
-          supplierPan: req.body.supplierPannumber
+          userId: req.user.id
         },
         {
-          $inc: {
-            Quantity: parseInt(req.body.Quantity)
-          },
-          Costprice: parseInt(req.body.Costprice),
+          Costprice: Math.floor(
+            (q.Costprice * q.Quantity +
+              parseInt(req.body.Quantity) * parseInt(req.body.Costprice)) /
+              (q.Quantity + parseInt(req.body.Quantity))
+          ),
           Sellingprice: parseInt(req.body.Sellingprice),
-          supplierPan: req.body.supplierPannumber,
           Modelno: req.body.Modelno,
           userId: req.user.id,
           Date: Date.now(),
-          photo: photoName
+          photo: photoName,
+          $inc: {
+            Quantity: parseInt(req.body.Quantity)
+          }
         },
         { upsert: true, new: true, setDefaultsOnInsert: true }
       );
       let dateModified = new Date().getFullYear() + new Date().getMonth();
+
+      await suppliers.findOneAndUpdate(
+        {
+          userId: req.user.id,
+          supplierPan: req.body.supplierPannumber,
+          modelNo: req.body.Modelno,
+          costPrice: req.body.Costprice
+        },
+        {
+          userId: req.user.id,
+          supplierPan: req.body.supplierPannumber,
+          modelNo: req.body.Modelno,
+          costPrice: req.body.Costprice,
+          $inc: {
+            quantity: parseInt(req.body.Quantity)
+          }
+        },
+        { upsert: true }
+      );
 
       await model.findOneAndUpdate(
         { userId: req.user.id, Date: dateModified, modelNo: req.body.Modelno },
@@ -133,7 +161,8 @@ exports.addStocks = async (req, res, next) => {
           userId: req.user.id,
           $inc: {
             estimatedProfit:
-              parseInt(req.body.Quantity) * parseInt(req.body.Sellingprice),
+              parseInt(req.body.Quantity) *
+              (parseInt(req.body.Sellingprice) - parseInt(req.body.Costprice)),
             stockValue:
               parseInt(req.body.Quantity) * parseInt(req.body.Costprice)
           }
@@ -151,28 +180,6 @@ exports.addStocks = async (req, res, next) => {
         Date: Date.now()
       });
 
-      let supplier = await Supplier.findOne({
-        userId: req.user.id,
-        supplierPan: req.body.supplierPannumber
-      });
-      if (!supplier) {
-        supplier = await Supplier.create({
-          userId: req.user.id,
-          supplierPan: req.body.supplierPannumber,
-          supplies: stock
-        });
-      } else {
-        let exist = supplier.supplies.includes(stock._id) || false;
-        if (!exist) {
-          supplier = await Supplier.updateOne(supplier, {
-            userId: req.user.id,
-            supplierPan: req.body.supplierPannumber,
-            $push: {
-              supplies: stock
-            }
-          });
-        }
-      }
       await supplierDetails.updateOne(valider, {
         $inc: {
           amount: parseInt(req.body.Quantity) * parseInt(req.body.Costprice)
@@ -217,6 +224,26 @@ exports.updateQuantity = async (req, res, next) => {
           },
           { new: true }
         );
+
+        await buyers.findOneAndUpdate(
+          {
+            userId: req.user.id,
+            buyerPan: req.body.buyerPannumber,
+            modelNo: req.body.Modelno,
+            sellingPrice: req.body.Sellingprice
+          },
+          {
+            userId: req.user.id,
+            buyerPan: req.body.buyerPannumber,
+            modelNo: req.body.Modelno,
+            sellingPrice: req.body.Sellingprice,
+            $inc: {
+              quantity: parseInt(req.body.Quantity)
+            }
+          },
+          { upsert: true }
+        );
+
         let dateModified = new Date().getFullYear() + new Date().getMonth();
 
         await model.findOneAndUpdate(
@@ -260,32 +287,7 @@ exports.updateQuantity = async (req, res, next) => {
           userId: req.user.id,
           Date: Date.now()
         });
-        ////////////////////////////////////
-        ////////////////////////////////////
-        ////////////////////////////////////
-        /////////////////////////////////////
-        let buyer = await Buyer.findOne({
-          userId: req.user.id,
-          supplierPan: req.body.buyerPannumber
-        });
-        if (!buyer) {
-          buyer = await Buyer.create({
-            userId: req.user.id,
-            supplierPan: req.body.buyerPannumber,
-            supplies: stock
-          });
-        } else {
-          let exist = buyer.supplies.includes(stock._id) || false;
-          if (!exist) {
-            buyer = await Buyer.updateOne(buyer, {
-              userId: req.user.id,
-              supplierPan: req.body.buyerPannumber,
-              $push: {
-                supplies: stock
-              }
-            });
-          }
-        }
+
         await buyerDetails.updateOne(validator, {
           $inc: {
             amount:

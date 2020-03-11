@@ -1,4 +1,6 @@
 {{>headers}}
+
+
 <div class=" my-custom-scrollbar table-wrapper-scroll-y">
     <table class="table table-bordered table-hover">
         <caption>Table:List of Suppliers</caption>
@@ -13,7 +15,20 @@
             </tr>
         </thead>
 
-        <tbody id="tableData">
+        <tbody>
+            {{#each suppliers as |value key|}}
+            <tr>
+                <td>{{add1 key}} </td>
+                {{#each value as |svalue|}}
+                {{#if svalue.modelNo}} <td>{{svalue.supplierPan }} </td>  {{/if}}
+                {{#if svalue.modelNo}} <td>{{svalue.modelNo }} </td>  {{/if}}
+                {{#if svalue.modelNo}} <td>{{svalue.quantity }} </td>  {{/if}}
+                {{#if svalue.modelNo}} <td>{{svalue.costPrice }} </td>  {{/if}}
+                {{#if svalue.modelNo}} <td>{{multiply svalue.costPrice svalue.quantity  }} </td>  {{/if}}
+                {{/each}}
+                
+            </tr>
+            {{/each}}
 
         </tbody>
 
@@ -51,51 +66,3 @@
     <input type="submit" value="Add suppliers" class="btn btn-primary btn-block mb-4" />
 </form>
 
-<script>
-    fetch('/suppliers/getSupplies')
-        .then(response => response.json())
-        .then(data => {
-            let table = document.getElementById('tableData');
-            let i = 0;
-            console.log(data)
-
-            data.forEach(row => {
-                if (row.length > 1) {
-                    for (j = 0; j < row.length; j++) {
-                        table.innerHTML += `
-                        <tr>
-                            <td>${i + 1}</td>
-                            <td>${row[i].supplierPan}</td>
-                            <td>${row[i].Modelno}</td>
-                            <td>${row[i].Quantity}</td>
-                            <td>${row[i].Costprice}</td>
-                             <td>${parseInt(row[i].Costprice) * parseInt(row[i].Quantity)}</td>
-                        </tr>    
-                    `;
-                        i++;
-                    }
-
-                } else {
-                    table.innerHTML += `
-                        <tr>
-                            <td>${i + 1}</td>
-                            <td>${row[0].supplierPan}</td>
-                            <td>${row[0].Modelno}</td>
-                            <td>${row[0].Quantity}</td>
-                            <td>${row[0].Costprice}</td>
-                             <td>${parseInt(row[0].Costprice) * parseInt(row[0].Quantity)}</td>
-                        </tr>    
-                    `; console.log(1)
-                    i++;
-                }
-
-            });
-
-
-
-
-        });
-
-
-
-</script>

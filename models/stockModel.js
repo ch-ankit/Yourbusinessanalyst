@@ -26,12 +26,9 @@ const stocksSchema = new mongoose.Schema({
     default: 1
   },
   Date: {
-    type: Number
+    type: Date
   },
-  supplierPan: {
-    type: String,
-    default: ''
-  },
+
   photo: {
     type: String,
     default: 'defaultStock.jpeg'

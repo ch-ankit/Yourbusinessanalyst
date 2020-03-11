@@ -4,9 +4,10 @@ const auth = require('./../helpers/auth');
 router
   .route('/')
   .get(auth, supplierController.getSuppliers)
-  .post(auth, supplierController.updateSupplierPhoto,
-    supplierController.resizeSupplierPhoto, supplierController.addSuppliers);
-
-router.route('/getSupplies').get(auth, supplierController.getSupplies);
-
+  .post(
+    auth,
+    supplierController.updateSupplierPhoto,
+    supplierController.resizeSupplierPhoto,
+    supplierController.addSuppliers
+  );
 module.exports = router;

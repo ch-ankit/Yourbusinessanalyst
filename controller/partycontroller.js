@@ -1,6 +1,5 @@
 const User = require('./../models/userModel');
 const paymentHistoryModel = require('./../models/paymentHistoryModel');
-const Supplier = require('./../models/buyerSupplierModel').Supplier;
 const {
   supplierDetails,
   buyerDetails

@@ -1,6 +1,5 @@
 const moment = require('moment');
 const User = require('./../models/userModel');
-const Buyer = require('./../models/buyerSupplierModel').Buyer;
 const chart = require('./../models/chartModel');
 
 exports.ghmpage = async (req, res, next) => {

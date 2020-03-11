@@ -2,7 +2,7 @@
 <div class=" table-wrapper-scroll-y my-custom-scrollbar">
   <table class="table table-bordered table-hover ">
   <caption>
-    Table:List of Suppliers
+    Table:List of Clients
   </caption>
   <thead class="thead-dark">
     <tr>
@@ -15,7 +15,22 @@
     </tr>
   </thead>
 
-  <tbody id="tableData"></tbody>
+ <tbody>
+            {{#each buyers as |value key|}}
+            <tr>
+                <td>{{add1 key}} </td>
+                {{#each value as |svalue|}}
+                {{#if svalue.modelNo}} <td>{{svalue.buyerPan }} </td>  {{/if}}
+                {{#if svalue.modelNo}} <td>{{svalue.modelNo }} </td>  {{/if}}
+                {{#if svalue.modelNo}} <td>{{svalue.quantity }} </td>  {{/if}}
+                {{#if svalue.modelNo}} <td>{{svalue.sellingPrice }} </td>  {{/if}}
+                {{#if svalue.modelNo}} <td>{{multiply svalue.sellingPrice svalue.quantity  }} </td>  {{/if}}
+                {{/each}}
+                
+            </tr>
+            {{/each}}
+
+        </tbody>
 </table>
 </div>
 
@@ -82,30 +97,3 @@
   />
 </form>
 
-<script>
-  fetch('/clients/getSupplies')
-    .then(response => response.json())
-    .then(data => {
-      let table = document.getElementById('tableData');
-      let i = 1;
-
-      data.forEach(row => {
-        
-        let supplies = row.supplies;
-        supplies.forEach(el => {
-          table.innerHTML += `
-                          <tr>
-                              <td>${i}</td>
-                              <td>${row.supplierPan}</td>
-                              <td>${el.Modelno}</td>
-                              <td>${el.soldQuantity}</td>
-                              <td>${el.Costprice}</td>
-                               <td>${parseInt(el.Costprice) *
-                                 parseInt(el.soldQuantity)}</td>
-                          </tr>
-                      `;
-          i++;
-        });
-      });
-    });
-</script>

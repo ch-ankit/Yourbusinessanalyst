@@ -2,7 +2,7 @@ const multer = require('multer');
 const sharp = require('sharp');
 
 const User = require('./../models/userModel');
-const Supplier = require('./../models/buyerSupplierModel').Supplier;
+const Supplier = require('./../models/supplierModel');
 const supplierDetails = require('./../models/suppliersBuyersDetailModel')
   .supplierDetails;
 
@@ -26,13 +26,11 @@ const upload = multer({
 
 exports.updateSupplierPhoto = upload.single('sphoto');
 
-
 exports.resizeSupplierPhoto = async (req, res, next) => {
   try {
     if (!req.file) {
       throw Error('File Not Found');
-    }
-    else {
+    } else {
       req.file.filename = `${req.user.id}-${req.body.panNumber}.jpeg`;
       sharp(req.file.buffer)
         .resize(500, 500)
@@ -50,20 +48,15 @@ exports.resizeSupplierPhoto = async (req, res, next) => {
 /////////////////////////////////////////////////
 ///////
 
-
 exports.getSuppliers = async (req, res, next) => {
   try {
     const user = await User.findOne({ id: req.user.id });
-    let supplies = await Supplier.find(
-      { userId: req.user.id },
-      '-_id Quantity supplierPan Costprice Modelno '
-    ).populate('supplies');
-    // let supplies = suppliers.map(el => el.supplies);
+    const suppliers = await Supplier.find({ userId: req.user.id }, '-_id -__v');
     res.render('suppliers', {
       title: 'Suppliers',
       admin: user.username,
       src: `./../images/users/${user.photo}`,
-      suppliers: supplies
+      suppliers: suppliers
     });
   } catch (err) {
     next(err);
@@ -72,11 +65,11 @@ exports.getSuppliers = async (req, res, next) => {
 
 exports.addSuppliers = async (req, res, next) => {
   try {
-    let photo = 'default.jpeg'
+    let photo = 'default.jpeg';
     if (!req.file) {
-      photo = 'default.jpeg'
+      photo = 'default.jpeg';
     } else {
-      photo = req.file.filename
+      photo = req.file.filename;
     }
     const docs = await supplierDetails.findOneAndUpdate(
       {
@@ -95,20 +88,6 @@ exports.addSuppliers = async (req, res, next) => {
       { upsert: true }
     );
     res.redirect('/suppliers');
-  } catch (err) {
-    next(err);
-  }
-};
-
-exports.getSupplies = async (req, res, next) => {
-  try {
-    let suppliers = await Supplier.find(
-      { userId: req.user.id },
-      '-_id Quantity supplierPan Costprice Modelno '
-    ).populate('supplies');
-
-    let supplies = suppliers.map(el => el.supplies);
-    res.json(supplies);
   } catch (err) {
     next(err);
   }
