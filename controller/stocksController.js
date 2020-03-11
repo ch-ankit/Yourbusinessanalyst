@@ -119,16 +119,14 @@ exports.addStocks = async (req, res, next) => {
       );
 
       await chart.findOneAndUpdate(
-        { Date: date, userId: req.user.id },
+        { userId: req.user.id, Date: date },
         {
           userId: req.user.id,
           $inc: {
+            estimatedProfit:
+              parseInt(req.body.Quantity) * parseInt(req.body.Sellingprice),
             stockValue:
               parseInt(req.body.Quantity) * parseInt(req.body.Costprice)
-          },
-          $inc: {
-            estimatedProfit:
-              parseInt(req.body.Quantity) * parseInt(req.body.Sellingprice)
           }
         },
         { upsert: true, setDefaultsOnInsert: true }
@@ -214,12 +212,10 @@ exports.updateQuantity = async (req, res, next) => {
           },
           {
             $inc: {
-              stockValue: -(parseInt(req.body.Quantity) * parseInt(stock.Costprice))
-            },
-            $inc: {
               actualProfit:
                 parseInt(req.body.Quantity) *
-                parseInt(req.body.Sellingprice)
+                parseInt(req.body.Sellingprice),
+              stockValue: -(parseInt(req.body.Quantity) * parseInt(stock.Costprice))
             }
           },
           { upsert: true, setDefaultsOnInsert: true }

@@ -17,10 +17,6 @@ const chartSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
-  depreciation: {
-    type: Number,
-    default: 0
-  },
   actualProfit: {
     type: Number,
     default: 0
