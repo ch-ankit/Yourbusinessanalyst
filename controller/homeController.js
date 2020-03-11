@@ -1,72 +1,67 @@
 const moment = require('moment');
-const Stocks = require('./../models/stockModel');
 const User = require('./../models/userModel');
 const Buyer = require('./../models/buyerSupplierModel').Buyer;
+const chart = require('./../models/chartModel');
 
-function onlyUnique(value, index, self) {
-  return self.indexOf(value) === index;
-}
 exports.ghmpage = async (req, res, next) => {
   try {
     const user = await User.findOne({ id: req.user.id });
-    let stock = {};
-    let estimatedProfit = {};
-    let actualProfit = {};
-    let dates = [];
-    var i = 0;
-    let currentDate,
-      prevDate = null;
-    const docs = await Stocks.find({ userId: req.user.id }, '-_id ');
-    docs.forEach(row => {
-      dates[i] = row.Date;
-      currentDate = moment(dates[i]).format('YYYY MM DD');
-      if (!prevDate) {
-        stock[currentDate] = parseInt(row.Quantity) * parseInt(row.Costprice);
-        estimatedProfit[currentDate] =
-          parseInt(row.Quantity) *
-          (parseInt(row.Sellingprice) - parseInt(row.Costprice));
-        actualProfit[currentDate] =
-          parseInt(row.soldQuantity) *
-          (parseInt(row.Sellingprice) - parseInt(row.Costprice));
-        prevDate = currentDate;
-      } else if (currentDate == prevDate) {
-        stock[currentDate] += parseInt(row.Quantity) * parseInt(row.Costprice);
-        estimatedProfit[currentDate] +=
-          parseInt(row.Quantity) *
-          (parseInt(row.Sellingprice) - parseInt(row.Costprice));
-        actualProfit[currentDate] +=
-          parseInt(row.soldQuantity) *
-          (parseInt(row.Sellingprice) - parseInt(row.Costprice));
-        prevDate = currentDate;
-      } else if (prevDate != currentDate) {
-        stock[currentDate] =
-          stock[prevDate] + parseInt(row.Quantity) * parseInt(row.Costprice);
-        estimatedProfit[currentDate] =
-          estimatedProfit[prevDate] +
-          parseInt(row.Quantity) *
-            (parseInt(row.Sellingprice) - parseInt(row.Costprice));
-        actualProfit[currentDate] =
-          actualProfit[prevDate] +
-          parseInt(row.soldQuantity) *
-            (parseInt(row.Sellingprice) - parseInt(row.Costprice));
-        prevDate = currentDate;
-      }
-      i++;
-    });
-    dates = dates.map(date => moment(date).format('YYYY MM DD'));
-    let uniqueDates = dates.filter(onlyUnique);
+    const docs = await chart.find({ userId: req.user.id }, '-_id -__v');
 
+    let totalEstimatedProfit = [];
+    let totalActualProfit = [];
+    let totalStockValue = [];
+
+    const estimatedProfit = Object.keys(docs).map(
+      el => docs[el].estimatedProfit
+    );
+    const actualProfit = Object.keys(docs).map(el => docs[el].actualProfit);
+    const stockValue = Object.keys(docs).map(el => docs[el].stockValue);
+    const labels = Object.keys(docs).map(el => docs[el].label);
+    const label = labels.map(el => moment(el).format('YYYY MM DD'));
+
+    const diffDate =
+      user.dateCreated.getFullYear() -
+      new Date().getFullYear() +
+      (user.dateCreated.getMonth() - new Date().getMonth()) / 12 +
+      (user.dateCreated.getDate() - new Date().getDate()) / 365;
+
+    for (let i = 0; i < estimatedProfit.length; i++) {
+      if (i == 0) {
+        totalEstimatedProfit[i] = estimatedProfit[i];
+        totalActualProfit[i] = actualProfit[i];
+        totalStockValue[i] = stockValue[i];
+      } else {
+        totalEstimatedProfit[i] =
+          estimatedProfit[i] + totalEstimatedProfit[i - 1];
+        totalActualProfit[i] = actualProfit[i] + totalActualProfit[i - 1];
+        totalStockValue[i] = stockValue[i] + totalStockValue[i - 1];
+      }
+    }
+    let profitRatePerAnnum =
+      totalActualProfit[totalActualProfit.length - 1] /
+      ((1 / 365) * parseInt(user.capital));
+
+    if (diffDate != 0) {
+      profitRatePerAnnum =
+        totalActualProfit[totalActualProfit.length - 1] /
+        (diffDate * parseInt(user.capital));
+    }
+    const profit = totalActualProfit[totalActualProfit.length - 1];
+
+    console.log(profit);
     res.render('index', {
       title: 'Homepage',
       admin: user.username,
       accessTime: moment().format(),
       src: `./../images/users/${user.photo}`,
-      stock: Object.keys(stock).map(el => stock[el]),
-      estimatedProfit: Object.keys(estimatedProfit).map(
-        el => estimatedProfit[el]
-      ),
-      actualProfit: Object.keys(actualProfit).map(el => actualProfit[el]),
-      labels: uniqueDates
+      estimatedProfit: totalEstimatedProfit,
+      stockValue: totalStockValue,
+      actualProfit: totalActualProfit,
+      label: label,
+      profitRate: profitRatePerAnnum,
+      tProfit: profit,
+      capital: user.capital
     });
   } catch (err) {
     next(err);

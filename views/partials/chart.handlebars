@@ -1,6 +1,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js" integrity="sha256-AdQN98MVZs44Eq2yTwtoKufhnU+uZ7v2kXnD5vqzZVo=" crossorigin="anonymous"></script>
 <div hidden id="data">
-  {{ stock }}
+  {{ stockValue }}
 </div>
 
 <div hidden id="data1">
@@ -11,7 +11,7 @@
   {{ actualProfit }}
 </div>
 <div hidden id="labels">
-  {{ labels }}
+  {{ label }}
 </div>
 
 <canvas id="profitChart" class="mb-4"></canvas>
@@ -33,7 +33,6 @@
     .getElementById('labels')
     .innerText.trim()
     .split(',');
-  console.log(data, data1, labels);
   var chart = document.getElementById('profitChart').getContext('2d');
   var lineChart = new Chart(chart, {
     // The type of chart we want to create

@@ -38,7 +38,7 @@ const userSchema = new mongoose.Schema({
     default: 'default.jpeg'
   },
   dateCreated: {
-    type: String,
+    type: Date,
     default: Date.now()
   }
 });

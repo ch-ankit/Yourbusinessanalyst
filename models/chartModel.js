@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const moment = require('moment');
 const chartSchema = new mongoose.Schema({
   stockValue: {
     type: Number,
@@ -20,6 +20,10 @@ const chartSchema = new mongoose.Schema({
   actualProfit: {
     type: Number,
     default: 0
+  },
+  label: {
+    type: Date,
+    default: Date.now()
   }
 });
 

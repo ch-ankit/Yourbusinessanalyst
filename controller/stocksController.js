@@ -31,13 +31,11 @@ const upload = multer({
 
 exports.updateStockPhoto = upload.single('photo');
 
-
 exports.resizeStockPhoto = async (req, res, next) => {
   try {
     if (!req.file) {
       throw Error('File Not Found');
-    }
-    else {
+    } else {
       req.file.filename = `${req.user.id}-${req.body.Modelno}.jpeg`;
       sharp(req.file.buffer)
         .resize(500, 500)
@@ -81,10 +79,9 @@ exports.gpage = async (req, res, next) => {
   );
 };
 
-
 exports.addStocks = async (req, res, next) => {
   try {
-    let photoName = 'defaultStock.jpg'
+    let photoName = 'defaultStock.jpg';
     let valider = await supplierDetails.findOne({
       pan: req.body.supplierPannumber
     });
@@ -92,10 +89,9 @@ exports.addStocks = async (req, res, next) => {
       throw new Error('Supplier Is Not Registered, Add Suppliers first');
     } else {
       if (!req.file) {
-        photoName = 'defaultStock.jpg'
-      }
-      else {
-        photoName = req.file.filename
+        photoName = 'defaultStock.jpg';
+      } else {
+        photoName = req.file.filename;
       }
       let stock = await Stocks.findOneAndUpdate(
         {
@@ -131,6 +127,7 @@ exports.addStocks = async (req, res, next) => {
         },
         { upsert: true, setDefaultsOnInsert: true }
       );
+
       await stocksHistoryModel.create({
         Quantity: parseInt(req.body.Quantity),
         Costprice: parseInt(req.body.Costprice),
@@ -213,9 +210,10 @@ exports.updateQuantity = async (req, res, next) => {
           {
             $inc: {
               actualProfit:
-                parseInt(req.body.Quantity) *
-                parseInt(req.body.Sellingprice),
-              stockValue: -(parseInt(req.body.Quantity) * parseInt(stock.Costprice))
+                parseInt(req.body.Quantity) * parseInt(req.body.Sellingprice),
+              stockValue: -(
+                parseInt(req.body.Quantity) * parseInt(stock.Costprice)
+              )
             }
           },
           { upsert: true, setDefaultsOnInsert: true }
