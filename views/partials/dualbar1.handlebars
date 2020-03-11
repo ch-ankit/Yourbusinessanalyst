@@ -1,0 +1,149 @@
+<div id="estimatedProfit" hidden="true">{{ estimatedProfit}}</div>
+<div id="actualProfit" hidden="true">{{ actualProfit}}</div>
+<div id="labels" hidden="true">{{label }}</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<h3 class=" text-dark text-black text-center"> Bar Graph Profit of Different Days</h3>
+<canvas id="chart" class="mb-5">
+  <caption>
+    Profits in Different Days
+  </caption>
+</canvas>
+<div>
+  
+</div>
+<script>
+  const estimatedProfit = document
+    .getElementById('estimatedProfit')
+    .innerText.trim()
+    .split(',');
+  const actualProfit = document
+    .getElementById('actualProfit')
+    .innerText.trim()
+    .split(',');
+const label = document
+    .getElementById('labels')
+    .innerText.trim()
+    .split(',');
+  var chart = document.getElementById('chart').getContext('2d');
+  var lineChart = new Chart(chart, {
+    // The type of chart we want to create
+    type: 'bar',
+
+    // The data for our dataset
+    data: {
+      labels: label,
+      datasets: [
+        {
+          label: 'Estimated Profit',
+          borderColor: 'rgb(0, 0, 0)',
+          data: estimatedProfit,
+          backgroundColor: [
+            'rgb(226, 45, 44)',
+            'rgb(226, 45, 44)',
+            'rgb(226, 45, 44)',
+            'rgb(226, 45, 44)',
+            'rgb(226, 45, 44)',
+            'rgb(226, 45, 44)',
+            'rgb(226, 45, 44)',
+            'rgb(226, 45, 44)',
+            'rgb(226, 45, 44)',
+            'rgb(226, 45, 44)',
+            'rgb(226, 45, 44)',
+            'rgb(226, 45, 44)',
+            'rgb(226, 45, 44)',
+            'rgb(226, 45, 44)',
+            'rgb(226, 45, 44)',
+            'rgb(226, 45, 44)',
+            'rgb(226, 45, 44)',
+            'rgb(226, 45, 44)',
+            'rgb(226, 45, 44)',
+            'rgb(226, 45, 44)',
+            'rgb(226, 45, 44)',
+            'rgb(226, 45, 44)',
+            'rgb(226, 45, 44)',
+            'rgb(226, 45, 44)',
+            'rgb(226, 45, 44)',
+            'rgb(226, 45, 44)'
+            
+          ],
+          borderWidth: 3
+        },
+        {
+          label: 'Actual Profit',
+          borderColor: 'rgb(0, 0, 0)',
+          data: actualProfit,
+          backgroundColor: [
+                'rgb(102, 181, 19)',           
+                'rgb(102, 181, 19)',           
+                'rgb(102, 181, 19)',           
+                'rgb(102, 181, 19)',           
+                'rgb(102, 181, 19)',           
+                'rgb(102, 181, 19)',           
+                'rgb(102, 181, 19)',           
+                'rgb(102, 181, 19)',           
+                'rgb(102, 181, 19)',           
+                'rgb(102, 181, 19)',           
+                'rgb(102, 181, 19)',           
+                'rgb(102, 181, 19)',           
+                'rgb(102, 181, 19)',           
+                'rgb(102, 181, 19)',           
+                'rgb(102, 181, 19)',           
+                'rgb(102, 181, 19)',           
+                'rgb(102, 181, 19)',           
+                'rgb(102, 181, 19)',           
+                'rgb(102, 181, 19)',           
+                'rgb(102, 181, 19)',           
+                'rgb(102, 181, 19)',           
+                'rgb(102, 181, 19)',           
+                'rgb(102, 181, 19)',           
+                'rgb(102, 181, 19)',           
+                'rgb(102, 181, 19)',           
+                'rgb(102, 181, 19)',           
+                'rgb(102, 181, 19)',           
+                'rgb(102, 181, 19)',           
+                'rgb(102, 181, 19)',           
+                'rgb(102, 181, 19)',           
+                'rgb(102, 181, 19)',           
+                'rgb(102, 181, 19)',           
+                'rgb(102, 181, 19)'           
+          ],
+          borderWidth: 3
+        }
+      ]
+    },
+
+    // Configuration options go here
+    options: {
+      scales: {
+        xAxes: [
+          {
+            scaleLabel:{
+              display:true,
+              labelString:`Date`
+            }
+          }
+        ],
+        yAxes:[{
+            ticks: {
+              beginAtZero: true
+            },
+          scaleLabel:{
+            display:true,
+            labelString:`Amount in NRs`
+          }
+        }]
+      },
+      legend: {
+        position: 'right',
+        labels: {
+          fontSize: '14',
+          fontColor: 'black'
+        }
+      },
+      tooltips: {
+        mode: 'nearest'
+      }
+    }
+  });
+</script>

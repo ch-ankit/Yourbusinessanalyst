@@ -49,15 +49,17 @@ exports.ghmpage = async (req, res, next) => {
     }
     const profit = totalActualProfit[totalActualProfit.length - 1];
 
-    console.log(profit);
     res.render('index', {
       title: 'Homepage',
       admin: user.username,
       accessTime: moment().format(),
       src: `./../images/users/${user.photo}`,
-      estimatedProfit: totalEstimatedProfit,
-      stockValue: totalStockValue,
-      actualProfit: totalActualProfit,
+      testimatedProfit: totalEstimatedProfit,
+      tstockValue: totalStockValue,
+      tactualProfit: totalActualProfit,
+      estimatedProfit: estimatedProfit,
+      stockValue: stockValue,
+      actualProfit: actualProfit,
       label: label,
       profitRate: profitRatePerAnnum,
       tProfit: profit,

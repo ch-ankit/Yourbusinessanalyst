@@ -11,6 +11,7 @@ const {
   buyerDetails
 } = require('./../models/suppliersBuyersDetailModel');
 const chart = require('./../models/chartModel');
+const model = require('./../models/modelModel');
 /////////////////////////////////////////////////
 //MULTER WORKS
 const multerStorage = multer.memoryStorage();
@@ -53,9 +54,6 @@ exports.resizeStockPhoto = async (req, res, next) => {
 /////////////////////////////////////////////////
 ///////
 
-let date =
-  new Date().getFullYear() + new Date().getMonth() + new Date().getDate();
-
 exports.gpage = async (req, res, next) => {
   const user = await User.findOne({ id: req.user.id });
   await Stocks.find(
@@ -80,6 +78,8 @@ exports.gpage = async (req, res, next) => {
 };
 
 exports.addStocks = async (req, res, next) => {
+  let date =
+    new Date().getFullYear() + new Date().getMonth() + new Date().getDate();
   try {
     let photoName = 'defaultStock.jpg';
     let valider = await supplierDetails.findOne({
@@ -112,6 +112,19 @@ exports.addStocks = async (req, res, next) => {
           photo: photoName
         },
         { upsert: true, new: true, setDefaultsOnInsert: true }
+      );
+      let dateModified = new Date().getFullYear() + new Date().getMonth();
+
+      await model.findOneAndUpdate(
+        { userId: req.user.id, Date: dateModified, modelNo: req.body.Modelno },
+        {
+          userId: req.user.id,
+          modelNo: req.body.Modelno,
+          $inc: {
+            quantityBought: parseInt(req.body.Quantity)
+          }
+        },
+        { upsert: true, setDefaultsOnInsert: true }
       );
 
       await chart.findOneAndUpdate(
@@ -174,6 +187,8 @@ exports.addStocks = async (req, res, next) => {
 };
 
 exports.updateQuantity = async (req, res, next) => {
+  let date =
+    new Date().getFullYear() + new Date().getMonth() + new Date().getDate();
   try {
     const validator = await buyerDetails.findOne({
       pan: req.body.buyerPannumber
@@ -202,6 +217,24 @@ exports.updateQuantity = async (req, res, next) => {
           },
           { new: true }
         );
+        let dateModified = new Date().getFullYear() + new Date().getMonth();
+
+        await model.findOneAndUpdate(
+          {
+            userId: req.user.id,
+            Date: dateModified,
+            modelNo: req.body.Modelno
+          },
+          {
+            userId: req.user.id,
+            modelNo: req.body.Modelno,
+            $inc: {
+              quantitySold: parseInt(req.body.Quantity)
+            }
+          },
+          { upsert: true, setDefaultsOnInsert: true }
+        );
+
         await chart.findOneAndUpdate(
           {
             userId: req.user.id,
