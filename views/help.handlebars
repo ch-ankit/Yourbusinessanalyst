@@ -52,23 +52,29 @@
             </p>
         </div>
         <div class="col-sm-7 slideanim">
-            <div class="row">
-                <div class="col-sm-6 form-group">
-                    <input class="form-control" id="name" name="name" placeholder="Name" type="text" required />
+            <form action="/help" method="POST" class=" ab-4">
+
+                <div class="row">
+                    <div class="col-sm-6 form-group">
+                        <input class="form-control" id="name" name="name" placeholder="Name" type="text" required />
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <input class="form-control" id="email" name="email" placeholder="Email" type="email" required />
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <input class="form-control" id="password" name="password" placeholder="Password" type="password"
+                            required />
+                    </div>
                 </div>
-                <div class="col-sm-6 form-group">
-                    <input class="form-control" id="email" name="email" placeholder="Email" type="email" required />
+                <textarea class="form-control" id="comments" name="comments" placeholder="Comment"
+                    rows="5"></textarea><br />
+                <div class="row">
+                    <div class="col-sm-12 form-group">
+                        <input type="submit" value="Send" id="add" class="btn btn-primary btn-block mb-4">
+
+                    </div>
                 </div>
-            </div>
-            <textarea class="form-control" id="comments" name="comments" placeholder="Comment"
-                rows="5"></textarea><br />
-            <div class="row">
-                <div class="col-sm-12 form-group">
-                    <button class="btn btn-default pull-right" type="submit">
-                        Send
-                    </button>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>

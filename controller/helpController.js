@@ -1,6 +1,7 @@
 const User = require('./../models/userModel');
+const email = require('./../helpers/email')
 
-exports.gpage = async (req, res) => {
+exports.gpage = async (req, res, next) => {
   try {
     const user = await User.findOne({ id: req.user.id });
     res.render('help', {
@@ -12,3 +13,12 @@ exports.gpage = async (req, res) => {
     next(err);
   }
 };
+
+exports.sendComment = async (req, res, next) => {
+  try {
+    email(req, res, next);
+    res.redirect('/help')
+  } catch (err) {
+    next(err);
+  }
+}
