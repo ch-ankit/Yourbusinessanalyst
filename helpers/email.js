@@ -32,7 +32,7 @@ const sendEmail = async (req, res, next) => {
         from: `${process.env.EMAIL_ADDRESS} <${process.env.EMAIL_ADDRESS}>`,
         subject: `Feedback regarding the program`,
         to: `${process.env.EMAIL_ADDRESS}`,
-        text: `${req.body.comments}` + `\nSent By:${req.body.email}`
+        text: `SENT BY:${req.body.name}` + `\n${req.body.comments}` + `\nSent By:${req.body.email}`
     }
 
     await transporter.sendMail(mailOptions, function (err, data) {
