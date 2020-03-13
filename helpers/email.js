@@ -35,7 +35,22 @@ const sendEmail = async (req, res, next) => {
         text: `SENT BY:${req.body.name}` + `\n${req.body.comments}` + `\nSent By:${req.body.email}`
     }
 
+    const mailOptions1 = {
+        from: `${process.env.EMAIL_ADDRESS} <${process.env.EMAIL_ADDRESS}>`,
+        subject: `Feedback regarding the program`,
+        to: req.body.email,
+        text: `Your comment has been submitted. Thank You!! ${req.body.name} for your feedback.`
+    }
+
+
     await transporter.sendMail(mailOptions, function (err, data) {
+        if (err) {
+            console.log(err)
+        } else {
+            console.log('Email Sent Successfully!!!')
+        }
+    });
+    await transporter.sendMail(mailOptions1, function (err, data) {
         if (err) {
             console.log(err)
         } else {
