@@ -19,7 +19,6 @@ exports.gpage = async (req, res, next) => {
   quantityBought = Object.keys(docs).map(el => docs[el].quantityBought);
   let labels = Object.keys(docs).map(el => docs[el].label);
   label = labels.map(el => moment(el).format('YYYY MM'));
-  console.log(quantitySold, quantityBought, label);
   await Stocks.find(
     { userId: req.user.id, Modelno: req.query.name },
     'Modelno Quantity Sellingprice Costprice supplierPan photo Date -_id',
