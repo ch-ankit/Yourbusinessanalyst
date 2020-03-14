@@ -91,6 +91,12 @@ exports.addStocks = async (req, res, next) => {
       userId: req.user.id,
       Modelno: req.body.Modelno
     });
+    if (!q) {
+      q = {
+        Costprice: parseInt(req.body.Costprice),
+        Quantity: parseInt(req.body.Quantity)
+      }
+    }
     if (!valider) {
       throw new Error('Supplier Is Not Registered, Add Suppliers first');
     } else {
@@ -109,7 +115,7 @@ exports.addStocks = async (req, res, next) => {
           Costprice: Math.floor(
             (q.Costprice * q.Quantity +
               parseInt(req.body.Quantity) * parseInt(req.body.Costprice)) /
-              (q.Quantity + parseInt(req.body.Quantity))
+            (q.Quantity + parseInt(req.body.Quantity))
           ),
           Sellingprice: parseInt(req.body.Sellingprice),
           Modelno: req.body.Modelno,
