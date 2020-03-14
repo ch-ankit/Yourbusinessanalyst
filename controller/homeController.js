@@ -7,6 +7,26 @@ exports.ghmpage = async (req, res, next) => {
     const user = await User.findOne({ id: req.user.id });
     const docs = await chart.find({ userId: req.user.id }, '-_id -__v');
 
+    // const docs1 = Object.keys(docs).map(el => docs[el]);
+
+    // console.log(docs1[0].label.getFullYear() + docs1[0].label.getMonth());
+    // console.log(docs1.length);
+
+    // let monthlyEstimatedProfit = [];
+    // let monthlyActualProfit = [];
+    // let monthlyStockValue = [];
+    // for (let i = 0; i < docs1.length; i++) {
+    //   let j = 0;
+    //   while (j < docs1.length) {
+    //     if (
+    //       docs1[j].label.getFullYear() + docs1[j].label.getMonth() ==
+    //       docs1[j + 1].label.getFullYear() + docs1[j + 1].label.getMonth()
+    //     ) {
+    //       monthlyEstimatedProfit[j] = monthlyEstimatedProfit;
+    //     }
+    //   }
+    // }
+
     let totalEstimatedProfit = [];
     let totalActualProfit = [];
     let totalStockValue = [];
@@ -20,10 +40,10 @@ exports.ghmpage = async (req, res, next) => {
     const label = labels.map(el => moment(el).format('YYYY MM DD'));
 
     const diffDate =
-      user.dateCreated.getFullYear() -
-      new Date().getFullYear() +
-      (user.dateCreated.getMonth() - new Date().getMonth()) / 12 +
-      (user.dateCreated.getDate() - new Date().getDate()) / 365;
+      new Date().getFullYear() -
+      user.dateCreated.getFullYear() +
+      (new Date().getMonth() - user.dateCreated.getMonth()) / 12 +
+      (new Date().getDate() - user.dateCreated.getDate()) / 365;
 
     for (let i = 0; i < estimatedProfit.length; i++) {
       if (i == 0) {
@@ -37,6 +57,7 @@ exports.ghmpage = async (req, res, next) => {
         totalStockValue[i] = stockValue[i] + totalStockValue[i - 1];
       }
     }
+
     let profitRatePerAnnum =
       totalActualProfit[totalActualProfit.length - 1] /
       ((1 / 365) * parseInt(user.capital));
@@ -46,6 +67,7 @@ exports.ghmpage = async (req, res, next) => {
         totalActualProfit[totalActualProfit.length - 1] /
         (diffDate * parseInt(user.capital));
     }
+
     const profit = totalActualProfit[totalActualProfit.length - 1];
 
     res.render('index', {

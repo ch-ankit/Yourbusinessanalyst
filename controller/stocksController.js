@@ -82,6 +82,7 @@ exports.gpage = async (req, res, next) => {
 exports.addStocks = async (req, res, next) => {
   let date =
     new Date().getFullYear() + new Date().getMonth() + new Date().getDate();
+  console.log(1);
   try {
     let photoName = 'defaultStock.jpg';
     let valider = await supplierDetails.findOne({
@@ -91,6 +92,15 @@ exports.addStocks = async (req, res, next) => {
       userId: req.user.id,
       Modelno: req.body.Modelno
     });
+    var pCostPrice, pQuantity;
+    if (q == null) {
+      pCostPrice = 0;
+      pQuantity = 0;
+    } else {
+      pCostPrice = q.Costprice;
+      pQuantity = q.Quantity;
+    }
+
     if (!valider) {
       throw new Error('Supplier Is Not Registered, Add Suppliers first');
     } else {
@@ -99,6 +109,7 @@ exports.addStocks = async (req, res, next) => {
       } else {
         photoName = req.file.filename;
       }
+      console.log(2);
 
       let stock = await Stocks.findOneAndUpdate(
         {
@@ -107,9 +118,9 @@ exports.addStocks = async (req, res, next) => {
         },
         {
           Costprice: Math.floor(
-            (q.Costprice * q.Quantity +
+            (pCostPrice * pQuantity +
               parseInt(req.body.Quantity) * parseInt(req.body.Costprice)) /
-              (q.Quantity + parseInt(req.body.Quantity))
+              (pQuantity + parseInt(req.body.Quantity))
           ),
           Sellingprice: parseInt(req.body.Sellingprice),
           Modelno: req.body.Modelno,
@@ -122,6 +133,8 @@ exports.addStocks = async (req, res, next) => {
         },
         { upsert: true, new: true, setDefaultsOnInsert: true }
       );
+
+      console.log(3);
       let dateModified = new Date().getFullYear() + new Date().getMonth();
 
       await suppliers.findOneAndUpdate(
@@ -142,6 +155,7 @@ exports.addStocks = async (req, res, next) => {
         },
         { upsert: true }
       );
+      console.log(4);
 
       await model.findOneAndUpdate(
         { userId: req.user.id, Date: dateModified, modelNo: req.body.Modelno },
@@ -155,6 +169,7 @@ exports.addStocks = async (req, res, next) => {
         { upsert: true, setDefaultsOnInsert: true }
       );
 
+      console.log(5);
       await chart.findOneAndUpdate(
         { userId: req.user.id, Date: date },
         {
@@ -170,6 +185,7 @@ exports.addStocks = async (req, res, next) => {
         { upsert: true, setDefaultsOnInsert: true }
       );
 
+      console.log(6);
       await stocksHistoryModel.create({
         Quantity: parseInt(req.body.Quantity),
         Costprice: parseInt(req.body.Costprice),
@@ -179,6 +195,7 @@ exports.addStocks = async (req, res, next) => {
         userId: req.user.id,
         Date: Date.now()
       });
+      console.log(7);
 
       await supplierDetails.updateOne(valider, {
         $inc: {
@@ -188,6 +205,7 @@ exports.addStocks = async (req, res, next) => {
 
       res.redirect('/stocks');
     }
+    console.log(8);
   } catch (err) {
     next(err);
   }
