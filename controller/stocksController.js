@@ -92,7 +92,6 @@ exports.addStocks = async (req, res, next) => {
       userId: req.user.id,
       Modelno: req.body.Modelno
     });
-<<<<<<< HEAD
     var pCostPrice, pQuantity;
     if (q == null) {
       pCostPrice = 0;
@@ -102,14 +101,6 @@ exports.addStocks = async (req, res, next) => {
       pQuantity = q.Quantity;
     }
 
-=======
-    if (!q) {
-      q = {
-        Costprice: parseInt(req.body.Costprice),
-        Quantity: parseInt(req.body.Quantity)
-      }
-    }
->>>>>>> e50ece08e3d07e88659d685c6875a6450416acb5
     if (!valider) {
       throw new Error('Supplier Is Not Registered, Add Suppliers first');
     } else {
@@ -129,11 +120,7 @@ exports.addStocks = async (req, res, next) => {
           Costprice: Math.floor(
             (pCostPrice * pQuantity +
               parseInt(req.body.Quantity) * parseInt(req.body.Costprice)) /
-<<<<<<< HEAD
               (pQuantity + parseInt(req.body.Quantity))
-=======
-            (q.Quantity + parseInt(req.body.Quantity))
->>>>>>> e50ece08e3d07e88659d685c6875a6450416acb5
           ),
           Sellingprice: parseInt(req.body.Sellingprice),
           Modelno: req.body.Modelno,
