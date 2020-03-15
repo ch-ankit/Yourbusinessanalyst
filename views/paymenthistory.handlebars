@@ -7,9 +7,10 @@
                 <th>Index</th>
                 <th>Action</th>
                 <th>Date</th>
+                <th>Name</th>
                 <th>Amount</th>
                 <th>Pan No</th>
-                <th>Name</th>
+                <th>Recipt Number</th>
             </tr>
         </thead>
         <tbody>
@@ -22,9 +23,10 @@
                 {{#if svalue.userId}}{{#unless svalue.method}} <td> Payed </td>{{/unless}} {{/if}}
                 {{#if svalue.method}} <td> Recived </td>{{/if}}
                 {{#if svalue.userId}}<td> {{svalue.Date}} </td> {{/if}}
+                {{#if svalue.userId}} <td>{{svalue.name}} </td>{{/if}}
                 {{#if svalue.userId}}<td>{{svalue.amount}} </td> {{/if}}
                 {{#if svalue.userId}}<td>{{svalue.pan}}</td>{{/if}}
-                {{#if svalue.userId}} <td>{{svalue.name}} </td>{{/if}}
+                {{#if svalue.userId}}<td>{{svalue.reciptNumber}}</td>{{/if}}
                 {{/each}}
 
             </tr>

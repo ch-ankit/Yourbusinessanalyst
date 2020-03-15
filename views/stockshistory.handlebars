@@ -12,6 +12,7 @@
                 <th>Price</th>
                 <th>Total Price</th>
                 <th>Pan No</th>
+                <th>Bill No</th>
             </tr>
         </thead>
         <tbody>
@@ -33,6 +34,7 @@
                 {{/unless}} {{/if}}
                 {{#if svalue.method}}<td>{{multiply svalue.Sellingprice svalue.soldQuantity}}</td>{{/if}}
                 {{#if svalue.Modelno}} <td>{{svalue.pan}}</td>{{/if}}
+                {{#if svalue.Modelno}} <td>{{svalue.billNumber}}</td>{{/if}}
                 {{/each}}
 
             </tr>

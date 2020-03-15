@@ -59,9 +59,10 @@ exports.paymentMade = async (req, res, next) => {
       pan: req.body.supplierPanNumber,
       userId: req.user.id,
       name: req.body.supplierName,
-      Date: Date.now()
+      Date: Date.now(),
+      reciptNumber: req.body.reciptNumber
     });
-    res.redirect('/home');
+    res.redirect('/transhistory');
   } catch (err) {
     next(err);
   }
@@ -85,7 +86,7 @@ exports.paymentReceived = async (req, res, next) => {
       name: req.body.buyerName,
       Date: Date.now()
     });
-    res.redirect('/home');
+    res.redirect('/transhistory');
   } catch (err) {
     next(err);
   }

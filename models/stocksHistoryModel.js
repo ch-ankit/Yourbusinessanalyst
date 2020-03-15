@@ -34,6 +34,9 @@ const stocksHistorySchema = new mongoose.Schema({
   },
   method: {
     type: Number
+  },
+  billNumber: {
+    type: String
   }
 });
 

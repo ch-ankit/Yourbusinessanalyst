@@ -188,7 +188,8 @@ exports.addStocks = async (req, res, next) => {
         pan: req.body.supplierPannumber,
         Modelno: req.body.Modelno,
         userId: req.user.id,
-        Date: Date.now()
+        Date: Date.now(),
+        billNumber: req.body.billNumber
       });
 
       await supplierDetails.updateOne(valider, {
@@ -296,7 +297,8 @@ exports.updateQuantity = async (req, res, next) => {
           pan: req.body.buyerPannumber,
           Modelno: req.body.Modelno,
           userId: req.user.id,
-          Date: Date.now()
+          Date: Date.now(),
+          billNumber: req.body.billNumber
         });
 
         await buyerDetails.updateOne(validator, {

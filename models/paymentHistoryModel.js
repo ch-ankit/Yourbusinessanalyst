@@ -20,6 +20,9 @@ const paymentHistorySchema = new mongoose.Schema({
   },
   name: {
     type: String
+  },
+  reciptNumber: {
+    type: Number
   }
 });
 
