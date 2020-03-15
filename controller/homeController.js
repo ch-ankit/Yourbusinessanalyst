@@ -59,13 +59,15 @@ exports.ghmpage = async (req, res, next) => {
     }
 
     let profitRatePerAnnum =
-      totalActualProfit[totalActualProfit.length - 1] /
-      ((1 / 365) * parseInt(user.capital));
+      (totalActualProfit[totalActualProfit.length - 1] /
+        ((1 / 365) * parseInt(user.capital))) *
+      100;
 
     if (diffDate != 0) {
       profitRatePerAnnum =
-        totalActualProfit[totalActualProfit.length - 1] /
-        (diffDate * parseInt(user.capital));
+        (totalActualProfit[totalActualProfit.length - 1] /
+          (diffDate * parseInt(user.capital))) *
+        100;
     }
 
     const profit = totalActualProfit[totalActualProfit.length - 1];
