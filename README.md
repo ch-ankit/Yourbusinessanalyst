@@ -1,4 +1,4 @@
-# Yourbusinessanalyst
+# Your Business Analyst
 ***Project For 3rd Semester***
 This is a project for developing a website to keep track record of business. It is written using html,css and javascript with nodejs as 
 backend tool. Express libary is also used.
@@ -12,4 +12,4 @@ backend tool. Express libary is also used.
     <li>Create account and Follow Help for further guidelines</li>
 </ol>
 
-***THANK YOU ***
+***THANK YOU***
