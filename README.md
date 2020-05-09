@@ -3,7 +3,7 @@
 This is a project for developing a website to keep track record of business. It is written using html,css and javascript with nodejs as 
 backend tool. Express libary is also used.
 
-##Procedure For Use:
+***Procedure For Use:***<br>
 (Must have MongoDB database installed prior.)
 <ol>
   <li>Clone the repository.</li>
@@ -12,4 +12,4 @@ backend tool. Express libary is also used.
     <li>Create account and Follow Help for further guidelines</li>
 </ol>
 
-##THANK YOU ;)
+***THANK YOU ***
