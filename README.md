@@ -1,15 +1,32 @@
 # Your Business Analyst
 ***Project For 3rd Semester***
-This is a project for developing a website to keep track record of business. It is written using html,css and javascript with nodejs as 
-backend tool. Express libary is also used.
 
-***Procedure For Use:***<br>
-(Must have MongoDB database installed prior.)
-<ol>
-  <li>Clone the repository.</li>
-   <li>Open cmd in root folder and enter: npm install</li>
-    <li>After installation of Dependencies: npm start</li>
-    <li>Create account and Follow Help for further guidelines</li>
-</ol>
+Your Business Analyst is a web-based inventory management system built using Node.js as the backend API, MongoDB as the database, and Handlebars as views. The application is used to keep track of inventory for a business, where the manager needs to provide input to fields whenever the product is refilled or a new product is added. It shows the graph of sales for visualizing the sales data.
+
+## Features
+
+The following are the features of Your Business Analyst:
+
+- Inventory management
+- Input fields for refilling products and adding new products
+- Sales graph for visualizing sales data
+
+## Technologies Used
+
+The following technologies were used in the development of Your Business Analyst:
+
+- Node.js
+- MongoDB
+- Handlebars as views
+
+## Installation
+
+To install the dependencies and start the server, run the following commands:
+
+```console
+npm install
+npm start
+```
+
 
 ***THANK YOU***
